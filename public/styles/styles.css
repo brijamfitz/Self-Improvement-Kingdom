@@ -3,25 +3,30 @@
 }
 /* Brian's code starts here */
 /* ========================================================================== */
-.btn {
-  margin: 10px;
-  background-color: royalblue;
-}
-.jumbotron-fluid {
+#navbar {
   background-color: royalblue;
   color: white;
 }
-.jumbotron {
+#encounter-card {
   margin: 30px 0px 30px 0px;
+  width: 100%
+}
+#encounter-card .btn {
+  margin: 10px;
+  background-color: royalblue;
 }
 img {
   margin: 5px;
 }
 #fight-flee,
 #avatar,
-#experience,
-#level {
+#user-experience,
+#user-level {
   text-align: center;
+}
+
+#user-level .level {
+  margin-top: 22px;
 }
 #fight-flee {
   background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
@@ -49,7 +54,105 @@ img {
   width: 100%;
   padding: 10px;
 }
+#user-experience .progress {
+  border-radius: 20px;
+  height: 20px;
+  margin-top: 30px;
+}
 #user-army {
   background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
   background: rgba(204, 204, 204, 0.5);
+}
+
+
+
+/* Todo card styles */
+
+.todo-card {
+  margin-bottom: 40px;
+}
+
+.todo-card > .card-header {
+  padding: 0 15px;
+  border-bottom: 2px solid black;
+}
+
+.todo-card .card-header h2 {
+  text-align: center;
+  font-size: 24px;
+  margin: .5rem 0;
+}
+
+.todo-card .progress {
+  height: 15px;
+  border-radius: 10px;
+  margin: 10px 0 20px;
+}
+
+.cat-level {
+  text-align: right;
+}
+
+.btn-add-task {
+  width: 50%;
+  display: block;
+  margin: 10px auto;
+}
+
+.tasks {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tasks li {
+  cursor: pointer;
+  font-size: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-top: 1px solid #92A0A5;
+}
+
+.tasks li:last-of-type {
+  border-bottom: 1px solid #92A0A5;
+}
+
+.tasks li:hover {
+  background-color: #ffc107;
+}
+
+.tasks li:before {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f0c8";
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  margin:  0 5px;
+}
+
+.tasks li:hover:before {
+  content: "\f14a";
+}
+
+#collapse-personal-completed {
+  /* background-color: #92A0A5; */
+}
+
+.tasks.completed {
+  padding-top: 15px;
+}
+
+.tasks.completed li {
+  cursor: default;
+  border: none;
+}
+.tasks.completed li:before {
+  content: "\f14a";
+}
+
+.tasks.completed li:hover {
+  background-color: #fff;
 }

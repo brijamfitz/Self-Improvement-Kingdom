@@ -6,16 +6,15 @@
         <img src="https://brijamfitz.github.io/Portfolio/assets/images/profile-image.jpg" id="profile-img" />
         <img src="http://pixelartmaker.com/art/bb62bdc4697c7fb.png" id="castle-img" />
       </div>
-      <div class="col-md-6" id="experience">
+      <div class="col-md-6" id="user-experience">
         <h5 class="card-title">Experience</h5>
-        <div class="progress" style="height: 30px;">
-          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;"
-            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
-      <div class="col-md-3" id="level">
+      <div class="col-md-3" id="user-level">
         <h5 class="card-title">Level</h5>
-        <p class="lead">9</p>
+        <p class="lead level">9</p>
       </div>
     </div>
   </div>
@@ -26,7 +25,8 @@
 
     <!-- USER INFO -->
     <!-- ======================================================================================== -->
-    {{!-- <div class="jumbotron" id="navbar">
+    {{!--
+    <div class="jumbotron" id="navbar">
       <div class="container">
         <div class="row">
           <div class="col-md-3" id="avatar">
@@ -39,8 +39,8 @@
             <h1 class="display-4">Experience</h1>
             <hr class="my-4">
             <div class="progress" style="height: 30px;">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;"
-                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100"></div>
             </div>
           </div>
           <div class="col-md-3" id="level">
@@ -50,39 +50,8 @@
           </div>
         </div>
       </div>
-    </div> --}}
-
-    <!-- ENCOUNTER CARD -->
-    <!-- ======================================================================================== -->
-    <div class="jumbotron" id="encounter-card">
-      <div class="row">
-        <div class="col-md-4" id="user-army">
-          <h1 class="display-4">Encounter!</h1>
-          <hr class="my-4">
-          <p class="lead">Your Army</p>
-          <p>10 x Wizards</p>
-          <p>25 x Knights</p>
-        </div>
-        <div class="col-md-4" id="fight-flee">
-          <a class="btn btn-primary btn-lg" href="#" role="button">Fight!</a>
-          <span> OR </span>
-          <a class="btn btn-primary btn-lg" href="#" role="button">Flee!</a>
-          <hr class="my-4">
-          <p>EVENT NAME</p>
-          <hr class="my-4">
-          <p>VS.</p>
-        </div>
-        <div class="col-md-4" id="enemy">
-          <h1 class="display-4">TEXT</h1>
-          <hr class="my-4">
-          <p class="lead">Enemy</p>
-          <p>1 x Grim Reaper</p>
-          <p>1 x Executioner</p>
-        </div>
-      </div>
-    </div>
-
-    {{!-- <div class="row">
+    </div> --}} {{!--
+    <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <h2>This is our Home Page!</h2>
@@ -108,6 +77,104 @@
         </ul>
       </div>
     </div> --}}
+
+    <!-- ENCOUNTER CARD -->
+    <!-- ======================================================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron" id="encounter-card">
+          <div class="row">
+            <div class="col-md-4" id="user-army">
+              <h1 class="display-4">Encounter!</h1>
+              <hr class="my-4">
+              <p class="lead">Your Army</p>
+              <p>10 x Wizards</p>
+              <p>25 x Knights</p>
+            </div>
+            <div class="col-md-4" id="fight-flee">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Fight!</a>
+              <span> OR </span>
+              <a class="btn btn-primary btn-lg" href="#" role="button">Flee!</a>
+              <hr class="my-4">
+              <p>EVENT NAME</p>
+              <hr class="my-4">
+              <p>VS.</p>
+            </div>
+            <div class="col-md-4" id="enemy">
+              <h1 class="display-4">TEXT</h1>
+              <hr class="my-4">
+              <p class="lead">Enemy</p>
+              <p>1 x Grim Reaper</p>
+              <p>1 x Executioner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card todo-card" id="personal">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6 cat-name">
+                <h2>Personal</h2>
+              </div>
+              <div class="col-6 cat-level">
+                <h2>Level
+                  <span class="level">1</span>
+                </h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="progress">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-add-task" id="new-personal-task">Add Task</button>
+          <ul class="tasks">
+            {{!-- Loop through and add tasks in this category --}}
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Pay credit card bill</span>
+            </li>
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Clean out garage</span>
+            </li>
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Schedule oil change</span>
+            </li>
+          </ul>
+          <div class="accordion completed" id="personal-completed">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-personal-completed" aria-expanded="true"
+                    aria-controls="collapse-personal-completed">
+                    Completed Tasks
+                  </button>
+                </h5>
+              </div>
+              <div id="collapse-personal-completed" class="collapse hide" data-parent="#personal-completed">
+
+                <ul class="tasks completed">
+                  {{!-- loop through and add completed tasks in this category --}}
+                  <li id="{{!-- task-{{task_id}} --}}">
+                    <span>Deliver rent check</span>
+                  </li>
+                  <li id="{{!-- task-{{task_id}} --}}">
+                    <span>Empty litter box</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
