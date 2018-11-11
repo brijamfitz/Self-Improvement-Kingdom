@@ -1,3 +1,55 @@
 .list-group-item {
   line-height: 2.5;
 }
+/* Brian's code starts here */
+/* ========================================================================== */
+.btn {
+  margin: 10px;
+  background-color: royalblue;
+}
+.jumbotron-fluid {
+  background-color: royalblue;
+  color: white;
+}
+.jumbotron {
+  margin: 30px 0px 30px 0px;
+}
+img {
+  margin: 5px;
+}
+#fight-flee,
+#avatar,
+#experience,
+#level {
+  text-align: center;
+}
+#fight-flee {
+  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+  background: rgba(204, 204, 204, 0.5);
+}
+#enemy {
+  text-align: right;
+  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+  background: rgba(204, 204, 204, 0.5);
+}
+#encounter-card {
+  background-image: url("https://pre00.deviantart.net/d058/th/pre/f/2018/143/4/e/castle_landscape_study_by_88grzes-dccbfbg.jpg");
+  background-size: cover;
+}
+#profile-img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+#castle-img {
+  height: 50px;
+  width: 50px;
+}
+#navbar {
+  width: 100%;
+  padding: 10px;
+}
+#user-army {
+  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+  background: rgba(204, 204, 204, 0.5);
+}
