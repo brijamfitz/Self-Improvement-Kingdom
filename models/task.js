@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         taskCompleted: {
             type: DataTypes.BOOLEAN,
-            default: false
+            defaultValue: false
         }
     });
 

@@ -82,5 +82,12 @@ module.exports = function (sequelize, DataTypes) {
         });
       };
 
+    User.associate = function(models) {
+        //associates the single encounter for the user
+        User.hasOne(models.Encounter, {
+            onDelete: "cascade"
+        });
+    }
+
     return User;
 };
