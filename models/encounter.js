@@ -31,11 +31,12 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     Encounter.associate = function(models) {
-        Encounter.belongsTo(model.User, {
+        Encounter.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
+    return Encounter;
 
 };
