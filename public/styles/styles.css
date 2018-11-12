@@ -1,3 +1,7 @@
+body {
+  background-color: #1E1E1F;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -81,6 +85,7 @@ img {
   text-align: center;
   font-size: 24px;
   margin: .5rem 0;
+  position: relative;
 }
 
 .todo-card .progress {
@@ -93,22 +98,38 @@ img {
   text-align: right;
 }
 
+.bonus {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.bonus p {
+  text-align: center;
+  margin-top: .5rem;
+}
+
+.bonus img {
+  height: 30px;
+}
+
 .btn-add-task {
   width: 50%;
   display: block;
-  margin: 10px auto;
+  margin: 15px auto;
 }
 
 .tasks {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 0;
 }
 
 .tasks li {
   cursor: pointer;
-  font-size: 20px;
-  padding-left: 30px;
-  padding-right: 30px;
+  position: relative;
+  font-size: 18px;
+  padding: 5px 30px 5px 60px;
   border-top: 1px solid #92A0A5;
 }
 
@@ -130,29 +151,92 @@ img {
 	font-variant: normal;
 	text-rendering: auto;
   line-height: 1;
-  margin:  0 5px;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tasks li:after {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f142";
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  padding: 5px 10px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 2px;
 }
 
 .tasks li:hover:before {
   content: "\f14a";
 }
 
-#collapse-personal-completed {
-  /* background-color: #92A0A5; */
-}
-
 .tasks.completed {
   padding-top: 15px;
+  margin-bottom: 10px;
 }
 
 .tasks.completed li {
   cursor: default;
   border: none;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .tasks.completed li:before {
   content: "\f14a";
 }
 
+.tasks.completed li:after {
+  content: none;
+}
+
 .tasks.completed li:hover {
   background-color: #fff;
+}
+
+.accordion .card-header {
+  padding-top: 0;
+  padding-bottom: 0; 
+  position: relative;
+}
+
+.btn-expand {
+  position: relative;
+  text-decoration: none !important;
+  padding-right: 30px;
+}
+
+.btn-expand:hover {
+  text-decoration: none;
+}
+
+.btn-expand:after {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f0fe";
+  font-size: 24px;
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-expand:hover:after {
+  font-weight: 700;
 }
