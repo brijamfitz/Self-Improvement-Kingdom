@@ -18,17 +18,27 @@ module.exports = function (app) {
     }
   });
 
-
   // Getting the signup form
   app.get("/signup", function(req, res){
     console.log("you're hitting the route")
     res.render('signup', {msg: "Time to get to work!"});
 });
 
+ // the "main" page displaying our user's info and stuff
   app.get("/user", function(req, res){
-    console.log('here I am in the profile page');
-
-   res.redirect("/api/user")
+      // data is returned parsed to faciliatate front end integration
+    res.render('profile',
+    {data: {
+        username: req.user.username,
+        photo: req.user.photo,
+        title: req.user.title,
+        castle: req.user.castle,
+        provinceCount: req.user.provinceCount,
+        knightCount: req.user.knightCount,
+        archerCount: req.user.archerCount,
+        mageCount: req.user.mageCount
+      }
+    });
   });
 
   app.get('/logout', function(req, res){
