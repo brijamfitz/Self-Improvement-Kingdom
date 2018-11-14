@@ -78,7 +78,6 @@ img {
 
 .todo-card > .card-header {
   padding: 0 15px;
-  border-bottom: 2px solid black;
 }
 
 .todo-card .card-header h2 {
@@ -94,23 +93,28 @@ img {
   margin: 10px 0 20px;
 }
 
-.cat-level {
-  text-align: right;
-}
-
 .bonus {
   position: absolute;
-  top: 5px;
+  top: 2px;
   right: 10px;
-}
-
-.bonus p {
-  text-align: center;
-  margin-top: .5rem;
 }
 
 .bonus img {
   height: 30px;
+}
+
+.difficulty-select {
+  display: block;
+  margin: 10px auto;
+}
+
+.task-form {
+  text-align: center;
+  margin: 5px 5px 0;
+}
+
+.task-form > .form-group {
+  margin-bottom: 5px;
 }
 
 .btn-add-task {

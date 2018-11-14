@@ -75,12 +75,12 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    User.associate = function(models) {
-        //associating user with their current tasks, deletes on user deletion
-        User.hasMany(models.Task, {
-          onDelete: "cascade"
-        });
-      };
+    // User.associate = function(models) {
+    //     //associating user with their current tasks, deletes on user deletion
+    //     User.hasMany(models.Task, {
+    //       onDelete: "cascade"
+    //     });
+    //   };
 
     User.associate = function(models) {
         //associates the single encounter for the user
