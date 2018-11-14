@@ -15,7 +15,7 @@ module.exports = function (app) {
             provinceCount: req.user.provinceCount,
             knightCount: req.user.knightCount,
             archerCount: req.user.archerCount,
-            mageCount: req.user.mageCount,
+            mageCount: req.user.mageCount
           }
         });
     });
