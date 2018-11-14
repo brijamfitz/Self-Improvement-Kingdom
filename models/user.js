@@ -123,5 +123,16 @@ User.prototype.validPassword = function(password) {
 
 
 
+<<<<<<< HEAD
 return User;
+=======
+    User.associate = function(models) {
+        //associates the single encounter for the user
+        User.hasOne(models.Encounter, {
+            onDelete: "cascade"
+        });
+    }
+
+    return User;
+>>>>>>> 986c0386abd0fa1db5ef7d7fc2fb91d7c94ec87e
 };
