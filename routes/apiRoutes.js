@@ -16,6 +16,12 @@ module.exports = function (app) {
    }
     );
 
-
- 
-};
+   app.get("/api/army", function(req, res){
+     var playerArmy = {
+       knightCount: req.user.knightCount,
+       mageCount: req.user.mageCount,
+       archerCount: req.user.archerCount
+     }
+     res.json(playerArmy);
+   })
+};  
