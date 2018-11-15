@@ -1,73 +1,88 @@
 body {
   background-color: #1E1E1F;
+  padding-top: 135px;
 }
 
 .list-group-item {
   line-height: 2.5;
 }
-/* Brian's code starts here */
-/* ========================================================================== */
+/* ================================================================================== */
+/* BRIAN'S CSS FOR ENCOUNTER CARD AND USER NAVBAR INFO */
+/* ================================================================================== */
 #navbar {
   background-color: royalblue;
   color: white;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
+
 #encounter-card {
   margin: 30px 0px 30px 0px;
-  width: 100%
+  width: 100%;
+  background-color: #fff;
 }
+
 #encounter-card .btn {
   margin: 10px;
   background-color: royalblue;
 }
+
 img {
   margin: 5px;
 }
+
 #fight-flee,
 #avatar,
 #user-experience,
-#user-level {
+#user-level,
+#army-counts {
   text-align: center;
 }
 
 #user-level .level {
   margin-top: 22px;
 }
-#fight-flee {
-  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
-  background: rgba(204, 204, 204, 0.5);
-}
+
 #enemy {
   text-align: right;
-  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
-  background: rgba(204, 204, 204, 0.5);
 }
-#encounter-card {
-  background-image: url("https://pre00.deviantart.net/d058/th/pre/f/2018/143/4/e/castle_landscape_study_by_88grzes-dccbfbg.jpg");
-  background-size: cover;
-}
+
 #profile-img {
   border-radius: 50%;
   height: 50px;
   width: 50px;
 }
+
 #castle-img {
   height: 50px;
   width: 50px;
 }
-#navbar {
-  width: 100%;
-  padding: 10px;
-}
+
 #user-experience .progress {
   border-radius: 20px;
   height: 20px;
   margin-top: 30px;
 }
-#user-army {
-  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
-  background: rgba(204, 204, 204, 0.5);
+
+.modal-header {
+  text-align: center;
 }
 
+#encounter-img-archer,
+#encounter-img-mage {
+  height: 30px;
+  width: 30px;
+}
+
+#encounter-img-knight {
+  height: 30px;
+  width: 25px;
+}
+
+/* ================================================================================== */
 
 
 /* Todo card styles */

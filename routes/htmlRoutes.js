@@ -27,7 +27,7 @@ module.exports = function (app) {
  // the "main" page displaying our user's info and stuff
   app.get("/user", function(req, res){
       // data is returned parsed to faciliatate front end integration
-    res.render('profile',
+    res.render('index',
     {data: {
         username: req.user.username,
         photo: req.user.photo,
