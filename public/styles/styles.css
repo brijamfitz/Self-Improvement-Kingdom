@@ -1,3 +1,257 @@
+body {
+  background-color: #1E1E1F;
+  padding-top: 135px;
+}
+
 .list-group-item {
   line-height: 2.5;
+}
+/* ================================================================================== */
+/* BRIAN'S CSS FOR ENCOUNTER CARD AND USER NAVBAR INFO */
+/* ================================================================================== */
+#navbar {
+  background-color: royalblue;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+#encounter-card {
+  margin: 30px 0px 30px 0px;
+  width: 100%;
+  background-color: #fff;
+}
+
+#encounter-card .btn {
+  margin: 10px;
+  background-color: royalblue;
+}
+
+img {
+  margin: 5px;
+}
+
+#fight-flee,
+#avatar,
+#user-experience,
+#user-level,
+#army-counts {
+  text-align: center;
+}
+
+#user-level .level {
+  margin-top: 22px;
+}
+
+#enemy {
+  text-align: right;
+}
+
+#profile-img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+#castle-img {
+  height: 50px;
+  width: 50px;
+}
+
+#user-experience .progress {
+  border-radius: 20px;
+  height: 20px;
+  margin-top: 30px;
+}
+
+.modal-header {
+  text-align: center;
+}
+
+#encounter-img-archer,
+#encounter-img-mage {
+  height: 30px;
+  width: 30px;
+}
+
+#encounter-img-knight {
+  height: 30px;
+  width: 25px;
+}
+
+/* ================================================================================== */
+
+
+/* Todo card styles */
+
+.todo-card {
+  margin-bottom: 40px;
+}
+
+.todo-card > .card-header {
+  padding: 0 15px;
+  border-bottom: 2px solid black;
+}
+
+.todo-card .card-header h2 {
+  text-align: center;
+  font-size: 24px;
+  margin: .5rem 0;
+  position: relative;
+}
+
+.todo-card .progress {
+  height: 15px;
+  border-radius: 10px;
+  margin: 10px 0 20px;
+}
+
+.cat-level {
+  text-align: right;
+}
+
+.bonus {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.bonus p {
+  text-align: center;
+  margin-top: .5rem;
+}
+
+.bonus img {
+  height: 30px;
+}
+
+.btn-add-task {
+  width: 50%;
+  display: block;
+  margin: 15px auto;
+}
+
+.tasks {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.tasks li {
+  cursor: pointer;
+  position: relative;
+  font-size: 18px;
+  padding: 5px 30px 5px 60px;
+  border-top: 1px solid #92A0A5;
+}
+
+.tasks li:last-of-type {
+  border-bottom: 1px solid #92A0A5;
+}
+
+.tasks li:hover {
+  background-color: #ffc107;
+}
+
+.tasks li:before {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f0c8";
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tasks li:after {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f142";
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  padding: 5px 10px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.tasks li:hover:before {
+  content: "\f14a";
+}
+
+.tasks.completed {
+  padding-top: 15px;
+  margin-bottom: 10px;
+}
+
+.tasks.completed li {
+  cursor: default;
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.tasks.completed li:before {
+  content: "\f14a";
+}
+
+.tasks.completed li:after {
+  content: none;
+}
+
+.tasks.completed li:hover {
+  background-color: #fff;
+}
+
+.accordion .card-header {
+  padding-top: 0;
+  padding-bottom: 0; 
+  position: relative;
+}
+
+.btn-expand {
+  position: relative;
+  text-decoration: none !important;
+  padding-right: 30px;
+}
+
+.btn-expand:hover {
+  text-decoration: none;
+}
+
+.btn-expand:after {
+	font-family: 'Font Awesome 5 Free';
+  content: "\f0fe";
+  font-size: 24px;
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-expand:hover:after {
+  font-weight: 700;
 }

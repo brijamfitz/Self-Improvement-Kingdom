@@ -1,24 +1,35 @@
 var db = require("../models");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+var passport = require("../config/passport")
 
-module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
+module.exports = function (app) {
+    // Processing the local login form
+  app.post("/api/login/local", passport.authenticate('local-login'), function (req, res) {
+    // sending the user data to api/user, which will in turn render the profile page with the parsed data
+    res.redirect("/login");
+  }
+  );
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+   // Processing the signup form
+   app.post("/api/signup", passport.authenticate('local-signup'), function(req, res){
+    res.redirect("/login");
+   }
+    );
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-};
+  app.set("/api/tasks/edit", function(req, res){
+    db.Task.findById(req.body.taskId).then(function(data){
+
+    })
+      
+    
+  })
+
+   app.get("/api/army", function(req, res){
+     var playerArmy = {
+       knightCount: req.user.knightCount,
+       mageCount: req.user.mageCount,
+       archerCount: req.user.archerCount
+     }
+     res.json(playerArmy);
+   })
+};  

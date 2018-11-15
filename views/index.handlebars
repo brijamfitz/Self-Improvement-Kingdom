@@ -1,31 +1,135 @@
+<!-- ======================================================================================== -->
+<!-- USER INFO BAR AT TOP OF DASHBOARD -->
+<!-- ======================================================================================== -->
+{{> usernav/usernav}}
+
 <div id="home">
   <div class="container">
+    <!-- ======================================================================================== -->
+    <!-- ENCOUNTER CARD -->
+    <!-- ======================================================================================== -->
     <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+     {{> encounter/encounter-card}}
+    </div>
+
+    <!-- ======================================================================================== -->
+    <!-- FIGHT MODAL -->
+    <!-- ======================================================================================== -->
+    <div class="modal fade bd-example-modal-md" id="fightModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Fight!</h4>
+            <button type="button" class="close" data-dismiss="modal">x</button>
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+          <div class="modal-body">
+            <!-- Battle content goes here -->
+            <p id="battle-simulation">Battle simulation content goes here</p>
+            <p id="battle-results">You lost 10 knights, 5 archers, 1 mage</p>
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+          <div class="modal-footer">
+            <h5>Reward: You have gained 1 Province!</h5>
+            {{!-- <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button> --}}
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- ======================================================================================== -->
+    <!-- FLEE MODAL -->
+    <!-- ======================================================================================== -->
+    <div class="modal fade bd-example-modal-md" id="fleeModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Flee!</h4>
+            <button type="button" class="close" data-dismiss="modal">x</button>
+          </div>
+          <div class="modal-body">
+            <!-- Content goes here -->
+            <p>Your army has retreated!</p>
+            <p>You have lost 1 province for this act of cowardice.</p>
+            <p>Return tomorrow &mdash; if you are ready for battle!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================================== -->
+    <!-- TASK CARD -->
+    <!-- ======================================================================================== -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card todo-card" id="personal">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6 todo-cat">
+                <h2>Personal</h2>
+              </div>
+              <div class="col-6 cat-level">
+                <h2>Level
+                  <span class="level">1</span>
+                </h2>
+              </div>
+              <div class="bonus">
+                <img src="./images/archer.png" alt="archer pixel art">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="progress">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-add-task" id="new-personal-task">Add Task</button>
+          <ul class="tasks">
+            {{!-- Loop through and add tasks in this category --}}
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Pay credit card bill</span>
+            </li>
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Clean out garage</span>
+            </li>
+            <li id="{{!-- task-{{task_id}} --}}">
+              <span>Schedule oil change</span>
+            </li>
+          </ul>
+          <div class="accordion completed" id="personal-completed">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <button class="btn btn-link btn-expand ml-auto d-block" type="button" data-toggle="collapse"
+                    data-target="#collapse-personal-completed" aria-expanded="true" aria-controls="collapse-personal-completed">
+                    Completed tasks
+                  </button>
+                </h5>
+              </div>
+              <div id="collapse-personal-completed" class="collapse hide" data-parent="#personal-completed">
+
+                <ul class="tasks completed">
+                  {{!-- loop through and add completed tasks in this category --}}
+                  <li id="{{!-- task-{{task_id}} --}}">
+                    <span>Deliver rent check</span>
+                  </li>
+                  <li id="{{!-- task-{{task_id}} --}}">
+                    <span>Empty litter box</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
