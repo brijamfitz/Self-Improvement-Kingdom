@@ -1,3 +1,6 @@
+<!-- ======================================================================================== -->
+<!-- USER INFO BAR AT TOP OF DASHBOARD -->
+<!-- ======================================================================================== -->
 <div class="jumbotron-fluid" id="navbar">
   <div class="container-fluid">
     <div class="row">
@@ -6,15 +9,22 @@
         <img src="https://brijamfitz.github.io/Portfolio/assets/images/profile-image.jpg" id="profile-img" />
         <img src="http://pixelartmaker.com/art/bb62bdc4697c7fb.png" id="castle-img" />
       </div>
-      <div class="col-md-6" id="user-experience">
-        <h5 class="card-title">Experience</h5>
+      <div class="col-md-3" id="user-experience">
+        <h5 class="card-title">Progress</h5>
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
         </div>
+      </div>
+      <div class="col-md-3" id="army-counts">
+        <h5 class="card-title">Army</h5>
+        <div>Archers: <span id="user-archer-count"></span></div>
+        <div>Knights: <span id="user-knight-count"></span></div>
+        <div>Mages: <span id="user-mage-count"></span></div>
       </div>
       <div class="col-md-3" id="user-level">
         <h5 class="card-title">Level</h5>
-        <p class="lead level">9</p>
+        <p class="lead level">1</p>
       </div>
     </div>
   </div>
@@ -22,35 +32,10 @@
 
 <div id="home">
   <div class="container">
-
-    <!-- USER INFO -->
+    <!-- ======================================================================================== -->
+    <!-- THIS IS FROM THE EXAMPLE PROVIDED IN CLASS -->
     <!-- ======================================================================================== -->
     {{!--
-    <div class="jumbotron" id="navbar">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3" id="avatar">
-            <h1 class="display-4">Username</h1>
-            <hr class="my-4">
-            <img src="https://brijamfitz.github.io/Portfolio/assets/images/profile-image.jpg" id="profile-img" />
-            <img src="http://pixelartmaker.com/art/bb62bdc4697c7fb.png" id="castle-img" />
-          </div>
-          <div class="col-md-6" id="experience">
-            <h1 class="display-4">Experience</h1>
-            <hr class="my-4">
-            <div class="progress" style="height: 30px;">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="col-md-3" id="level">
-            <h1 class="display-4">Level</h1>
-            <hr class="my-4">
-            <p class="lead">9</p>
-          </div>
-        </div>
-      </div>
-    </div> --}} {{!--
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
@@ -78,6 +63,8 @@
       </div>
     </div> --}}
 
+
+    <!-- ======================================================================================== -->
     <!-- ENCOUNTER CARD -->
     <!-- ======================================================================================== -->
     <div class="row">
@@ -85,33 +72,83 @@
         <div class="jumbotron" id="encounter-card">
           <div class="row">
             <div class="col-md-4" id="user-army">
-              <h1 class="display-4">Encounter!</h1>
+              <h4>Your Army</h4>
               <hr class="my-4">
-              <p class="lead">Your Army</p>
-              <p>10 x Wizards</p>
-              <p>25 x Knights</p>
+              <p><img src="./images/archer.png" id="encounter-img-archer">Archers: <span id="encounter-archer-count"></span></p>
+              <p><img src="./images/knight.png" id="encounter-img-knight">Knights: <span id="encounter-knight-count"></span></p>
+              <p><img src="./images/mage.png" id="encounter-img-mage">Mages: <span id="encounter-mage-count"></span></p>
             </div>
             <div class="col-md-4" id="fight-flee">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Fight!</a>
+              <h4>Encounter Name</h4>
+              <hr class="my-4">
+              <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#fightModal">Fight!</a>
               <span> OR </span>
-              <a class="btn btn-primary btn-lg" href="#" role="button">Flee!</a>
+              <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#fleeModal">Flee!</a>
               <hr class="my-4">
-              <p>EVENT NAME</p>
-              <hr class="my-4">
-              <p>VS.</p>
             </div>
             <div class="col-md-4" id="enemy">
-              <h1 class="display-4">TEXT</h1>
+              <h4>Enemy Army</h4>
               <hr class="my-4">
-              <p class="lead">Enemy</p>
-              <p>1 x Grim Reaper</p>
-              <p>1 x Executioner</p>
+              <p><img src="./images/archer.png" id="encounter-img-archer">Archers: <span id="enemy-archer-count">20</span></p>
+              <p><img src="./images/knight.png" id="encounter-img-knight">Knights: <span id="enemy-archer-count">10</span></p>
+              <p><img src="./images/mage.png" id="encounter-img-mage">Mages: <span id="enemy-archer-count">5</span></p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ======================================================================================== -->
+    <!-- FIGHT MODAL -->
+    <!-- ======================================================================================== -->
+    <div class="modal fade bd-example-modal-md" id="fightModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Fight!</h4>
+            <button type="button" class="close" data-dismiss="modal">x</button>
+          </div>
+          <div class="modal-body">
+            <!-- Battle content goes here -->
+            <p class="battle-simulation">Battle simulation content goes here</p>
+            <p id="battle-results">You lost 10 knights, 5 archers, 1 mage</p>
+          </div>
+          <div class="modal-footer">
+            <h5>Reward: You have gained 1 Province!</h5>
+            {{!-- <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================================== -->
+    <!-- FLEE MODAL -->
+    <!-- ======================================================================================== -->
+    <div class="modal fade bd-example-modal-md" id="fleeModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Flee!</h4>
+            <button type="button" class="close" data-dismiss="modal">x</button>
+          </div>
+          <div class="modal-body">
+            <!-- Content goes here -->
+            <p>Your army has retreated!</p>
+            <p>You have lost 1 province for this act of cowardice.</p>
+            <p>Return tomorrow &mdash; if you are ready for battle!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================================== -->
+    <!-- TASK CARD -->
+    <!-- ======================================================================================== -->
     <div class="row">
       <div class="col-md-6">
         <div class="card todo-card" id="personal">
@@ -132,7 +169,8 @@
             <div class="row">
               <div class="col-12">
                 <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
             </div>
@@ -154,8 +192,8 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <button class="btn btn-link btn-expand ml-auto d-block" type="button" data-toggle="collapse" data-target="#collapse-personal-completed" aria-expanded="true"
-                    aria-controls="collapse-personal-completed">
+                  <button class="btn btn-link btn-expand ml-auto d-block" type="button" data-toggle="collapse"
+                    data-target="#collapse-personal-completed" aria-expanded="true" aria-controls="collapse-personal-completed">
                     Completed tasks
                   </button>
                 </h5>

@@ -21,4 +21,13 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  // ==================================================================================================
+  // Testing database
+  // ==================================================================================================
+  app.get('/api/user', function(req, res) {
+    db.User.findAll().then(function(dbResults) {
+      res.json(dbResults);
+    })
+  })
 };
