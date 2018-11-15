@@ -7,10 +7,12 @@ $(function() {
   $(".task-form").on("submit", function(event) {
     event.preventDefault();
 
+    var currentCat = $(this).data('category');
+
     var newTask = {
       name: $(this).find('.task-input').val().trim(),
       difficulty: $(this).find("input:checked").val(),
-      category: $(this).data('category')
+      currentCat: 1
     }
     $.ajax("/api/tasks", {
       type: "POST",
@@ -22,6 +24,4 @@ $(function() {
       }
     );
   });
-
-
 });

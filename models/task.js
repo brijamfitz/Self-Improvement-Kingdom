@@ -8,11 +8,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1, 100]
             }
         },
-        //stores the body of the text describing task
-        // taskBody: {
-        //     type: DataTypes.TEXT,
-        //     allowNull: false
-        // },
         //assigned difficulty value by the user
         difficulty: {
             type: DataTypes.INTEGER,
@@ -28,6 +23,30 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
+        // personal: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
+        // wellness: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
+        // learning: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
+        // creativity: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
+        // exercise: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
+        // chores: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false
+        // },
         completed: {
             type: DataTypes.BOOLEAN,
             defaultValue: false

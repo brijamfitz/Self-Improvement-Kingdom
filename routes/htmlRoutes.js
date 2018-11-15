@@ -3,47 +3,65 @@ var db = require("../models");
 module.exports = function (app) {
   // Load index page
   app.get("/", function (req, res) {
-    db.Task.findAll({
-      where: { category: "personal" }
-    }).then(function (personalTasks) {
-      console.log(personalTasks);
-      res.render("index", personalTasks);
+    db.Task.findAll({}).then(function (allTasks) {
+      // console.log(allTasks);
+      //filter tasks
+
+      // var personalCheck = function(task) {
+      //   if(task.category == "personal") {
+      //     return task;
+      //   }
+      // }
+      // var wellnessCheck = function(task) {
+      //   if(task.category == "wellness") {
+      //     return task;
+      //   }
+      // }
+
+      var personalTasks = allTasks.filter(function(task) {
+        if(task.category == "personal") {
+          return task;
+        }
+      });
+      var wellnessTasks = allTasks.filter(function(task) {
+        if(task.category == "wellness") {
+          return task;
+        }
+      });
+      var learningTasks = allTasks.filter(function(task) {
+        if(task.category == "learning") {
+          return task;
+        }
+      });
+      var creativityTasks = allTasks.filter(function(task) {
+        if(task.category == "creativity") {
+          return task;
+        }
+      });
+      var exerciseTasks = allTasks.filter(function(task) {
+        if(task.category == "exercise") {
+          return task;
+        }
+      });
+      var choresTasks = allTasks.filter(function(task) {
+        if(task.category == "chores") {
+          return task;
+        }
+      });
+
+      console.log(wellnessTasks);
+      res.render("index", {
+        personalTasks: personalTasks,
+        wellnessTasks: wellnessTasks,
+        learningTasks: learningTasks,
+        creativityTasks: creativityTasks,
+        exerciseTasks: exerciseTasks,
+        choresTasks: choresTasks
+      });
+      // res.render("index", {
+      //   allTasks: allTasks
+      // });
     });
-
-    // db.Task.findAll({
-    //   where: { category: "health/wellness" }
-    // }).then(function (wellnessTasks) {
-    //   console.log(wellnessTasks);
-    //   res.render("index", wellnessTasks);
-    // });
-
-    // db.Task.findAll({
-    //   where: { category: "learning/school" }
-    // }).then(function (learningTasks) {
-    //   console.log(learningTasks);
-    //   res.render("index", learningTasks);
-    // });
-
-    // db.Task.findAll({
-    //   where: { category: "creativity" }
-    // }).then(function (creativityTasks) {
-    //   console.log(creativityTasks);
-    //   res.render("index", creativityTasks);
-    // });
-
-    // db.Task.findAll({
-    //   where: { category: "exercise" }
-    // }).then(function (exerciseTasks) {
-    //   console.log(exerciseTasks);
-    //   res.render("index", exerciseTasks);
-    // });
-
-    // db.Task.findAll({
-    //   where: { category: "chores" }
-    // }).then(function (choresTasks) {
-    //   console.log(choresTasks);
-    //   res.render("index", choresTasks);
-    // });
   });
 
   // Load example page and pass in an example by id
