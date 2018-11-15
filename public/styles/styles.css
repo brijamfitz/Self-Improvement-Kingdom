@@ -259,3 +259,8 @@ img {
 .btn-expand:hover:after {
   font-weight: 700;
 }
+
+.collapse.show {
+  max-height: 100px;
+  overflow-y: scroll;
+}

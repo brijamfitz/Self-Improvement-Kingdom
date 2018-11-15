@@ -9,6 +9,12 @@ module.exports = function (app) {
     })
   });
 
+  app.post("/api/tasks", function(req, res) {
+    db.Task.create(req.body).then(function(newTask) {
+      res.json(newTask);
+    });
+  });
+
     // Processing the local login form
   app.post("/api/login/local", passport.authenticate('local-login'), function (req, res) {
     // sending the user data to api/user, which will in turn render the profile page with the parsed data
