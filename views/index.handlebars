@@ -1,101 +1,15 @@
 <!-- ======================================================================================== -->
 <!-- USER INFO BAR AT TOP OF DASHBOARD -->
 <!-- ======================================================================================== -->
-<div class="jumbotron-fluid" id="navbar">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3" id="avatar">
-        <h5 class="card-title">Username</h5>
-        <img src="https://brijamfitz.github.io/Portfolio/assets/images/profile-image.jpg" id="profile-img" />
-        <img src="http://pixelartmaker.com/art/bb62bdc4697c7fb.png" id="castle-img" />
-      </div>
-      <div class="col-md-3" id="user-experience">
-        <h5 class="card-title">Progress</h5>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div>
-      <div class="col-md-3" id="army-counts">
-        <h5 class="card-title">Army</h5>
-        <div>Archers: <span id="user-archer-count"></span></div>
-        <div>Knights: <span id="user-knight-count"></span></div>
-        <div>Mages: <span id="user-mage-count"></span></div>
-      </div>
-      <div class="col-md-3" id="user-level">
-        <h5 class="card-title">Level</h5>
-        <p class="lead level">1</p>
-      </div>
-    </div>
-  </div>
-</div>
+{{> usernav/usernav}}
 
 <div id="home">
   <div class="container">
     <!-- ======================================================================================== -->
-    <!-- THIS IS FROM THE EXAMPLE PROVIDED IN CLASS -->
-    <!-- ======================================================================================== -->
-    {{!--
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div> --}}
-
-
-    <!-- ======================================================================================== -->
     <!-- ENCOUNTER CARD -->
     <!-- ======================================================================================== -->
     <div class="row">
-      <div class="col-12">
-        <div class="jumbotron" id="encounter-card">
-          <div class="row">
-            <div class="col-md-4" id="user-army">
-              <h4>Your Army</h4>
-              <hr class="my-4">
-              <p><img src="./images/archer.png" id="encounter-img-archer">Archers: <span id="encounter-archer-count"></span></p>
-              <p><img src="./images/knight.png" id="encounter-img-knight">Knights: <span id="encounter-knight-count"></span></p>
-              <p><img src="./images/mage.png" id="encounter-img-mage">Mages: <span id="encounter-mage-count"></span></p>
-            </div>
-            <div class="col-md-4" id="fight-flee">
-              <h4>Encounter Name</h4>
-              <hr class="my-4">
-              <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#fightModal">Fight!</a>
-              <span> OR </span>
-              <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#fleeModal">Flee!</a>
-              <hr class="my-4">
-            </div>
-            <div class="col-md-4" id="enemy">
-              <h4>Enemy Army</h4>
-              <hr class="my-4">
-              <p><img src="./images/archer.png" id="encounter-img-archer">Archers: <span id="enemy-archer-count">20</span></p>
-              <p><img src="./images/knight.png" id="encounter-img-knight">Knights: <span id="enemy-archer-count">10</span></p>
-              <p><img src="./images/mage.png" id="encounter-img-mage">Mages: <span id="enemy-archer-count">5</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
+     {{> encounter/encounter-card}}
     </div>
 
     <!-- ======================================================================================== -->
@@ -111,7 +25,7 @@
           </div>
           <div class="modal-body">
             <!-- Battle content goes here -->
-            <p class="battle-simulation">Battle simulation content goes here</p>
+            <p id="battle-simulation">Battle simulation content goes here</p>
             <p id="battle-results">You lost 10 knights, 5 archers, 1 mage</p>
           </div>
           <div class="modal-footer">

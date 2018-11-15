@@ -13,7 +13,7 @@ var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var sequelize = new Sequelize (
   "project2db",
   "root",
-  "Ulgo1149",
+  "",
   {"dialect": "mysql",
 "storage": "./session.sqlite"}
 );
