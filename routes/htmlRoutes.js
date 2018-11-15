@@ -1,27 +1,53 @@
-var db = require("../models");
 
-module.exports = function(app) {
-  // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
+module.exports = function (app) {
+  // splash checks if user is registered, if so redirects to user's page
+  app.get("/", function (req, res) {
+    if (req.user) {
+      res.redirect("/api/user");
+    } else {
+      res.redirect("/login")
+    }
+  });
+
+  // Getting the local login form
+  app.get("/login", function (req, res) {
+    if(req.user){
+      res.redirect("api/user");
+    } else {
+      res.render('login');
+    }
+  });
+
+  // Getting the signup form
+  app.get("/signup", function(req, res){
+    console.log("you're hitting the route")
+    res.render('signup', {msg: "Time to get to work!"});
+});
+
+ // the "main" page displaying our user's info and stuff
+  app.get("/user", function(req, res){
+      // data is returned parsed to faciliatate front end integration
+    res.render('profile',
+    {data: {
+        username: req.user.username,
+        photo: req.user.photo,
+        title: req.user.title,
+        castle: req.user.castle,
+        provinceCount: req.user.provinceCount,
+        knightCount: req.user.knightCount,
+        archerCount: req.user.archerCount,
+        mageCount: req.user.mageCount
+      }
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
+  app.get("*", function (req, res) {
+    res.render('404');
   });
 };
