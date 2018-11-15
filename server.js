@@ -11,9 +11,9 @@ var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 var sequelize = new Sequelize (
-  "project2db",
-  "root",
-  "Ulgo1149",
+  process.env.DB_name,
+  process.env.DB_username,
+  process.env.DB_password,
   {"dialect": "mysql",
 "storage": "./session.sqlite"}
 );

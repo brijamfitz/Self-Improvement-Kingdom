@@ -6,7 +6,7 @@ module.exports = function (app) {
     // Processing the local login form
   app.post("/api/login/local", passport.authenticate('local-login'), function (req, res) {
     // sending the user data to api/user, which will in turn render the profile page with the parsed data
-    res.redirect("/user");
+    res.redirect("/login");
   }
   );
 
@@ -15,6 +15,14 @@ module.exports = function (app) {
     res.redirect("/login");
    }
     );
+
+  app.set("/api/tasks/edit", function(req, res){
+    db.Task.findById(req.body.taskId).then(function(data){
+
+    })
+      
+    
+  })
 
    app.get("/api/army", function(req, res){
      var playerArmy = {
