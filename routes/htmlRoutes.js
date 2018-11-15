@@ -3,7 +3,7 @@ module.exports = function (app) {
   // splash checks if user is registered, if so redirects to user's page
   app.get("/", function (req, res) {
     if (req.user) {
-      res.redirect("/api/user");
+      res.redirect("/user");
     } else {
       res.redirect("/login")
     }
@@ -12,7 +12,7 @@ module.exports = function (app) {
   // Getting the local login form
   app.get("/login", function (req, res) {
     if(req.user){
-      res.redirect("api/user");
+      res.redirect("/user");
     } else {
       res.render('login');
     }
@@ -43,7 +43,7 @@ module.exports = function (app) {
 
   app.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
   });
 
   // Render 404 page for any unmatched routes
