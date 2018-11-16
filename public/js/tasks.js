@@ -1,6 +1,7 @@
 $(function() {
 
-  $(".task-form .task-input").on("focus", function() {
+  $(".task-input").on("click", function() {
+    console.log("Task input clicked")
     $(this).parent().siblings(".task-options").removeClass("d-none")
   })
 
@@ -23,4 +24,17 @@ $(function() {
       }
     );
   });
+
+  $(".btn-delete").on("click", function() {
+    var id = $(this).parent().attr('data-id');
+    console.log(id)
+    $.ajax({
+      url: "api/task/" + id,
+      type: "DELETE"
+    }).then(
+      function() {
+        location.reload();
+      }
+    );
+  })
 });

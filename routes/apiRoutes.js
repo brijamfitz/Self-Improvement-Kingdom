@@ -43,8 +43,8 @@ module.exports = function (app) {
   });
 
     // delete route for removing tasks
-  app.delete("/api/task/delete", function(req, res){
-    db.Task.destroy({where: {id:req.body.id}}).then(function(task){
+  app.delete("/api/task/:id", function(req, res){
+    db.Task.destroy({where: {id:req.params.id}}).then(function(task){
       res.json(task);
     })
   });

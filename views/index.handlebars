@@ -65,18 +65,19 @@
     <!-- ======================================================================================== -->
 
     <div class="row">
-      {{> todos/personal }}
-      {{> todos/wellness }}
+      {{!-- {{> todo-layout/category-list category="personal" }} --}}
+      {{> todo-lists/personal }}
+      {{> todo-lists/wellness }}
     </div>
 
     <div class="row">
-      {{> todos/learning }}
-      {{> todos/creativity }}
+      {{> todo-lists/learning }}
+      {{> todo-lists/creativity }}
     </div>
 
     <div class="row">
-      {{> todos/exercise }}
-      {{> todos/chores }}
+      {{> todo-lists/exercise }}
+      {{> todo-lists/chores }}
     </div>
 
   </div>
