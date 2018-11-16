@@ -1,15 +1,24 @@
-<h1>{{msg}}</h1>
-
-<form action="/api/signup" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
+<div class="container">
+    <div class="jumbotron" id="signup-card">
+        <h1 class="display-4">The Self Improvement Kingdom!</h1>
+        <img src="http://orig11.deviantart.net/c588/f/2010/235/a/6/pixel_art__castle_keep_by_doctordrg.png" alt="castle" />
+        <p class="lead">Build your army and battle your way to self improvement!</p>
+        <hr class="my-4">
+        <div class="col-md-12" id="signup-container">
+            <p>Create a username and password to begin your quest!</p>
+            <form action="/api/signup" method="post">
+                <div>
+                    {{!-- <label>Username:</label> --}}
+                    <input type="text" name="username" placeholder="Username" id="username-input" />
+                </div>
+                <div>
+                    {{!-- <label>Password:</label> --}}
+                    <input type="password" name="password" placeholder="Password" id="password-input" />
+                </div>
+                <div>
+                    <input type="submit" value="Create Account" class="btn btn-lg btn-primary" id="create-account-btn" />
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="signup"/>
-    </div>
-</form>
+</div>
