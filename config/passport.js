@@ -6,6 +6,7 @@ var db = require("../models")
 passport.use('local-login', new LocalStrat({
     usernameField: 'username',
     passwordField: 'password',
+    passReqToCallback: true,
 }, function (username, password, done) {
     console.log("You're in passport");
     db.User.findAll({ where: { username: username }}).then(function (user) {
@@ -28,10 +29,12 @@ passport.use('local-login', new LocalStrat({
 passport.use('local-signup', new LocalStrat({
     usernameField: 'username',
     passwordField: 'password',
+    passReqToCallback: true,
 }, function (req, username, password, done) {
     process.nextTick(function () {
         db.User.findOne({ where: { 'username': username } }).then(function (err, data) {
             console.log("we're in the next tick function");
+            console.log(username, password)
             // if database err return the error
             if (err)
                 return done(err);

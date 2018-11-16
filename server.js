@@ -10,12 +10,12 @@ var session = require("express-session");
 var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-var sequelize = new Sequelize (
-  process.env.DB_name,
-  process.env.DB_username,
-  process.env.DB_password,
-  {"dialect": "mysql",
-"storage": "./session.sqlite"}
+var sequelize = new Sequelize(process.env.DB_name, process.env.DB_username, process.env.DB_password,
+  {
+    "dialect": "mysql",
+    "port": process.env.DB_port,
+    "storage": "./session.sqlite"
+  }
 );
 
 var myStore = new SequelizeStore({
@@ -26,16 +26,18 @@ var myStore = new SequelizeStore({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use(session({ 
-  secret: 'taskmanagerkingdom', 
+app.use(session({
+  secret: 'taskmanagerkingdom',
   resave: false,
-  saveUninitialized: true, 
-  cookie:{secure: false} ,
+  saveUninitialized: true,
+  cookie: { secure: false },
   store: myStore
 }));
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
+app.use(passport.session());
+
+
 
 
 // Handlebars

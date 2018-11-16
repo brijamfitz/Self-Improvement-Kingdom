@@ -61,73 +61,23 @@
     </div>
 
     <!-- ======================================================================================== -->
-    <!-- TASK CARD -->
+    <!-- TODO LISTS -->
     <!-- ======================================================================================== -->
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card todo-card" id="personal">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-6 todo-cat">
-                <h2>Personal</h2>
-              </div>
-              <div class="col-6 cat-level">
-                <h2>Level
-                  <span class="level">1</span>
-                </h2>
-              </div>
-              <div class="bonus">
-                <img src="./images/archer.png" alt="archer pixel art">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-primary btn-add-task" id="new-personal-task">Add Task</button>
-          <ul class="tasks">
-            {{!-- Loop through and add tasks in this category --}}
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Pay credit card bill</span>
-            </li>
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Clean out garage</span>
-            </li>
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Schedule oil change</span>
-            </li>
-          </ul>
-          <div class="accordion completed" id="personal-completed">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="mb-0">
-                  <button class="btn btn-link btn-expand ml-auto d-block" type="button" data-toggle="collapse"
-                    data-target="#collapse-personal-completed" aria-expanded="true" aria-controls="collapse-personal-completed">
-                    Completed tasks
-                  </button>
-                </h5>
-              </div>
-              <div id="collapse-personal-completed" class="collapse hide" data-parent="#personal-completed">
 
-                <ul class="tasks completed">
-                  {{!-- loop through and add completed tasks in this category --}}
-                  <li id="{{!-- task-{{task_id}} --}}">
-                    <span>Deliver rent check</span>
-                  </li>
-                  <li id="{{!-- task-{{task_id}} --}}">
-                    <span>Empty litter box</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row">
+      {{!-- {{> todo-layout/category-list category="personal" }} --}}
+      {{> todo-lists/personal }}
+      {{> todo-lists/wellness }}
+    </div>
+
+    <div class="row">
+      {{> todo-lists/learning }}
+      {{> todo-lists/creativity }}
+    </div>
+
+    <div class="row">
+      {{> todo-lists/exercise }}
+      {{> todo-lists/chores }}
     </div>
 
   </div>
@@ -137,3 +87,4 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/tasks.js"></script>

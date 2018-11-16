@@ -1,6 +1,5 @@
-
+var db = require("../models");
 module.exports = function (app) {
-  // splash checks if user is registered, if so redirects to user's page
   app.get("/", function (req, res) {
     if (req.user) {
       res.redirect("/user");
@@ -11,31 +10,72 @@ module.exports = function (app) {
 
   // Getting the local login form
   app.get("/login", function (req, res) {
-      res.render('login', {message: req.flash('info','message')});
-      console.log(req.flash('info','message'))
+      res.render('login', {message: req.flash(failureFlash)});
+      console.log(req.flash("this is what we're trying to flash"+req.flash(failureFlash)));
     }
   );
+
 
   // Getting the signup form
   app.get("/signup", function(req, res){
     console.log("you're hitting the route")
-    res.render('signup', {msg: "Time to get to work!"});
-});
+    res.render('signup', {msg: req.flash('message')});
+  });
 
- // the "main" page displaying our user's info and stuff
-  app.get("/user", function(req, res){
-      // data is returned parsed to faciliatate front end integration
-    res.render('index',
-    {data: {
-        username: req.user.username,
-        photo: req.user.photo,
-        title: req.user.title,
-        castle: req.user.castle,
-        provinceCount: req.user.provinceCount,
-        knightCount: req.user.knightCount,
-        archerCount: req.user.archerCount,
-        mageCount: req.user.mageCount
-      }
+  // Load index page
+  app.get("/user", function (req, res) {
+    db.Task.findAll({}).then(function (allTasks) {
+      //filter tasks
+      var personalTasks = allTasks.filter(function(task) {
+        if(task.category == "personal") {
+          return task;
+        }
+      });
+      var wellnessTasks = allTasks.filter(function(task) {
+        if(task.category == "wellness") {
+          return task;
+        }
+      });
+      var learningTasks = allTasks.filter(function(task) {
+        if(task.category == "learning") {
+          return task;
+        }
+      });
+      var creativityTasks = allTasks.filter(function(task) {
+        if(task.category == "creativity") {
+          return task;
+        }
+      });
+      var exerciseTasks = allTasks.filter(function(task) {
+        if(task.category == "exercise") {
+          return task;
+        }
+      });
+      var choresTasks = allTasks.filter(function(task) {
+        if(task.category == "chores") {
+          return task;
+        }
+      });
+
+      res.render("index", {
+        personalTasks: personalTasks,
+        wellnessTasks: wellnessTasks,
+        learningTasks: learningTasks,
+        creativityTasks: creativityTasks,
+        exerciseTasks: exerciseTasks,
+        choresTasks: choresTasks,
+        data: {
+          userId: req.user.userId,
+          username: req.user.username,
+          photo: req.user.photo,
+          title: req.user.title,
+          castle: req.user.castle,
+          provinceCount: req.user.provinceCount,
+          knightCount: req.user.knightCount,
+          archerCount: req.user.archerCount,
+          mageCount: req.user.mageCount
+        }
+      });
     });
   });
 

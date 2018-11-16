@@ -3,21 +3,31 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var passport = require("../config/passport")
 
 module.exports = function (app) {
-  // Processing the local login form
-  app.post("/api/login/local", passport.authenticate('local-login', {
-    successRedirect: "/", // redirect to the home page on successful login
-    failureRedirect:"/login", // back to the login page if there's an error
-    failureFlash: true
-  })
-  );
+  app.get("/api/tasks", function(req, res) {
+    db.Task.findAll({}).then(function(allTasks) {
+      res.json(allTasks);
+    })
+  });
 
-  // Processing the signup form
-  app.post("/api/signup", passport.authenticate('local-signup',{
-    successRedirect: "/", // redirect to the home page on successful login
-    failureRedirect: "/signup", //  back to the signup page if there's an error
-    failureFlash: true // sends message back to page in case of error
-  }) 
-  );
+  app.post("/api/tasks", function(req, res) {
+    db.Task.create(req.body).then(function(newTask) {
+      res.json(newTask);
+    });
+  });
+
+    // Processing the local login form
+  app.post("/api/login/local", passport.authenticate('local-login', {
+    successRedirect:"/",
+    failureRedirect:"/login",
+    failureFlash: "incorrect username or password",
+  }));
+
+   // Processing the signup form
+   app.post("/api/signup", passport.authenticate('local-signup',{
+    successRedirect:"/",
+    failureRedirect:"/signup",
+    failureFlash: true,
+   }));
 
   // set route for editing individual tasks
   app.set("/api/task/edit", function (req, res) {
@@ -27,23 +37,23 @@ module.exports = function (app) {
     })
   });
 
-  // set route for completing individual tasks
-  app.set("/api/task/complete", function (req, res) {
-    db.Task.update({ taskCompleted: true }, { where: { id: req.body.id } }).then(function (task) {
+    // set route for completing individual tasks
+  app.set("/api/task/complete", function(req, res){
+    db.Task.update({taskCompleted: true}, {where: {id:req.body.id}}).then(function(task){
       //returns the updated task
+    res.json(task);
+    })
+  });
+
+    // delete route for removing tasks
+  app.delete("/api/task/:id", function(req, res){
+    db.Task.destroy({where: {id:req.params.id}}).then(function(task){
       res.json(task);
     })
   });
 
-  // delete route for removing tasks
-  app.delete("/api/task/delete", function (req, res) {
-    db.Task.destroy({ where: { id: req.body.id } }).then(function (task) {
-      res.json(task);
-    })
-  });
 
-
-  app.get("/api/army", function (req, res) {
+  app.get("/api/army", function(req, res){
     var playerArmy = {
       knightCount: req.user.knightCount,
       mageCount: req.user.mageCount,
@@ -51,4 +61,4 @@ module.exports = function (app) {
     }
     res.json(playerArmy);
   })
-};  
+}
