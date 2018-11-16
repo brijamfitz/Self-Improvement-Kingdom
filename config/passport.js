@@ -12,7 +12,7 @@ passport.use('local-login', new LocalStrat({
         var user = user[0];
         console.log("Here's the retrieved info:" + user)
         // check if username exists
-        if (user.username == undefined) {
+        if (user == undefined) {
             return done(null, false, { message: "Unkown username." });
             // use hash checker to check password
         } else if (!user.validPassword(password)) {
@@ -28,7 +28,6 @@ passport.use('local-login', new LocalStrat({
 passport.use('local-signup', new LocalStrat({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true
 }, function (req, username, password, done) {
     process.nextTick(function () {
         db.User.findOne({ where: { 'username': username } }).then(function (err, data) {

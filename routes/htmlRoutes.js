@@ -11,12 +11,10 @@ module.exports = function (app) {
 
   // Getting the local login form
   app.get("/login", function (req, res) {
-    if(req.user){
-      res.redirect("/user");
-    } else {
-      res.render('login');
+      res.render('login', {message: req.flash('info','message')});
+      console.log(req.flash('info','message'))
     }
-  });
+  );
 
   // Getting the signup form
   app.get("/signup", function(req, res){

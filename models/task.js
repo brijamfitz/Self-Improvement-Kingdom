@@ -37,9 +37,7 @@ module.exports = function (sequelize, DataTypes) {
     Task.associate = function(models) {
         //this sets which user owns the current task
         Task.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
+            as: '',
         });
     };
 
