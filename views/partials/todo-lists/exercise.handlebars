@@ -1,37 +1,36 @@
 <div class="col-md-6">
-  <div class="card todo-card" id="exercise">
+  <div class="card todo-card troop-{{troop-type}}" id="{{category}}">
     <div class="card-header">
       <div class="row">
         <div class="col-12 todo-cat">
-          <h2>exercise</h2>
+          <h2>{{category}}</h2>
         </div>
         <div class="bonus">
-          <img src="./images/knight.png" alt="knight pixel art">
+          <img src="./images/{{troop-type}}.png" alt="{{troop-type}} pixel art" data-toggle="tooltip" data-placement="bottom" title="{{category}} tasks yield bonus {{troop-type}}s!">
         </div>
       </div>
     </div>
-    <form data-category="exercise" class="task-form">
+    <form data-category="{{category}}" class="task-form">
       <div class="form-group">
-        <label class="sr-only" for="exercise-task-input">New task</label>
-        <input type="text" class="form-control task-input" id="exercise-task-input" placeholder="Add a task" required>
+        <label class="sr-only" for="{{category}}-task-input">New task</label>
+        <input type="text" class="form-control task-input" id="{{category}}-task-input" placeholder="Add a task" required>
       </div>
       <div class="task-options d-none">
         <div class="difficulty-select">
           <div class="form-check form-check-inline">
-            <input class="form-check-input active" type="radio" name="exercise-difficulty" id="inlineRadio1" value="1"
-              checked="">
+            <input class="form-check-input active" type="radio" name="{{category}}-difficulty" id="inlineRadio1" value="1" checked="">
             <label class="form-check-label" for="inlineRadio1">Easy</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="exercise-difficulty" id="inlineRadio2" value="2">
+            <input class="form-check-input" type="radio" name="{{category}}-difficulty" id="inlineRadio2" value="2">
             <label class="form-check-label" for="inlineRadio2">Medium</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="exercise-difficulty" id="inlineRadio3" value="3">
+            <input class="form-check-input" type="radio" name="{{category}}-difficulty" id="inlineRadio3" value="3">
             <label class="form-check-label" for="inlineRadio3">Hard</label>
           </div>
         </div>
-        <button class="btn btn-primary btn-add-task" id="new-exercise-task" type="submit">Add Task</button>
+        <button class="btn btn-primary btn-add-task" id="new-{{category}}-task" type="submit">Add Task</button>
       </div>
     </form>
     <ul class="tasks">
@@ -44,17 +43,17 @@
       {{/unless}}
       {{/each}}
     </ul>
-    <div class="accordion completed" id="exercise-completed">
+    <div class="accordion completed" id="{{category}}-completed">
       <div class="card">
         <div class="card-header">
           <h5 class="mb-0">
-            <button class="btn btn-link btn-expand collapsed" type="button" data-toggle="collapse" data-target="#collapse-exercise-completed"
-              aria-expanded="true" aria-controls="collapse-exercise-completed">
+            <button class="btn btn-link btn-expand collapsed" type="button" data-toggle="collapse" data-target="#collapse-{{category}}-completed"
+              aria-expanded="true" aria-controls="collapse-{{category}}-completed">
               Completed tasks
             </button>
           </h5>
         </div>
-        <div id="collapse-exercise-completed" class="collapse hide" data-parent="#exercise-completed">
+        <div id="collapse-{{category}}-completed" class="collapse hide" data-parent="#{{category}}-completed">
 
           <ul class="tasks completed">
             {{!-- loop through and add completed tasks in this category --}}

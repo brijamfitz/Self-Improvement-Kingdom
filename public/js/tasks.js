@@ -1,5 +1,11 @@
 $(function() {
+<<<<<<< HEAD
  
+=======
+  
+  $('[data-toggle="tooltip"]').tooltip()
+
+>>>>>>> refs/heads/develop
   $(".task-input").on("click", function() {
     console.log("Task input clicked")
     $(this).parent().siblings(".task-options").removeClass("d-none")
