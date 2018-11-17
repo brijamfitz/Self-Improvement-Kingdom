@@ -18,7 +18,8 @@
       <div class="task-options d-none">
         <div class="difficulty-select">
           <div class="form-check form-check-inline">
-            <input class="form-check-input active" type="radio" name="creativity-difficulty" id="inlineRadio1" value="1" checked="">
+            <input class="form-check-input active" type="radio" name="creativity-difficulty" id="inlineRadio1" value="1"
+              checked="">
             <label class="form-check-label" for="inlineRadio1">Easy</label>
           </div>
           <div class="form-check form-check-inline">
@@ -36,11 +37,11 @@
     <ul class="tasks">
       {{!-- Loop through and add tasks in this category --}}
       {{#each creativityTasks}}
-        {{#unless completed}}
-          <li data-id="{{id}}">
-            <span>{{name}}</span><button class="btn btn-delete">&times;</button>
-          </li>
-        {{/unless}}
+      {{#unless completed}}
+      <li data-id="{{id}}" data-userId="{{userId}}">
+        <span>{{name}}</span><button class="btn btn-delete">&times;</button>
+      </li>
+      {{/unless}}
       {{/each}}
     </ul>
     <div class="accordion completed" id="creativity-completed">
@@ -58,11 +59,11 @@
           <ul class="tasks completed">
             {{!-- loop through and add completed tasks in this category --}}
             {{#each creativityTasks}}
-              {{#if completed}}
-                <li data-id="{{id}}">
-                  <span>{{name}}</span>
-                </li>
-              {{/if}}
+            {{#if completed}}
+            <li data-id="{{id}}" data-userId="{{userId}}">
+              <span>{{name}}</span>
+            </li>
+            {{/if}}
             {{/each}}
           </ul>
         </div>

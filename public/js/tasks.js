@@ -1,5 +1,5 @@
 $(function() {
-
+ 
   $(".task-input").on("click", function() {
     console.log("Task input clicked")
     $(this).parent().siblings(".task-options").removeClass("d-none")
@@ -7,20 +7,19 @@ $(function() {
 
   $(".task-form").on("submit", function(event) {
     event.preventDefault();
-
     var newTask = {
       name: $(this).find('.task-input').val().trim(),
       difficulty: $(this).find("input:checked").val(),
-      category: $(this).data('category')
+      category: $(this).data('category'),
     }
 
     $.ajax("/api/tasks", {
       type: "POST",
       data: newTask
     }).then(
-      function() {
+      function(res) {
         console.log("created new task");
-        location.reload();
+        location.reload(res);
       }
     );
   });
