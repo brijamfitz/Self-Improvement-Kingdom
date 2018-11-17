@@ -1,4 +1,6 @@
 $(function() {
+  
+  $('[data-toggle="tooltip"]').tooltip()
 
   $(".task-input").on("click", function() {
     console.log("Task input clicked")

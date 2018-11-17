@@ -111,7 +111,9 @@ img {
 /* ================================================================================== */
 
 
-/* Todo card styles */
+/* ================================================================================== */
+/* Todo list styles */
+/* ================================================================================== */
 
 .todo-card {
   margin-bottom: 40px;
@@ -119,6 +121,34 @@ img {
 
 .todo-card > .card-header {
   padding: 0 15px;
+}
+
+.troop-archer > .card-header {
+  background-color: rgba(17,165,35,.3)
+}
+
+.troop-knight > .card-header {
+  background-color: rgba(53,53,53,.3)
+}
+
+.troop-mage > .card-header {
+  background-color: rgba(23,62,184,.3)
+}
+
+.troop-archer .tasks li:hover {
+  background-color: rgba(17,165,35,.3)
+}
+
+.troop-knight .tasks li:hover {
+  background-color: rgba(53,53,53,.3)
+}
+
+.troop-mage .tasks li:hover {
+  background-color: rgba(23,62,184,.3)
+}
+
+.tooltip-inner::first-letter {
+  text-transform: capitalize;
 }
 
 .todo-card .card-header h2 {
@@ -183,13 +213,10 @@ img {
   border-bottom: 1px solid #92A0A5;
 }
 
-.tasks li:hover {
-  background-color: #ffc107;
-}
-
 .tasks li:before {
 	font-family: 'Font Awesome 5 Free';
   content: "\f0c8";
+  font-size: 24px;
   -moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	display: inline-block;
@@ -256,7 +283,7 @@ img {
 .accordion .card-header {
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 25px;
+  padding-left: 28px;
   position: relative;
 }
 
@@ -300,6 +327,15 @@ img {
   font-weight: 700;
 }
 
+.statusDisplay {
+
+  height: 310px;
+  width: 350px;
+}
+
+.subtractor {
+  color: red
+}
 .collapse.show {
   max-height: 100px;
   overflow-y: scroll;
