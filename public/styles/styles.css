@@ -85,7 +85,9 @@ img {
 /* ================================================================================== */
 
 
-/* Todo card styles */
+/* ================================================================================== */
+/* Todo list styles */
+/* ================================================================================== */
 
 .todo-card {
   margin-bottom: 40px;
@@ -93,7 +95,34 @@ img {
 
 .todo-card > .card-header {
   padding: 0 15px;
-  border-bottom: 2px solid black;
+}
+
+.troop-archer > .card-header {
+  background-color: rgba(17,165,35,.3)
+}
+
+.troop-knight > .card-header {
+  background-color: rgba(53,53,53,.3)
+}
+
+.troop-mage > .card-header {
+  background-color: rgba(23,62,184,.3)
+}
+
+.troop-archer .tasks li:hover {
+  background-color: rgba(17,165,35,.3)
+}
+
+.troop-knight .tasks li:hover {
+  background-color: rgba(53,53,53,.3)
+}
+
+.troop-mage .tasks li:hover {
+  background-color: rgba(23,62,184,.3)
+}
+
+.tooltip-inner::first-letter {
+  text-transform: capitalize;
 }
 
 .todo-card .card-header h2 {
@@ -101,6 +130,7 @@ img {
   font-size: 24px;
   margin: .5rem 0;
   position: relative;
+  text-transform: capitalize;
 }
 
 .todo-card .progress {
@@ -109,23 +139,28 @@ img {
   margin: 10px 0 20px;
 }
 
-.cat-level {
-  text-align: right;
-}
-
 .bonus {
   position: absolute;
-  top: 5px;
+  top: 2px;
   right: 10px;
-}
-
-.bonus p {
-  text-align: center;
-  margin-top: .5rem;
 }
 
 .bonus img {
   height: 30px;
+}
+
+.difficulty-select {
+  display: block;
+  margin: 10px auto;
+}
+
+.task-form {
+  text-align: center;
+  margin: 5px 5px 0;
+}
+
+.task-form > .form-group {
+  margin-bottom: 5px;
 }
 
 .btn-add-task {
@@ -144,7 +179,7 @@ img {
   cursor: pointer;
   position: relative;
   font-size: 18px;
-  padding: 5px 30px 5px 60px;
+  padding: 5px 42px 5px 60px;
   border-top: 1px solid #92A0A5;
 }
 
@@ -152,13 +187,10 @@ img {
   border-bottom: 1px solid #92A0A5;
 }
 
-.tasks li:hover {
-  background-color: #ffc107;
-}
-
 .tasks li:before {
 	font-family: 'Font Awesome 5 Free';
   content: "\f0c8";
+  font-size: 24px;
   -moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	display: inline-block;
@@ -172,24 +204,27 @@ img {
   transform: translateY(-50%);
 }
 
-.tasks li:after {
-	font-family: 'Font Awesome 5 Free';
-  content: "\f142";
-  font-weight: 700;
-  -moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	display: inline-block;
-	font-style: normal;
-	font-variant: normal;
-	text-rendering: auto;
-  line-height: 1;
-  padding: 5px 10px;
+.btn-delete {
+  padding: 0;
   position: absolute;
-  right: 10px;
+  height: 22px;
+  width: 22px;
+  line-height: 0px;
+  font-size: 18px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
-  border-radius: 2px;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 3px;
+}
+
+.btn-delete:hover {
+  background-color: red;
+}
+
+.btn-delete:focus {
+  box-shadow: none;
 }
 
 .tasks li:hover:before {
@@ -221,13 +256,15 @@ img {
 
 .accordion .card-header {
   padding-top: 0;
-  padding-bottom: 0; 
+  padding-bottom: 0;
+  padding-left: 28px;
   position: relative;
 }
 
 .btn-expand {
   position: relative;
   text-decoration: none !important;
+  padding-left: 30px;
   padding-right: 30px;
 }
 
@@ -235,9 +272,9 @@ img {
   text-decoration: none;
 }
 
-.btn-expand:after {
+.btn-expand:before {
 	font-family: 'Font Awesome 5 Free';
-  content: "\f0fe";
+  content: "\f146";
   font-size: 24px;
   -moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
@@ -247,12 +284,20 @@ img {
 	text-rendering: auto;
   line-height: 1;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.btn-expand:hover:after {
+.d-block.btn-expand:before {
+  content: "\f146";
+}
+
+.collapsed.btn-expand:before {
+  content: "\f0fe";
+}
+
+.btn-expand:hover:before {
   font-weight: 700;
 }
 
@@ -264,4 +309,8 @@ img {
 
 .subtractor {
   color: red
+}
+.collapse.show {
+  max-height: 100px;
+  overflow-y: scroll;
 }
