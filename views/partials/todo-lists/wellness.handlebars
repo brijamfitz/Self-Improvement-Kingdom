@@ -35,13 +35,36 @@
     </form>
     <ul class="tasks">
       {{!-- Loop through and add tasks in this category --}}
-      {{#each wellnessTasks}}
-        {{#unless completed}}
-          <li data-id="{{id}}">
-            <span>{{name}}</span><button class="btn btn-delete">&times;</button>
-          </li>
-        {{/unless}}
-      {{/each}}
+      {{#each wellnessTasks}} {{#unless completed}}
+      <li data-id="{{id}}">
+        <div class="task-view"><i class="far fa-square checkbox-link"></i><span class="task-name">{{name}}</span>
+        <button class="btn btn-edit">Edit</button><button class="btn btn-delete">&times;</button></div>
+        <form data-category="{{category}}" class="edit-task-form d-none">
+          <div class="form-group">
+            <label class="sr-only" for="{{category}}-task-input">New task</label>
+            <input type="text" class="form-control task-input" id="{{category}}-task-input" value="{{name}}" required>
+          </div>
+          <div class="task-options text-center">
+            <div class="difficulty-select">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{category}}-difficulty" id="inlineRadio1" value="1">
+                <label class="form-check-label" for="inlineRadio1">Easy</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{category}}-difficulty" id="inlineRadio2" value="2">
+                <label class="form-check-label" for="inlineRadio2">Medium</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{category}}-difficulty" id="inlineRadio3" value="3">
+                <label class="form-check-label" for="inlineRadio3">Hard</label>
+              </div>
+            </div>
+            <button class="btn btn-primary submit-edit" id="new-{{category}}-task" type="submit">Update</button>
+            <button class="btn btn-danger btn-cancel">Cancel</button>
+          </div>
+        </form>
+      </li>
+      {{/unless}} {{/each}}
     </ul>
     <div class="accordion completed" id="{{category}}-completed">
       <div class="card">
@@ -53,17 +76,14 @@
             </button>
           </h5>
         </div>
-        <div id="collapse-{{category}}-completed" class="collapse hide" data-parent="#{{category}}-completed">
+        <div id="collapse-{{category}}-completed" class="collapse collapse-completed hide" data-parent="#{{category}}-completed">
 
           <ul class="tasks completed">
-            {{!-- loop through and add completed tasks in this category --}}
-            {{#each wellnessTasks}}
-              {{#if completed}}
-                <li data-id="{{id}}">
-                  <span>{{name}}</span>
-                </li>
-              {{/if}}
-            {{/each}}
+            {{!-- loop through and add completed tasks in this category --}} {{#each wellnessTasks}} {{#if completed}}
+            <li data-id="{{id}}">
+              <span>{{name}}</span>
+            </li>
+            {{/if}} {{/each}}
           </ul>
         </div>
       </div>
