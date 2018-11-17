@@ -10,6 +10,9 @@ var session = require("express-session");
 var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+//mount for static public folder resources
+app.use(express.static(__dirname + '/public'));
+
 var sequelize = new Sequelize (
   process.env.DB_name,
   process.env.DB_username,

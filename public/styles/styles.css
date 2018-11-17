@@ -255,3 +255,13 @@ img {
 .btn-expand:hover:after {
   font-weight: 700;
 }
+
+.statusDisplay {
+
+  height: 310px;
+  width: 350px;
+}
+
+.subtractor {
+  color: red
+}
