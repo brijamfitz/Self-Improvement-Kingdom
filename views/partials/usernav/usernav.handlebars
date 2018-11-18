@@ -2,18 +2,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4" id="avatar">
-                <h5 class="card-title">{{data.username}}</h5>
-                <div>{{data.title}}</div>
-                <div>
-                    <img src="{{data.photo}}" id="profile-img" />
-                    <img src="{{data.castle}}" id="castle-img" />
-                </div>
-                <div>
-                    <a href="/signup">Logout</a>
-                </div>
+                <h5 class="card-title"><span>{{data.username}}</span>&nbsp;<span><img src="{{data.castle}}" id="castle-img" /></span>&nbsp;<span>{{data.title}}</span></h5>
             </div>
             <div class="col-md-4" id="user-progress">
-                <h5 class="card-title">Progress</h5>
+                <h5 class="card-title">Provinces: {{data.provinceCount}}</h5>
                 <div class="progress" id="progress-usernav">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
@@ -21,9 +13,11 @@
             </div>
             <div class="col-md-4" id="army-counts">
                 <h5 class="card-title">Army</h5>
-                <div><img src="./images/archer.png" id="encounter-img-archer">Archers x <span id="user-archer-count">{{data.archerCount}}</span></div>
-                <div><img src="./images/knight.png" id="encounter-img-knight"> Knights x <span id="user-knight-count">{{data.knightCount}}</span></div>
-                <div><img src="./images/mage.png" id="encounter-img-mage">Mages x <span id="user-mage-count">{{data.mageCount}}</span></div>
+                <div id="army">
+                    <img src="./images/archer.png" id="encounter-img-archer" alt="archer-pixel"><span id="x">x</span> <span id="user-archer-count">{{data.archerCount}}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <img src="./images/knight.png" id="encounter-img-knight" alt="knight-pixel"> <span id="x">x</span> <span id="user-knight-count">{{data.knightCount}}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <img src="./images/mage.png" id="encounter-img-mage" alt="mage-pixel"><span id="x">x</span> <span id="user-mage-count">&nbsp;{{data.mageCount}}</span>
+                </div>
             </div>
         </div>
     </div>

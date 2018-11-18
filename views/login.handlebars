@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="jumbotron" id="signup-card">
+    <div class="jumbotron" id="login-card">
         <h1 class="display-4">The Self Improvement Kingdom!</h1>
-        <img src="http://orig11.deviantart.net/c588/f/2010/235/a/6/pixel_art__castle_keep_by_doctordrg.png" alt="castle" />
+        <img src="images/login-castle.png" alt="login-castle" />
         <p class="lead">Build your army and battle your way to self improvement!</p>
         <hr class="my-4">
-        <div class="col-md-12" id="signup-container">
+        <div class="col-md-12" id="login-container">
             <p>Login to continue your quest!</p>
             <form action="/api/login/local" method="post">
                 <div>
@@ -19,6 +19,8 @@
                     <input type="submit" value="Login" class="btn btn-lg btn-primary" id="login-btn" />
                 </div>
             </form>
+            <p>Don't have an account yet? Create one <a href="/signup">here</a>.</p>
+            <p id="about">Learn more about the Self Improvement Kingdom <a href="#">here</a>.</p>
         </div>
     </div>
 </div>
