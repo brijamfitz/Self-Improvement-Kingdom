@@ -51,18 +51,9 @@ $(function() {
     );
   });
 
-  $(".checkbox-link").on("mouseover", function() {
-    $(this).removeClass('fa-square')
-    $(this).addClass('fa-check-square')
-  })
-
-  $(".checkbox-link").on("mouseout", function() {
-    $(this).addClass('fa-square')
-    $(this).removeClass('fa-check-square')
-  })
-
   $(".checkbox-link").on("click", function() {
-    console.log("clicked on checkbox!")
+    $(this).parents(".task-view").addClass("d-none")
+    $(this).parents(".task-view").siblings(".troop-select").removeClass("d-none")
   })
 
   $(".btn-delete").on("click", function() {
