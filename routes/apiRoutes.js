@@ -30,7 +30,7 @@ module.exports = function (app) {
         return next(err); }
         ;
       if (!user) { 
-        return res.redirect('/login', {msg: "Username or Password incorrect, please try again or follow the link to sign up."}); 
+        return res.redirect('/login', req.flash('error',  "Username or Password incorrect, please try again or follow the link to sign up.")); 
       };
       req.logIn(user, function(err) {
         if (err) { 

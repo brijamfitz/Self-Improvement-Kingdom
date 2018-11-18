@@ -17,7 +17,7 @@ module.exports = function (app) {
   // Getting the local login form
   app.get("/login", function (req, res) {
     if(!req.user){
-    res.render('login');
+    res.render('login', {msg: req.flash('error')});
     } else {
       res.redirect("/");
     }
@@ -28,7 +28,7 @@ module.exports = function (app) {
   // Getting the signup form
   app.get("/signup", function (req, res) {
     console.log("you're hitting the route")
-    res.render('signup', { msg: req.flash('message') });
+    res.render('signup', { msg: req.flash('message')});
   });
 
   // Load index page

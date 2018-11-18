@@ -30,9 +30,7 @@ module.exports = function (allTasks, req) {
                 break;
         }
     };
-
     return {
-
         personalTasks: personalTasks,
         wellnessTasks: wellnessTasks,
         learningTasks: learningTasks,

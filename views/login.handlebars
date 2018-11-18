@@ -5,6 +5,7 @@
         <p class="lead">Build your army and battle your way to self improvement!</p>
         <hr class="my-4">
         <div class="col-md-12" id="signup-container">
+
             <p>Login to continue your quest!</p>
             <form action="/api/login/local" method="post">
                 <div>
@@ -21,16 +22,7 @@
             </form>
         </div>
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="login"/>
-    </div>
 </form>
 
-{{#if message}}
-     <div class="alert alert-danger">{{message}}</div>
-{{/if}}
+
 </div>
