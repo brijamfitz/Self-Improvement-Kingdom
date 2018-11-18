@@ -66,8 +66,7 @@ $(function() {
   })
 
   $(".btn-delete").on("click", function() {
-    var id = $(this).parent().attr('data-id');
-    console.log(id)
+    var id = $(this).parents("li").attr('data-id');
     $.ajax({
       url: "api/task/" + id,
       type: "DELETE"
