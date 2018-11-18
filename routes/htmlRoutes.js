@@ -13,7 +13,6 @@ module.exports = function (app) {
     });
   });
 
-
   // Getting the local login form
   app.get("/login", function (req, res) {
     if(!req.user){
@@ -21,9 +20,7 @@ module.exports = function (app) {
     } else {
       res.redirect("/");
     }
-  }
-  );
-
+  });
 
   // Getting the signup form
   app.get("/signup", function (req, res) {

@@ -9,6 +9,13 @@ module.exports = function (app) {
     })
   });
 
+  // GET task based on id to use difficulty column
+  app.get("/api/tasks/difficulty/:id", function(req, res) {
+    db.Task.findOne({ where: {id:req.params.id} }).then(function(task) {
+      res.json(task);
+    })
+  });
+
   app.post("/api/tasks", function (req, res) {
     var newTask = {
       name: req.body.name,
@@ -39,8 +46,7 @@ module.exports = function (app) {
         process.nextTick(function(){res.redirect('/')});
       })
     })(req, res, next);
-  }
-  );
+  });
 
   // Processing the signup form
   app.post("/api/signup", passport.authenticate('local-signup', {
@@ -48,9 +54,13 @@ module.exports = function (app) {
     failureRedirect: "/signup",
   }));
 
-  // set route for editing individual tasks
-  app.set("/api/task/edit", function (req, res) {
-    db.Task.update({ taskBody: req.body.text }, { where: { id: req.body.id } }).then(function (task) {
+   // SET route for editing individual tasks
+  app.put("/api/task/edit/:id", function(req, res){
+    db.Task.update({
+      name: req.body.name, difficulty: req.body.difficulty
+    }, {
+      where: {id:req.params.id}
+    }).then(function(task){
       //returns the updated task, would be lighter on the server to reload this object rather than reloading the whole page
       res.json(task);
     })
@@ -70,7 +80,6 @@ module.exports = function (app) {
       res.json(task);
     })
   });
-
 
   app.get("/api/army", function (req, res) {
     var playerArmy = {
