@@ -8,11 +8,10 @@ passport.use('local-login', new LocalStrat({
     passwordField: 'password',
 }, function (username, password, done) {
     console.log("You're in passport");
-    db.User.findAll({ where: { username: username }}).then(function (user) {
-        var user = user[0];
+    db.User.findOne({ where: { username: username }}).then(function (user) {
         console.log("Here's the retrieved info:" + user)
         // check if username exists
-        if (user.username == undefined) {
+        if (user == undefined) {
             return done(null, false, { message: "Unkown username." });
             // use hash checker to check password
         } else if (!user.validPassword(password)) {
@@ -28,11 +27,9 @@ passport.use('local-login', new LocalStrat({
 passport.use('local-signup', new LocalStrat({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true
-}, function (req, username, password, done) {
+}, function (username, password, done) {
     process.nextTick(function () {
         db.User.findOne({ where: { 'username': username } }).then(function (err, data) {
-            console.log("we're in the next tick function");
             // if database err return the error
             if (err)
                 return done(err);
@@ -64,9 +61,13 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
  // deserializing a user 
-  passport.deserializeUser(function(user, done) {
-    done(null, user);
-  });
+ passport.deserializeUser(function(user, done) {
+    db.User.findById(user.id).then(function(user) {
+        done(null, user);
+    }).catch(function(e) {
+        done(e, false);
+    });
+});
 
 
 module.exports = passport;
