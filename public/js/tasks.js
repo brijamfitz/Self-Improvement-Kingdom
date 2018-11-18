@@ -1,9 +1,10 @@
 $(function() {
   
+  // Initialize tooltips
   $('[data-toggle="tooltip"]').tooltip()
 
+
   $(".task-input").on("click", function() {
-    console.log("Task input clicked")
     $(this).parent().siblings(".task-options").removeClass("d-none")
   })
 
@@ -54,6 +55,58 @@ $(function() {
   $(".checkbox-link").on("click", function() {
     $(this).parents(".task-view").addClass("d-none")
     $(this).parents(".task-view").siblings(".troop-select").removeClass("d-none")
+  })
+
+  $(".btn-troop-select").on("click", function() {
+    var id = $(this).parents("li").attr('data-id')
+    var difficulty = $(this).parents("li").find("input:checked").val()
+    var bonusType = $(this).parents('.troop-select').data("troop")
+    var archersRecruited = 0
+    var knightsRecruited = 0
+    var magesRecruited = 0
+    var troopSelected = $(this).data("troop")
+
+    if (bonusType == "archer") {
+      archersRecruited++;
+    } else if (bonusType == "knight") {
+      knightsRecruited++;
+    } else if (bonusType == "mage") {
+      magesRecruited++;
+    }
+
+    // Get the completed task's difficulty
+    var task;
+    $.ajax({
+      url: "api/tasks/difficulty/" + id,
+      method: "GET",
+      task: task
+    }).then(function(task) {
+
+      if (troopSelected == "archer") {
+        archersRecruited+= task.difficulty
+      } else if (troopSelected == "knight") {
+        knightsRecruited+= task.difficulty
+      } else if (troopSelected == "mage") {
+        magesRecruited+= task.difficulty
+      }
+
+      var rewardObj = {
+        taskId: id,
+        archersRecruited: archersRecruited,
+        knightsRecruited: knightsRecruited,
+        magesRecruited: magesRecruited
+      }
+
+      console.log(rewardObj)
+      // $.ajax({
+      //   url: "/api/task/edit/" + id,
+      //   type: "PUT",
+      //   data: editedTask
+      // }).then(function() {
+      //   console.log("edited task");
+      //   location.reload();
+      // })
+    })
   })
 
   $(".btn-delete").on("click", function() {
