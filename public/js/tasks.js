@@ -9,20 +9,19 @@ $(function() {
 
   $(".task-form").on("submit", function(event) {
     event.preventDefault();
-
     var newTask = {
       name: $(this).find('.task-input').val().trim(),
       difficulty: $(this).find("input:checked").val(),
-      category: $(this).data('category')
+      category: $(this).data('category'),
     }
 
     $.ajax("/api/tasks", {
       type: "POST",
       data: newTask
     }).then(
-      function() {
+      function(res) {
         console.log("created new task");
-        location.reload();
+        location.reload(res);
       }
     );
   });
@@ -55,13 +54,11 @@ $(function() {
   $(".checkbox-link").on("mouseover", function() {
     $(this).removeClass('fa-square')
     $(this).addClass('fa-check-square')
-    // $(this).parent().addClass('task-gradient')
   })
 
   $(".checkbox-link").on("mouseout", function() {
     $(this).addClass('fa-square')
     $(this).removeClass('fa-check-square')
-    // $(this).parent().removeClass('task-gradient')
   })
 
   $(".checkbox-link").on("click", function() {

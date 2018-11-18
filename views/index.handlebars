@@ -64,7 +64,7 @@
     <!-- TODO LISTS -->
     <!-- ======================================================================================== -->
 
-    <div class="row">
+    <div class="row" id="userId" data="{{data.userId}}">
       {{!-- {{> todo-layout/category-list category="personal" }} --}}
       {{> todo-lists/personal category="personal" troop-type="archer"}}
       {{> todo-lists/wellness category="wellness" troop-type="archer"}}
@@ -83,6 +83,9 @@
   </div>
 </div>
 
+<a href='/logout'>Signout</a>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/battle.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/tasks.js"></script>

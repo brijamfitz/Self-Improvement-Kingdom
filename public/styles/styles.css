@@ -1,6 +1,6 @@
 body {
   background-color: #1E1E1F;
-  padding-top: 135px;
+  padding-top: 180px;
 }
 
 .list-group-item {
@@ -36,10 +36,15 @@ img {
 
 #fight-flee,
 #avatar,
-#user-experience,
+#user-progress,
 #user-level,
 #army-counts {
   text-align: center;
+}
+
+#progress-usernav {
+  position: relative;
+  top: 40px;
 }
 
 #user-level .level {
@@ -82,6 +87,27 @@ img {
   width: 25px;
 }
 
+#signup-container {
+  text-align: center;
+}
+
+#username-input,
+#password-input {
+  border-radius: 5px;
+  margin: 5px;
+  width: 250px;
+  height: 40px;
+}
+
+#create-account-btn,
+#login-btn {
+  margin: 5px;
+}
+
+#signup-card {
+  font-weight: bold;
+  text-align: center;
+}
 /* ================================================================================== */
 
 
@@ -342,6 +368,16 @@ img {
 
 .btn-expand:hover:before {
   font-weight: 700;
+}
+
+.statusDisplay {
+
+  height: 310px;
+  width: 350px;
+}
+
+.subtractor {
+  color: red
 }
 
 .collapse-completed {

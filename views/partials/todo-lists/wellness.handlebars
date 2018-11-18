@@ -36,7 +36,7 @@
     <ul class="tasks">
       {{!-- Loop through and add tasks in this category --}}
       {{#each wellnessTasks}} {{#unless completed}}
-      <li data-id="{{id}}">
+      <li data-id="{{id}}" data-userId="{{userId}}">
         <div class="task-view"><i class="far fa-square checkbox-link"></i><span class="task-name">{{name}}</span>
         <button class="btn btn-edit">Edit</button><button class="btn btn-delete">&times;</button></div>
         <form data-category="{{category}}" class="edit-task-form d-none">
@@ -79,8 +79,9 @@
         <div id="collapse-{{category}}-completed" class="collapse collapse-completed hide" data-parent="#{{category}}-completed">
 
           <ul class="tasks completed">
-            {{!-- loop through and add completed tasks in this category --}} {{#each wellnessTasks}} {{#if completed}}
-            <li data-id="{{id}}">
+            {{!-- loop through and add completed tasks in this category --}}
+            {{#each wellnessTasks}} {{#if completed}}
+            <li data-id="{{id}}"  data-userId="{{userId}}">
               <span>{{name}}</span>
             </li>
             {{/if}} {{/each}}
