@@ -1,6 +1,9 @@
 //Export function for sorting tasks
 module.exports = function (allTasks, req) {
     req.session.userId = req.user.id;
+    req.session.knightCount = req.user.knightCount;
+    req.session.mageCount = req.user.mageCount;
+    req.session.archerCount = req.user.archerCount;
     var personalTasks = [];
     var wellnessTasks = [];
     var learningTasks = [];

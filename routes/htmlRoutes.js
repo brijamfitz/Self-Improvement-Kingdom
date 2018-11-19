@@ -8,24 +8,26 @@ module.exports = function (app) {
       if (req.user) {
         res.redirect("/user");
       } else {
-        res.redirect("/login")
+        res.redirect("/login");
       }
     });
   });
 
   // Getting the local login form
   app.get("/login", function (req, res) {
-    if(!req.user){
-    res.render('login', {msg: req.flash('error')});
-    } else {
-      res.redirect("/");
-    }
+    process.nextTick(function () {
+      if (req.user) {
+        res.redirect("/");
+      } else {
+        res.render('login', { msg: req.flash('error') });
+      }
+    })
   });
 
   // Getting the signup form
   app.get("/signup", function (req, res) {
     console.log("you're hitting the route")
-    res.render('signup', { msg: req.flash('message')});
+    res.render('signup', { msg: req.flash('message') });
   });
 
   // Load index page

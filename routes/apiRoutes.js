@@ -67,8 +67,9 @@ module.exports = function (app) {
   });
 
   // set route for completing individual tasks
-  app.set("/api/task/complete", function (req, res) {
-    db.Task.update({ taskCompleted: true }, { where: { id: req.body.id } }).then(function (task) {
+  app.put("/api/task/complete/:id", function (req, res) {
+    db.Task.update({ taskCompleted: true }, { where: { id: req.params.id } }).then(function (task) {
+      
       //returns the updated task
       res.json(task);
     })
@@ -82,11 +83,23 @@ module.exports = function (app) {
   });
 
   app.get("/api/army", function (req, res) {
-    var playerArmy = {
-      knightCount: req.user.knightCount,
-      mageCount: req.user.mageCount,
-      archerCount: req.user.archerCount
+    var id = req.session.userId
+   db.User.findById(id).then(function(user){
+    var playerArmy= {
+      knightCount: user.knightCount,
+      mageCount: user.mageCount,
+      archerCount: user.archerCount
     }
     res.json(playerArmy);
+   })
+  });
+
+  app.put("/api/army", function (req, res) {
+    var knightCount = req.body.knightCount;
+    var mageCount = req.body.mageCount;
+    var archerCount = req.body.archerCount;
+    db.User.update({knightCount:knightCount, mageCount:mageCount, archerCount:archerCount},{where:{id:req.session.userId}}).then(function(user){
+      res.json(user);
+    })
   })
 }
