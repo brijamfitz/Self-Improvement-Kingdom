@@ -67,11 +67,11 @@
           </div>
         </form>
         <div class="troop-select d-none" data-troop="{{../troop-type}}">
-          <p>Select reward (&times;{{difficulty}}):&nbsp;</p>
+          <p class="reward-message">Select reward (&times;{{difficulty}}):</p>
           <button class="btn-archer btn-troop-select" data-troop="archer"><span class="sr-only">archer</span><img src="./images/archer.png" alt="archer pixel art"></button>
           <button class="btn-knight btn-troop-select" data-troop="knight"><span class="sr-only">knight</span><img src="./images/knight.png" alt="knight pixel art"></button>
           <button class="btn-mage btn-troop-select" data-troop="mage"><span class="sr-only">mage</span><img src="./images/mage.png" alt="mage pixel art"></button>
-          <p class="bonus-troop"><i>+&nbsp;bonus&nbsp;</i>
+          <p class="bonus-troop"><i>+1</i>
             <span class="sr-only">{{../troop-type}}</span>
             <img src="./images/{{../troop-type}}.png" alt="{{../troop-type}} pixel art" data-toggle="tooltip" data-placement="bottom" title="{{category}} tasks yield bonus {{../troop-type}}s!">
           </p>

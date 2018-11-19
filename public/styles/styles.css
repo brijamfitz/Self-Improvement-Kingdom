@@ -115,14 +115,6 @@ img {
 /* Todo list styles */
 /* ================================================================================== */
 
-#personal, #exercise, #learning {
-  margin-left: auto;
-}
-
-#wellness, #chores, #creativity {
-  margin-right: auto;
-}
-
 .todo-card {
   margin-bottom: 40px;
   max-width: 550px;
@@ -297,11 +289,17 @@ img {
 .troop-select p {
   display: inline;
   margin-bottom: 0;
+  font-size: 16px;
+}
+
+.reward-message {
+  font-weight: 700;
+  margin-right: 4px;
 }
 
 .bonus-troop {
-  font-size: 16px;
   text-align: center;
+  margin-left: 4px;
 }
 
 .bonus-troop img {
@@ -312,8 +310,13 @@ img {
 .btn-troop-select {
   padding: 2px 5px;
   cursor: pointer;
-  border: 2px solid black;
+  border: 2px solid;
   border-radius: 3px;
+  flex-grow: 1;
+}
+
+.btn-troop-select + .btn-troop-select {
+  margin-left: 2px;
 }
 
 .btn-troop-select img {
@@ -323,6 +326,7 @@ img {
 
 .btn-archer {
   background: rgba(17,165,35,.25);
+  border-color: rgb(17,165,35);
 }
 
 .btn-archer:hover {
@@ -331,6 +335,7 @@ img {
 
 .btn-knight {
   background: rgba(53,53,53,.25);
+  border-color: rgb(53,53,53);
 }
 
 .btn-knight:hover {
@@ -339,6 +344,7 @@ img {
 
 .btn-mage {
   background: rgba(23,62,184,.25);
+  border-color: rgb(23,62,184);
 }
 
 .btn-mage:hover {
