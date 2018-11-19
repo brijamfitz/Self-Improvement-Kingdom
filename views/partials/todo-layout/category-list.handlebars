@@ -36,7 +36,7 @@
     <ul class="tasks">
       {{!-- Loop through and add tasks in this category--}}
       {{#each tasksObj}} {{#unless completed}}
-      <li data-id="{{id}}" data-userId="{{userId}}">
+      <li class="task-container" data-id="{{id}}" data-user-id="{{UserId}}" data-difficulty="{{difficulty}}">
         <div class="task-view">
           <a class="checkbox-link"><i class="far fa-square box"></i></a>
           <span class="task-name">{{name}}</span>

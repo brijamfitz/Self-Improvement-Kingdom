@@ -1,4 +1,6 @@
-// Function declarations
+/* ======================================================================================== */
+/* Function declarations */
+/* ======================================================================================== */
 
 function createTask(newTask) {
   $.ajax("/api/tasks", {
@@ -46,81 +48,67 @@ function editTask(id, editedTask) {
   );
 }
 
-function presetEditDifficulty(id) {
-  var task
-  $.ajax({
-    url: "api/task/" + id,
-    method: "GET",
-    task: task
-  }).then(function(task) {
-    // Select difficulty radio by task id and difficulty
-    var $difficultyOption = $('[data-id="' + id + '"]').find('[value="' + task.difficulty + '"]');
+function presetEditDifficulty(id, difficulty) {
+  // Select difficulty radio by task id and difficulty
+  var $difficultyOption = $('[data-id="' + id + '"]').find('[value="' + difficulty + '"]');
 
-    // Pre-select the corresponding difficulty
-    $difficultyOption.attr("checked", true);
-    $difficultyOption.addClass("active");
-  })
+  // Pre-select the corresponding difficulty
+  $difficultyOption.attr("checked", true);
+  $difficultyOption.addClass("active");
 }
 
-function updateArmy(id, difficulty, bonusType, troopSelected) {
-  // Get the completed task data
-  var task;
+function updateArmy(id, userId, difficulty, bonusType, troopSelected) {
+  var archersRecruited = 0
+  var knightsRecruited = 0
+  var magesRecruited = 0
+
+  // Increment recruit counter for bonus troop type
+  if (bonusType == "archer") {
+    archersRecruited++;
+  } else if (bonusType == "knight") {
+    knightsRecruited++;
+  } else if (bonusType == "mage") {
+    magesRecruited++;
+  }
+
+  // Increment recruit counter based on selection
+  if (troopSelected == "archer") {
+    archersRecruited+= difficulty
+  } else if (troopSelected == "knight") {
+    knightsRecruited+= difficulty
+  } else if (troopSelected == "mage") {
+    magesRecruited+= difficulty
+  }
+
+  var user;
   $.ajax({
-    url: "api/task/" + id,
+    url: "api/user/" + userId,
     method: "GET",
-    task: task
-  }).then(function(task) {
-    var userId = task.UserId
-    var archersRecruited = 0
-    var knightsRecruited = 0
-    var magesRecruited = 0
-
-    // Increment recruit counter for bonus troop type
-    if (bonusType == "archer") {
-      archersRecruited++;
-    } else if (bonusType == "knight") {
-      knightsRecruited++;
-    } else if (bonusType == "mage") {
-      magesRecruited++;
+    user: user
+  }).then(function(user) {
+    // Calculate new toop totals and store in object
+    var newArmyObj = {
+      archerCount: user.archerCount + archersRecruited,
+      knightCount: user.knightCount + knightsRecruited,
+      mageCount: user.mageCount + magesRecruited
     }
-
-    // Increment recruit counter based on selection
-    if (troopSelected == "archer") {
-      archersRecruited+= task.difficulty
-    } else if (troopSelected == "knight") {
-      knightsRecruited+= task.difficulty
-    } else if (troopSelected == "mage") {
-      magesRecruited+= task.difficulty
-    }
-
-    var user;
-    $.ajax({
-      url: "api/user/" + userId,
-      method: "GET",
-      user: user
-    }).then(function(user) {
-      // Calculate new toop totals and store in object
-      var newArmyObj = {
-        archerCount: user.archerCount + archersRecruited,
-        knightCount: user.knightCount + knightsRecruited,
-        mageCount: user.mageCount + magesRecruited
-      }
-    
-      // Send put request to update user's army with new totals
-      $.ajax({
-        url: "/api/user/army/" + userId,
-        type: "PUT",
-        data: newArmyObj
-      }).then(function() {
-        console.log("compeleted task");
-      })
   
-      completeTask(id);
+    // Send put request to update user's army with new totals
+    $.ajax({
+      url: "/api/user/army/" + userId,
+      type: "PUT",
+      data: newArmyObj
+    }).then(function() {
+      console.log("compeleted task");
     })
+
+    completeTask(id);
   })
 }
 
-// Begin jQuery functionality
+/* ======================================================================================== */
+/* Begin jQuery functionality */
+/* ======================================================================================== */
 $(function() {
   
   // Initialize tooltips
@@ -146,7 +134,7 @@ $(function() {
   // Handler for editing tasks
   $(".edit-task-form").on("submit", function(event) {
     event.preventDefault();
-    var id = $(this).parent().attr('data-id');
+    var id = $(this).parent().data('id');
     var editedTask = {
       name: $(this).find('.task-input').val().trim(),
       difficulty: $(this).find("input:checked").val()
@@ -163,28 +151,30 @@ $(function() {
 
   // Handler for updating player army on troop selection
   $(".btn-troop-select").on("click", function() {
-    var taskId = $(this).parents("li").attr('data-id')
-    var difficulty = $(this).parents("li").find("input:checked").val()
+    var taskId = $(this).parents(".task-container").data('id')
+    var userId = $(this).parents(".task-container").data('user-id')
+    var difficulty = $(this).parents(".task-container").data("difficulty")
     var bonusType = $(this).parents('.troop-select').data("troop")
     var troopSelected = $(this).data("troop")
 
-    updateArmy(taskId, difficulty, bonusType, troopSelected)
+    updateArmy(taskId, userId, difficulty, bonusType, troopSelected)
   })
 
   // Handler for deleting tasks
   $(".btn-delete").on("click", function() {
-    var id = $(this).parents("li").attr('data-id')
+    var id = $(this).parents(".task-container").data('id')
 
-    deleteTask()
+    deleteTask(id)
   })
 
   // Handler for displaying edit view with pre-selected difficulty
   $(".btn-edit").on("click", function() {
     $(this).parent().addClass("d-none")
     $(this).parent().siblings(".edit-task-form").removeClass('d-none')
-    var id = $(this).parents("li").attr('data-id')
+    var id = $(this).parents(".task-container").data('id')
+    var difficulty = $(this).parents(".task-container").data("difficulty")
 
-    presetEditDifficulty(id)
+    presetEditDifficulty(id, difficulty)
   })
 
   // Handler for resetting task view when editing is canceled
