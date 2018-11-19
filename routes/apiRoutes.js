@@ -3,9 +3,15 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var passport = require("../config/passport")
 
 module.exports = function (app) {
-  app.get("/api/tasks", function (req, res) {
-    db.Task.findAll({where: {UserId: req.user.id}}).then(function (allTasks) {
-      res.json(allTasks);
+  app.get("/api/task/:id", function (req, res) {
+    db.Task.findOne({where: {id: req.params.id}}).then(function (task) {
+      res.json(task);
+    })
+  });
+
+  app.get("/api/user/:id", function (req, res) {
+    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
+      res.json(user);
     })
   });
 
@@ -24,15 +30,15 @@ module.exports = function (app) {
       UserId: req.session.userId
     }
     console.log(newTask)
-  db.Task.create(newTask).then(function (newTask) {
-    res.json(newTask);
+    db.Task.create(newTask).then(function (newTask) {
+      res.json(newTask);
+    });
   });
-});
 
   // Processing the local login form
   app.post("/api/login/local",function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
-      console.log("Here's the returned user: " +user);
+      console.log("Here's the returned user: " + user);
       if (err) { 
         return next(err); }
         ;
@@ -54,23 +60,38 @@ module.exports = function (app) {
     failureRedirect: "/signup",
   }));
 
-   // SET route for editing individual tasks
+  // PUT route for editing individual tasks
   app.put("/api/task/edit/:id", function(req, res){
     db.Task.update({
       name: req.body.name, difficulty: req.body.difficulty
     }, {
       where: {id:req.params.id}
     }).then(function(task){
-      //returns the updated task, would be lighter on the server to reload this object rather than reloading the whole page
+      //returns the updated task
       res.json(task);
     })
   });
 
-  // set route for completing individual tasks
-  app.set("/api/task/complete", function (req, res) {
-    db.Task.update({ taskCompleted: true }, { where: { id: req.body.id } }).then(function (task) {
+  // PUT route for completing tasks
+  app.put("/api/task/complete/:id", function (req, res) {
+    db.Task.update({ completed: true }, { where: { id: req.params.id } }).then(function (task) {
       //returns the updated task
       res.json(task);
+    })
+  });
+
+  // PUT route for adding to player army on task completion
+  app.put("/api/user/army/:id", function(req, res){
+    db.User.update({
+      archerCount: req.body.archerCount,
+      knightCount: req.body.knightCount,
+      mageCount: req.body.mageCount,
+    }, {
+      where: {id:req.params.id}
+    }).then(function(army){
+      //returns the updated army
+      console.log("ARMY UPDATED")
+      res.json(army);
     })
   });
 
