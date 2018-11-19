@@ -115,8 +115,17 @@ img {
 /* Todo list styles */
 /* ================================================================================== */
 
+#personal, #exercise, #learning {
+  margin-left: auto;
+}
+
+#wellness, #chores, #creativity {
+  margin-right: auto;
+}
+
 .todo-card {
   margin-bottom: 40px;
+  max-width: 550px;
 }
 
 .todo-card > .card-header {

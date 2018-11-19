@@ -49,7 +49,7 @@ function editTask(id, editedTask) {
 function presetEditDifficulty(id) {
   var task
   $.ajax({
-    url: "api/tasks/difficulty/" + id,
+    url: "api/task/" + id,
     method: "GET",
     task: task
   }).then(function(task) {

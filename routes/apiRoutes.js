@@ -3,37 +3,10 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var passport = require("../config/passport")
 
 module.exports = function (app) {
-  app.get("/api/task/:id", function (req, res) {
-    db.Task.findOne({where: {id: req.params.id}}).then(function (task) {
-      res.json(task);
-    })
-  });
 
-  app.get("/api/user/:id", function (req, res) {
-    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
-      res.json(user);
-    })
-  });
-
-  // GET task based on id to use difficulty column
-  app.get("/api/tasks/difficulty/:id", function(req, res) {
-    db.Task.findOne({ where: {id:req.params.id} }).then(function(task) {
-      res.json(task);
-    })
-  });
-
-  app.post("/api/tasks", function (req, res) {
-    var newTask = {
-      name: req.body.name,
-      category: req.body.category,
-      difficulty: req.body.difficulty,
-      UserId: req.session.userId
-    }
-    console.log(newTask)
-    db.Task.create(newTask).then(function (newTask) {
-      res.json(newTask);
-    });
-  });
+  /* ================================================================================== */
+  /* LOGIN/SIGNUP ROUTES */
+  /* ================================================================================== */
 
   // Processing the local login form
   app.post("/api/login/local",function(req, res, next) {
@@ -59,24 +32,64 @@ module.exports = function (app) {
     successRedirect: "/user",
     failureRedirect: "/signup",
   }));
+  
+  /* ================================================================================== */
+  /* TASK ROUTES */
+  /* ================================================================================== */
 
-  // PUT route for editing individual tasks
+  // GET route for accessing task data
+  app.get("/api/task/:id", function (req, res) {
+    db.Task.findOne({where: {id: req.params.id}}).then(function (task) {
+      res.json(task);
+    })
+  });
+
+  // POST route for creating a new task
+  app.post("/api/tasks", function (req, res) {
+    var newTask = {
+      name: req.body.name,
+      category: req.body.category,
+      difficulty: req.body.difficulty,
+      UserId: req.session.userId
+    }
+    console.log(newTask)
+    db.Task.create(newTask).then(function (newTask) {
+      res.json(newTask);
+    });
+  });
+
+  // PUT route for editing a task
   app.put("/api/task/edit/:id", function(req, res){
     db.Task.update({
       name: req.body.name, difficulty: req.body.difficulty
     }, {
       where: {id:req.params.id}
     }).then(function(task){
-      //returns the updated task
       res.json(task);
     })
   });
 
-  // PUT route for completing tasks
+  // PUT route for completing a task
   app.put("/api/task/complete/:id", function (req, res) {
     db.Task.update({ completed: true }, { where: { id: req.params.id } }).then(function (task) {
-      //returns the updated task
       res.json(task);
+    })
+  });
+
+  // DELETE route for removing tasks
+  app.delete("/api/task/:id", function (req, res) {
+    db.Task.destroy({ where: { id: req.params.id } }).then(function (task) {
+      res.json(task);
+    })
+  });
+
+  /* ================================================================================== */
+  /* USER/ARMY ROUTES */
+  /* ================================================================================== */
+
+  app.get("/api/user/:id", function (req, res) {
+    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
+      res.json(user);
     })
   });
 
@@ -89,19 +102,11 @@ module.exports = function (app) {
     }, {
       where: {id:req.params.id}
     }).then(function(army){
-      //returns the updated army
-      console.log("ARMY UPDATED")
       res.json(army);
     })
   });
 
-  // delete route for removing tasks
-  app.delete("/api/task/:id", function (req, res) {
-    db.Task.destroy({ where: { id: req.params.id } }).then(function (task) {
-      res.json(task);
-    })
-  });
-
+  // DELETE THIS ROUTE? POSSIBLY NOT IN USE
   app.get("/api/army", function (req, res) {
     var playerArmy = {
       knightCount: req.user.knightCount,
