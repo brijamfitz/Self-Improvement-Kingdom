@@ -19,7 +19,7 @@ module.exports = function (app) {
       if (req.user) {
         res.redirect("/");
       } else {
-        res.render('login', { msg: req.flash('error') });
+        res.render('login', {msg: req.flash('error')});
       }
     })
   });
@@ -27,7 +27,7 @@ module.exports = function (app) {
   // Getting the signup form
   app.get("/signup", function (req, res) {
     console.log("you're hitting the route")
-    res.render('signup', { msg: req.flash('message') });
+    res.render('signup', {msg: req.flash('message')});
   });
 
   // Load index page

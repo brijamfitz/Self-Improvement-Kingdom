@@ -5,7 +5,9 @@
         <p class="lead">Build your army and battle your way to self improvement!</p>
         <hr class="my-4">
         <div class="col-md-12" id="signup-container">
-
+            {{#if msg}}
+                {{msg}}
+            {{/if}}
             <p>Login to continue your quest!</p>
             <form action="/api/login/local" method="post">
                 <div>

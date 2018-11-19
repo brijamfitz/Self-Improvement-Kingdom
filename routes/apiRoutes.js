@@ -32,12 +32,12 @@ module.exports = function (app) {
   // Processing the local login form
   app.post("/api/login/local",function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
-      console.log("Here's the returned user: " +user);
+      console.log(info);
       if (err) { 
         return next(err); }
         ;
       if (!user) { 
-        return res.redirect('/login', req.flash('error',  "Username or Password incorrect, please try again or follow the link to sign up.")); 
+        return res.redirect('/login', req.flash('error', 'Invalid username or password')); 
       };
       req.logIn(user, function(err) {
         if (err) { 
@@ -69,7 +69,6 @@ module.exports = function (app) {
   // set route for completing individual tasks
   app.put("/api/task/complete/:id", function (req, res) {
     db.Task.update({ taskCompleted: true }, { where: { id: req.params.id } }).then(function (task) {
-      
       //returns the updated task
       res.json(task);
     })
