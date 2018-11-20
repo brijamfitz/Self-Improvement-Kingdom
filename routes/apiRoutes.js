@@ -60,7 +60,7 @@ module.exports = function (app) {
   });
 
   // PUT route for editing a task
-  app.put("/api/task/edit/:id", function(req, res){
+  app.put("/api/task/:id", function(req, res){
     db.Task.update({
       name: req.body.name, difficulty: req.body.difficulty
     }, {

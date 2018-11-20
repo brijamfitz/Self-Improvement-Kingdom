@@ -37,7 +37,7 @@ function completeTask(id) {
 
 function editTask(id, editedTask) {
   $.ajax({
-    url: "/api/task/edit/" + id,
+    url: "/api/task/" + id,
     type: "PUT",
     data: editedTask
   }).then(
@@ -57,7 +57,7 @@ function presetEditDifficulty(id, difficulty) {
   $difficultyOption.addClass("active");
 }
 
-function updateArmy(id, userId, difficulty, bonusType, troopSelected) {
+function updateArmy(taskId, userId, difficulty, bonusType, troopSelected) {
   var archersRecruited = 0
   var knightsRecruited = 0
   var magesRecruited = 0
@@ -102,7 +102,7 @@ function updateArmy(id, userId, difficulty, bonusType, troopSelected) {
       console.log("compeleted task");
     })
 
-    completeTask(id);
+    completeTask(taskId);
   })
 }
 
