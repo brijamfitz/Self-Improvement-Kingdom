@@ -1,6 +1,10 @@
+//global variable for player army
 var armyOne;
+//varibles for sound clips
 var battleSounds;
 var battleStart; 
+
+//gif that displays fire during battle
 var battleGif = $("<img>");
 $(battleGif).attr("src", "https://media2.giphy.com/media/6wpHEQNjkd74Q/giphy.gif?cid=3640f6095bef6acc35795a526f03a450");
 // test values for the computer army
@@ -10,10 +14,13 @@ var armyTwo = {
     archerCount: 1
 }
 
-//on document ready, completes an AJAX call to set armyOne as the army
+
 $(document).ready(function(){
+    //setting sounds
     battleSounds = document.getElementById("battleEffects");
     battleStart = document.getElementById("battleStart");
+
+    //when document loads, make ajax call for player army values
     $.ajax({
         url: "/api/army",
         method: "GET"
@@ -22,6 +29,7 @@ $(document).ready(function(){
     });
 });
 
+//when fight button is clicked, clear the buttons, play sounds, and begin battle simulation
 $(document).on("click", "#fight-btn", function(){
     battleSounds.play();
     battleStart.play();
@@ -118,9 +126,11 @@ var battle = {
         if (archerResult > cArcher){
             archerResult = cArcher;
         };
+        //check to display DODGED only for live groups
         if (archerResult === 0 && cArcher > 0){
             $("#enemy-archer-loss").removeClass("subtractor");
             $("#enemy-archer-loss").text("(DODGED)")
+        //if casualties taken, display damage done
         } else if (cArcher > 0) {
             $("#enemy-archer-loss").text("(-" + archerResult + ")");
         }
@@ -135,9 +145,9 @@ var battle = {
             $("#enemy-mage-loss").text("(DODGED)")
         } else if (cMage > 0)  {
             $("#enemy-mage-loss").text("(-" + mageResult + ")")
-        }
-        
-        ;
+        };
+
+        //fades out damage hits over jquery default of 400ms (can change please refer to jquery documentation)
         $("#enemy-archer-loss").fadeOut();
         $("#enemy-knight-loss").fadeOut();
         $("#enemy-mage-loss").fadeOut();
@@ -167,6 +177,7 @@ var battle = {
         if (archerResult > pArcher){
             archerResult = pArcher;
         };
+        //check to display DODGED only for live groups
         if (archerResult === 0 && pArcher > 0){
             $("#player-archer-loss").removeClass("subtractor");
             $("#player-archer-loss").text("(DODGED)  ")

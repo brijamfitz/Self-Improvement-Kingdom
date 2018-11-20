@@ -1,6 +1,7 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 var passport = require("../config/passport")
+var fs = require("fs");
 
 module.exports = function (app) {
   app.get("/api/tasks", function(req, res) {
@@ -49,7 +50,6 @@ module.exports = function (app) {
     })
   });
 
-
   app.get("/api/army", function(req, res){
     var playerArmy = {
       knightCount: req.user.knightCount,
@@ -57,5 +57,16 @@ module.exports = function (app) {
       archerCount: req.user.archerCount
     }
     res.json(playerArmy);
+  });
+
+  app.get("/api/encounterNames", function(req, res){
+    fs.readFile('text/names.txt', "utf-8", (err, data) => {
+      if (err) throw err;
+      var nameArray = data.split(",")
+      res.json(nameArray);
   })
+
+})
+
 }
+

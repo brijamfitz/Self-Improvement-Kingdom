@@ -22,12 +22,16 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1]
             }
         },
-        encounterDesc: {
+        encounterName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
             }
+        },
+        encounterCompleted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     });
     Encounter.associate = function(models) {
