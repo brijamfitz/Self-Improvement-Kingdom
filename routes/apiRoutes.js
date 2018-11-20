@@ -87,8 +87,8 @@ module.exports = function (app) {
   /* USER/ARMY ROUTES */
   /* ================================================================================== */
 
-  app.get("/api/user/:id", function (req, res) {
-    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
+  app.get("/api/user/", function (req, res) {
+    db.User.findOne({where: {id: req.session.userId}}).then(function (user) {
       res.json(user);
     })
   });

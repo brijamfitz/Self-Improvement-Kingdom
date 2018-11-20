@@ -471,13 +471,13 @@ img {
 }
 
 .troop-archer .collapse-completed {
-  background: linear-gradient(to right, rgba(17,165,35,.25), rgba(17,165,35,.25) 65%, rgb(255,255,255,1));
+  background: linear-gradient(to right, rgba(17,165,35,.25), rgba(17,165,35,.25) 65%, rgb(255,255,255));
 }
 
 .troop-knight .collapse-completed {
-  background: linear-gradient(to right, rgba(53,53,53,.25), rgba(53,53,53,.25) 65%, rgb(255,255,255,1));
+  background: linear-gradient(to right, rgba(53,53,53,.25), rgba(53,53,53,.25) 65%, rgb(255,255,255));
 }
 
 .troop-mage .collapse-completed {
-  background: linear-gradient(to right, rgba(23,62,184,.25), rgba(23,62,184,.25) 65%, rgb(255,255,255,1));
+  background: linear-gradient(to right, rgba(23,62,184,.25), rgba(23,62,184,.25) 65%, rgb(255,255,255));
 }
