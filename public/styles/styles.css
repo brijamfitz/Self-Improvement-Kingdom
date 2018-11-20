@@ -1,6 +1,6 @@
 body {
   background-color: #1E1E1F;
-  padding-top: 180px;
+  padding-top: 100px;
 }
 
 .list-group-item {
@@ -13,10 +13,11 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding: 10px;
+  padding-top: 10px;
   position: fixed;
   top: 0;
   z-index: 1;
+  box-shadow: 0 0 15px black;
 }
 
 #encounter-card {
@@ -42,9 +43,15 @@ img {
   text-align: center;
 }
 
-#progress-usernav {
+#progress-usernav,
+#avatar {
   position: relative;
-  top: 40px;
+  top: 5px;
+}
+
+#army {
+  position: relative;
+  bottom: 8px;
 }
 
 #user-level .level {
@@ -87,7 +94,8 @@ img {
   width: 25px;
 }
 
-#signup-container {
+#signup-container,
+#login-container {
   text-align: center;
 }
 
@@ -101,12 +109,32 @@ img {
 
 #create-account-btn,
 #login-btn {
-  margin: 5px;
+  margin: 10px 0px 20px 0px;
 }
 
-#signup-card {
+#signup-card,
+#login-card {
   font-weight: bold;
   text-align: center;
+}
+
+#about {
+  font-weight: normal;
+}
+
+#x {
+  font-size: 12px;
+}
+
+/* #user-archer-count,
+#user-knight-count,
+#user-mage-count {
+  position: absolute;
+  top: 57%;
+} */
+
+#army {
+  padding: 0px;
 }
 /* ================================================================================== */
 

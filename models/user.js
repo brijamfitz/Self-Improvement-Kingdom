@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
         castle: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "./assets/images/castle1.jpeg"
+            defaultValue: "./images/castle-1.png"
         },
         //stores the user's active title
         title: {
