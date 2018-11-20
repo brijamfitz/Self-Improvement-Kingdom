@@ -64,24 +64,31 @@
     <!-- TODO LISTS -->
     <!-- ======================================================================================== -->
 
-    <div class="row">
-      {{!-- {{> todo-layout/category-list category="personal" }} --}}
-      {{> todo-lists/personal category="personal" troop-type="archer"}}
-      {{> todo-lists/wellness category="wellness" troop-type="archer"}}
+    <div class="row" id="userId" data="{{data.userId}}">
+      {{> todo-layout/category-list category="personal" troop-type="archer" tasksObj=personalTasks }}
+      {{> todo-layout/category-list category="wellness" troop-type="archer" tasksObj=wellnessTasks }}
+      {{!-- {{> todo-lists/personal category="personal" troop-type="archer" tasksObj=personalTasks}} --}}
+      {{!-- {{> todo-lists/wellness category="wellness" troop-type="archer"}} --}}
     </div>
 
     <div class="row">
-      {{> todo-lists/exercise category="exercise" troop-type="knight"}}
-      {{> todo-lists/chores category="chores" troop-type="knight"}}
+      {{> todo-layout/category-list category="exercise" troop-type="knight" tasksObj=exerciseTasks }}
+      {{> todo-layout/category-list category="chores" troop-type="knight" tasksObj=choresTasks }}
+      {{!-- {{> todo-lists/exercise category="exercise" troop-type="knight"}} --}}
+      {{!-- {{> todo-lists/chores category="chores" troop-type="knight"}} --}}
     </div>
 
     <div class="row">
-      {{> todo-lists/learning category="learning" troop-type="mage"}}
-      {{> todo-lists/creativity category="creativity" troop-type="mage"}}
+      {{> todo-layout/category-list category="learning" troop-type="mage" tasksObj=learningTasks }}
+      {{> todo-layout/category-list category="creativity" troop-type="mage" tasksObj=creativityTasks }}
+      {{!-- {{> todo-lists/learning category="learning" troop-type="mage"}} --}}
+      {{!-- {{> todo-lists/creativity category="creativity" troop-type="mage"}} --}}
     </div>
 
   </div>
 </div>
+
+<a href='/logout'>Signout</a>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/battle.js"></script>

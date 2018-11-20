@@ -1,6 +1,6 @@
 body {
   background-color: #1E1E1F;
-  padding-top: 135px;
+  padding-top: 100px;
 }
 
 .list-group-item {
@@ -13,10 +13,11 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding: 10px;
+  padding-top: 10px;
   position: fixed;
   top: 0;
   z-index: 1;
+  box-shadow: 0 0 15px black;
 }
 
 #encounter-card {
@@ -36,10 +37,21 @@ img {
 
 #fight-flee,
 #avatar,
-#user-experience,
+#user-progress,
 #user-level,
 #army-counts {
   text-align: center;
+}
+
+#progress-usernav,
+#avatar {
+  position: relative;
+  top: 5px;
+}
+
+#army {
+  position: relative;
+  bottom: 8px;
 }
 
 #user-level .level {
@@ -82,6 +94,48 @@ img {
   width: 25px;
 }
 
+#signup-container,
+#login-container {
+  text-align: center;
+}
+
+#username-input,
+#password-input {
+  border-radius: 5px;
+  margin: 5px;
+  width: 250px;
+  height: 40px;
+}
+
+#create-account-btn,
+#login-btn {
+  margin: 10px 0px 20px 0px;
+}
+
+#signup-card,
+#login-card {
+  font-weight: bold;
+  text-align: center;
+}
+
+#about {
+  font-weight: normal;
+}
+
+#x {
+  font-size: 12px;
+}
+
+/* #user-archer-count,
+#user-knight-count,
+#user-mage-count {
+  position: absolute;
+  top: 57%;
+} */
+
+#army {
+  padding: 0px;
+}
 /* ================================================================================== */
 
 
@@ -91,6 +145,7 @@ img {
 
 .todo-card {
   margin-bottom: 40px;
+  max-width: 550px;
 }
 
 .todo-card > .card-header {
@@ -98,27 +153,27 @@ img {
 }
 
 .troop-archer > .card-header {
-  background-color: rgba(17,165,35,.3)
+  background: linear-gradient(to right, rgba(17,165,35,.45), rgba(17,165,35,.45) 65%, rgb(255,255,255,1));
 }
 
 .troop-knight > .card-header {
-  background-color: rgba(53,53,53,.3)
+  background: linear-gradient(to right, rgba(53,53,53,.45), rgba(53,53,53,.45) 65%, rgb(255,255,255,1));
 }
 
 .troop-mage > .card-header {
-  background-color: rgba(23,62,184,.3)
+  background: linear-gradient(to right, rgba(23,62,184,.45), rgba(23,62,184,.45) 65%, rgb(255,255,255,1));
 }
 
-.troop-archer .tasks li:hover {
-  background-color: rgba(17,165,35,.3)
+.troop-archer .checkbox-link:hover {
+  color: rgb(17,165,35) !important;
 }
 
-.troop-knight .tasks li:hover {
-  background-color: rgba(53,53,53,.3)
+.troop-knight .checkbox-link:hover {
+  color: rgb(53,53,53) !important;
 }
 
-.troop-mage .tasks li:hover {
-  background-color: rgba(23,62,184,.3)
+.troop-mage .checkbox-link:hover {
+  color: rgb(23,62,184) !important;
 }
 
 .tooltip-inner::first-letter {
@@ -151,7 +206,7 @@ img {
 
 .difficulty-select {
   display: block;
-  margin: 10px auto;
+  margin: 4px auto;
 }
 
 .task-form {
@@ -159,14 +214,14 @@ img {
   margin: 5px 5px 0;
 }
 
-.task-form > .form-group {
+.task-form > .form-group, .edit-task-form > .form-group {
   margin-bottom: 5px;
 }
 
 .btn-add-task {
   width: 50%;
   display: block;
-  margin: 15px auto;
+  margin: 4px auto 10px;
 }
 
 .tasks {
@@ -176,10 +231,9 @@ img {
 }
 
 .tasks li {
-  cursor: pointer;
   position: relative;
   font-size: 18px;
-  padding: 5px 42px 5px 60px;
+  padding: 5px 16px 5px 16px;
   border-top: 1px solid #92A0A5;
 }
 
@@ -187,24 +241,49 @@ img {
   border-bottom: 1px solid #92A0A5;
 }
 
-.tasks li:before {
-	font-family: 'Font Awesome 5 Free';
-  content: "\f0c8";
-  font-size: 24px;
-  -moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	display: inline-block;
-	font-style: normal;
-	font-variant: normal;
-	text-rendering: auto;
-  line-height: 1;
+.checkbox-link {
+  position: relative;
+  top: 3px;
+  font-size: 23px;
+  margin-right: 4px;
+  color: black;
+  cursor: pointer;
+}
+
+.checkbox-link:hover {
+  color: black;
+}
+
+.checkbox-link:hover .box:before {
+  content: "\f14a"
+}
+
+.task-name {
+  padding-right: 75px;
+}
+
+.btn-edit {
+  display: inline-block;
+  padding: 0 4px;
   position: absolute;
-  left: 30px;
+  line-height: 0px;
+  font-size: 12px;
+  right: 33px;
   top: 50%;
   transform: translateY(-50%);
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 3px;
+  height: 22px;
+}
+
+.btn-edit:hover {
+  background-color: #007bff;
+  color: #fff;
 }
 
 .btn-delete {
+  display: inline-block;
   padding: 0;
   position: absolute;
   height: 22px;
@@ -220,15 +299,84 @@ img {
 }
 
 .btn-delete:hover {
-  background-color: red;
+  background-color: #c82333;
+  color: #fff;
 }
 
 .btn-delete:focus {
   box-shadow: none;
 }
 
-.tasks li:hover:before {
-  content: "\f14a";
+.troop-select {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.troop-select p {
+  display: inline;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.reward-message {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.bonus-troop {
+  text-align: center;
+  margin-left: 4px;
+}
+
+.bonus-troop img {
+  height: 25px;
+  margin: 0;
+}
+
+.btn-troop-select {
+  padding: 2px 5px;
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 3px;
+  flex-grow: 1;
+}
+
+.btn-troop-select + .btn-troop-select {
+  margin-left: 2px;
+}
+
+.btn-troop-select img {
+  height: 30px;
+  margin: auto;
+}
+
+.btn-archer {
+  background: rgba(17,165,35,.25);
+  border-color: rgb(17,165,35);
+}
+
+.btn-archer:hover {
+  background: rgba(17,165,35,.45);
+}
+
+.btn-knight {
+  background: rgba(53,53,53,.25);
+  border-color: rgb(53,53,53);
+}
+
+.btn-knight:hover {
+  background: rgba(53,53,53,.45);
+}
+
+.btn-mage {
+  background: rgba(23,62,184,.25);
+  border-color: rgb(23,62,184);
+}
+
+.btn-mage:hover {
+  background: rgba(23,62,184,.45);
 }
 
 .tasks.completed {
@@ -241,23 +389,30 @@ img {
   border: none;
   padding-top: 0;
   padding-bottom: 0;
+  padding-left: 43px;
 }
+
 .tasks.completed li:before {
+  font-family: 'Font Awesome 5 Free';
   content: "\f14a";
-}
-
-.tasks.completed li:after {
-  content: none;
-}
-
-.tasks.completed li:hover {
-  background-color: #fff;
+  font-size: 24px;
+  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+  line-height: 1;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .accordion .card-header {
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 28px;
+  padding-left: 14px;
   position: relative;
 }
 
@@ -302,7 +457,6 @@ img {
 }
 
 .statusDisplay {
-
   height: 310px;
   width: 350px;
 }
@@ -310,7 +464,20 @@ img {
 .subtractor {
   color: red
 }
-.collapse.show {
+
+.collapse-completed {
   max-height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.troop-archer .collapse-completed {
+  background: linear-gradient(to right, rgba(17,165,35,.25), rgba(17,165,35,.25) 65%, rgb(255,255,255,1));
+}
+
+.troop-knight .collapse-completed {
+  background: linear-gradient(to right, rgba(53,53,53,.25), rgba(53,53,53,.25) 65%, rgb(255,255,255,1));
+}
+
+.troop-mage .collapse-completed {
+  background: linear-gradient(to right, rgba(23,62,184,.25), rgba(23,62,184,.25) 65%, rgb(255,255,255,1));
 }
