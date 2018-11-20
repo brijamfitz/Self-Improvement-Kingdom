@@ -1,6 +1,6 @@
 body {
   background-color: #1E1E1F;
-  padding-top: 180px;
+  padding-top: 100px;
 }
 
 .list-group-item {
@@ -13,10 +13,11 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding: 10px;
+  padding-top: 10px;
   position: fixed;
   top: 0;
   z-index: 1;
+  box-shadow: 0 0 15px black;
 }
 
 #encounter-card {
@@ -42,9 +43,15 @@ img {
   text-align: center;
 }
 
-#progress-usernav {
+#progress-usernav,
+#avatar {
   position: relative;
-  top: 40px;
+  top: 5px;
+}
+
+#army {
+  position: relative;
+  bottom: 8px;
 }
 
 #user-level .level {
@@ -87,7 +94,8 @@ img {
   width: 25px;
 }
 
-#signup-container {
+#signup-container,
+#login-container {
   text-align: center;
 }
 
@@ -101,12 +109,32 @@ img {
 
 #create-account-btn,
 #login-btn {
-  margin: 5px;
+  margin: 10px 0px 20px 0px;
 }
 
-#signup-card {
+#signup-card,
+#login-card {
   font-weight: bold;
   text-align: center;
+}
+
+#about {
+  font-weight: normal;
+}
+
+#x {
+  font-size: 12px;
+}
+
+/* #user-archer-count,
+#user-knight-count,
+#user-mage-count {
+  position: absolute;
+  top: 57%;
+} */
+
+#army {
+  padding: 0px;
 }
 /* ================================================================================== */
 
@@ -117,6 +145,7 @@ img {
 
 .todo-card {
   margin-bottom: 40px;
+  max-width: 550px;
 }
 
 .todo-card > .card-header {
@@ -136,15 +165,15 @@ img {
 }
 
 .troop-archer .checkbox-link:hover {
-  background-color: rgba(17,165,35,.25);
+  color: rgb(17,165,35) !important;
 }
 
 .troop-knight .checkbox-link:hover {
-  background-color: rgba(53,53,53,.25);
+  color: rgb(53,53,53) !important;
 }
 
 .troop-mage .checkbox-link:hover {
-  background-color: rgba(23,62,184,.25);
+  color: rgb(23,62,184) !important;
 }
 
 .tooltip-inner::first-letter {
@@ -202,7 +231,6 @@ img {
 }
 
 .tasks li {
-  cursor: pointer;
   position: relative;
   font-size: 18px;
   padding: 5px 16px 5px 16px;
@@ -213,32 +241,21 @@ img {
   border-bottom: 1px solid #92A0A5;
 }
 
-/* .tasks li:before {
-	font-family: 'Font Awesome 5 Free';
-  content: "\f0c8";
-  font-size: 24px;
-  -moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	display: inline-block;
-	font-style: normal;
-	font-variant: normal;
-	text-rendering: auto;
-  line-height: 1;
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-} */
-
-/* .task-buttons {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-} */
-
 .checkbox-link {
+  position: relative;
+  top: 3px;
   font-size: 23px;
-  margin-right: 8px;
+  margin-right: 4px;
+  color: black;
+  cursor: pointer;
+}
+
+.checkbox-link:hover {
+  color: black;
+}
+
+.checkbox-link:hover .box:before {
+  content: "\f14a"
 }
 
 .task-name {
@@ -261,7 +278,7 @@ img {
 }
 
 .btn-edit:hover {
-  background-color: #4F6BD2;
+  background-color: #007bff;
   color: #fff;
 }
 
@@ -282,7 +299,7 @@ img {
 }
 
 .btn-delete:hover {
-  background-color: red;
+  background-color: #c82333;
   color: #fff;
 }
 
@@ -290,9 +307,77 @@ img {
   box-shadow: none;
 }
 
-/* .tasks li:hover:before {
-  content: "\f14a";
-} */
+.troop-select {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.troop-select p {
+  display: inline;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.reward-message {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.bonus-troop {
+  text-align: center;
+  margin-left: 4px;
+}
+
+.bonus-troop img {
+  height: 25px;
+  margin: 0;
+}
+
+.btn-troop-select {
+  padding: 2px 5px;
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 3px;
+  flex-grow: 1;
+}
+
+.btn-troop-select + .btn-troop-select {
+  margin-left: 2px;
+}
+
+.btn-troop-select img {
+  height: 30px;
+  margin: auto;
+}
+
+.btn-archer {
+  background: rgba(17,165,35,.25);
+  border-color: rgb(17,165,35);
+}
+
+.btn-archer:hover {
+  background: rgba(17,165,35,.45);
+}
+
+.btn-knight {
+  background: rgba(53,53,53,.25);
+  border-color: rgb(53,53,53);
+}
+
+.btn-knight:hover {
+  background: rgba(53,53,53,.45);
+}
+
+.btn-mage {
+  background: rgba(23,62,184,.25);
+  border-color: rgb(23,62,184);
+}
+
+.btn-mage:hover {
+  background: rgba(23,62,184,.45);
+}
 
 .tasks.completed {
   padding-top: 15px;
@@ -306,6 +391,7 @@ img {
   padding-bottom: 0;
   padding-left: 43px;
 }
+
 .tasks.completed li:before {
   font-family: 'Font Awesome 5 Free';
   content: "\f14a";
@@ -371,7 +457,6 @@ img {
 }
 
 .statusDisplay {
-
   height: 310px;
   width: 350px;
 }

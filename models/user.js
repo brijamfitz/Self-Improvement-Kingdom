@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
         castle: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "./assets/images/castle1.jpeg"
+            defaultValue: "./images/castle-1.png"
         },
         //stores the user's active title
         title: {
@@ -102,26 +102,23 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-User.associate = function (models) {
-    //associating user with their current tasks, deletes on user deletion
-    User.hasMany(models.Task, {
-        onDelete: "cascade"
+    User.associate = function (models) {
+        //associating user with their current tasks, deletes on user deletion
+        User.hasMany(models.Task, {
+            onDelete: "cascade"
+        });
+    };
+
+    // generating encryption for locally stored passwords
+    // the .hook "beforeCreate" runs the encryption function before generating the actual database object
+    User.hook("beforeCreate", function(user){
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
-};
 
-// generating encryption for locally stored passwords
-// the .hook "beforeCreate" runs the encryption function before generating the actual database object
-User.hook("beforeCreate", function(user){
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-});
-
-// comparing encrypted passwords 
-User.prototype.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-  };
-
-
-
+    // comparing encrypted passwords 
+    User.prototype.validPassword = function(password) {
+        return bcrypt.compareSync(password, this.password);
+    };
 
     User.associate = function(models) {
         //associates the single encounter for the user
