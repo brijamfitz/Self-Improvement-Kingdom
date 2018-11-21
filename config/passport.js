@@ -11,13 +11,14 @@ passport.use('local-login', new LocalStrat({
     db.User.findOne({ where: { username: username }}).then(function (user) {
         console.log("Here's the retrieved info:" + user)
         // check if username exists
-        if (user == undefined) {
+        if (!user) {
             return done(null, false, { message: "Unkown username." });
             // use hash checker to check password
         } else if (!user.validPassword(password)) {
             return done(null, false, { message: "incorrect password" });
             // if it clears both check return the user
         } else {
+            console.log("+++++++++++++++++++++++++++++>successful auth<=====================================")
             return done(null, user);
         }
     })
@@ -29,7 +30,7 @@ passport.use('local-signup', new LocalStrat({
     passwordField: 'password',
 }, function (username, password, done) {
     process.nextTick(function () {
-        db.User.findOne({ where: { 'username': username } }).then(function (err, data) {
+        db.User.findOne({ where: { username: username } }).then(function (err, data) {
             // if database err return the error
             if (err)
                 return done(err);

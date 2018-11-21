@@ -195,5 +195,4 @@ $(function() {
     event.preventDefault()
     $(this).parents(".edit-task-form").addClass("d-none")
     $(this).parents(".edit-task-form").siblings(".task-view").removeClass("d-none")
-  })
-})
+  });

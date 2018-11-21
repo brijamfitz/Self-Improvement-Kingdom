@@ -11,22 +11,18 @@ module.exports = function (app) {
   // Processing the local login form
   app.post("/api/login/local",function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
-<<<<<<< HEAD
-      console.log(info);
-=======
       console.log("Here's the returned user: " + user);
->>>>>>> 956f7ffa65d1f2c5ccedc639232f0148d3387530
       if (err) { 
         return next(err); }
         ;
       if (!user) { 
-        return res.redirect('/login', req.flash('error', 'Invalid username or password')); 
+        return res.redirect('/login', {msg: "Username or Password incorrect, please try again or follow the link to sign up."}); 
       };
       req.logIn(user, function(err) {
         if (err) { 
           return next(err); 
         };
-        process.nextTick(function(){res.redirect('/')});
+        res.redirect('/');
       })
     })(req, res, next);
   });
@@ -91,7 +87,7 @@ module.exports = function (app) {
   /* USER/ARMY ROUTES */
   /* ================================================================================== */
 
-  app.get("/api/user/:id", function (req, res) {
+  app.get("/api/user/", function (req, res) {
     db.User.findOne({where: {id: req.params.id}}).then(function (user) {
       res.json(user);
     })
@@ -112,23 +108,11 @@ module.exports = function (app) {
 
   // DELETE THIS ROUTE? POSSIBLY NOT IN USE
   app.get("/api/army", function (req, res) {
-    var id = req.session.userId
-   db.User.findById(id).then(function(user){
-    var playerArmy= {
-      knightCount: user.knightCount,
-      mageCount: user.mageCount,
-      archerCount: user.archerCount
+    var playerArmy = {
+      knightCount: req.user.knightCount,
+      mageCount: req.user.mageCount,
+      archerCount: req.user.archerCount
     }
     res.json(playerArmy);
-   })
-  });
-
-  app.put("/api/army", function (req, res) {
-    var knightCount = req.body.knightCount;
-    var mageCount = req.body.mageCount;
-    var archerCount = req.body.archerCount;
-    db.User.update({knightCount:knightCount, mageCount:mageCount, archerCount:archerCount},{where:{id:req.session.userId}}).then(function(user){
-      res.json(user);
-    })
   })
 }

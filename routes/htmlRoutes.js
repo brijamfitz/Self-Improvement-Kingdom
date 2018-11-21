@@ -4,24 +4,21 @@ var taskSort = require("../public/js/taskSort")
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    process.nextTick(function () {
+    console.log("+++++++++++++++++++++++++++++++++++++>>>>>"+req.user+"<++++++++++++++++++++++++++");
       if (req.user) {
         res.redirect("/user");
       } else {
         res.redirect("/login");
       }
-    });
   });
 
   // Getting the local login form
   app.get("/login", function (req, res) {
-    process.nextTick(function () {
       if (req.user) {
         res.redirect("/");
       } else {
         res.render('login', {msg: req.flash('error')});
       }
-    })
   });
 
   // Getting the signup form
