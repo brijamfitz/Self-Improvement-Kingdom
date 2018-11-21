@@ -1,29 +1,50 @@
+//global variable for player army
 var armyOne;
+
+//global variable for computer army
+var armyTwo;
+
+//variable for user province total;
+var provinceTotal;
+
+//varibles for sound clips
 var battleSounds;
-var battleStart;
+var battleStart; 
+
+//gif that displays fire during battle
 var battleGif = $("<img>");
 $(battleGif).attr("src", "https://media2.giphy.com/media/6wpHEQNjkd74Q/giphy.gif?cid=3640f6095bef6acc35795a526f03a450");
-// test values for the computer army
-var armyTwo = {
-    knightCount: 3,
-    mageCount: 2,
-    archerCount: 1
-}
 
-//on document ready, completes an AJAX call to set armyOne as the army
-$(document).ready(function () {
+
+$(document).ready(function(){
+
+
+    //setting sounds
     battleSounds = document.getElementById("battleEffects");
     battleStart = document.getElementById("battleStart");
+
+    //when document loads, make ajax call for player army values
     $.ajax({
-        url: "/api/army",
+        url: "/api/user/",
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response){
+        console.log(response);
+        provinceTotal = response.provinceCount;
         armyOne = response;
         console.log(armyOne)
     });
+
+
 });
 
-$(document).on("click", "#fight-btn", function () {
+//when fight button is clicked, clear the buttons, play sounds, and begin battle simulation
+$(document).on("click", "#fight-btn", function(){
+    armyTwo = {
+        knightCount: $("#enemy-knight-count").text(),
+        mageCount: $("#enemy-mage-count").text(),
+        archerCount: $("#enemy-archer-count").text()
+    }
+
     battleSounds.play();
     battleStart.play();
     $("#battle-buttons").html("");
@@ -119,9 +140,11 @@ var battle = {
         if (archerResult > cArcher) {
             archerResult = cArcher;
         };
-        if (archerResult === 0 && cArcher > 0) {
+        //check to display DODGED only for live groups
+        if (archerResult === 0 && cArcher > 0){
             $("#enemy-archer-loss").removeClass("subtractor");
             $("#enemy-archer-loss").text("(DODGED)")
+        //if casualties taken, display damage done
         } else if (cArcher > 0) {
             $("#enemy-archer-loss").text("(-" + archerResult + ")");
         }
@@ -136,9 +159,9 @@ var battle = {
             $("#enemy-mage-loss").text("(DODGED)")
         } else if (cMage > 0) {
             $("#enemy-mage-loss").text("(-" + mageResult + ")")
-        }
+        };
 
-        ;
+        //fades out damage hits over jquery default of 400ms (can change please refer to jquery documentation)
         $("#enemy-archer-loss").fadeOut();
         $("#enemy-knight-loss").fadeOut();
         $("#enemy-mage-loss").fadeOut();
@@ -168,7 +191,8 @@ var battle = {
         if (archerResult > pArcher) {
             archerResult = pArcher;
         };
-        if (archerResult === 0 && pArcher > 0) {
+        //check to display DODGED only for live groups
+        if (archerResult === 0 && pArcher > 0){
             $("#player-archer-loss").removeClass("subtractor");
             $("#player-archer-loss").text("(DODGED)  ")
         } else if (pArcher > 0) {
@@ -268,22 +292,36 @@ var battle = {
         $("#enemy-mage-count").text(cMage);
         $("#enemy-archer-count").text(cArcher);
     },
+    exportObject: {
+        knightCount: 0,
+        mageCount: 0,
+        archerCount: 0,
+        provinceCount: 0
+    },
 
     //returns an object that contains remaining player army values
-    exportResults: function (isVictory) {
-        $("#resultModal").modal();
-        $(battleGif).remove();
-        var newPlayerResults = {
+    exportResults: function(isVictory){
+        if (isVictory === true){
+            provinceTotal++;
+        } else {
+            provinceTotal--;
+        }
+
+        this.exportObject = {
             knightCount: pKnight,
             mageCount: pMage,
             archerCount: pArcher,
-            isVictorious: isVictory
-        };
+            provinceCount: provinceTotal
+        }
+
+        $("#resultModal").modal();
+        $(battleGif).remove();
+        var newPlayerResults = this.exportObject;
         var endGame = $("<div>");
-        if (newPlayerResults.isVictorious === false) {
+        if (isVictory === false){
             $(endGame).text("Your army has been obliterated. Enemy forces will certainly use this opportunity to take one of your provinces, prepare for your counter attack tomorrow.")
             $("#result-body").append(endGame);
-        } else if (newPlayerResults.isVictorious === true && pKnight === 0 && pMage === 0 && pArcher === 0) {
+        } else if (isVictory === true && pKnight === 0 && pMage === 0 && pArcher ===0) {
             $(endGame).text("Both armies were completely destroyed in the fighting. You have gained this province, but at a great cost.")
             $("#result-body").append(endGame);
         } else {
@@ -299,13 +337,20 @@ var battle = {
             $("#result-body").append(knightDiv);
             $("#result-body").append(mageDiv);
         }
-        $.ajax("/api/army", {
+        console.log(newPlayerResults);
+        $.ajax({
             method: "PUT",
-            data: newPlayerResults
-        }).then(function () {
-            console.log(newPlayerResults);
-            return newPlayerResults;
+            url: "/api/user/armyLosses",
+            data: battle.exportObject
+        }).then(function(response){
+            $.ajax({
+                method: "GET",
+                url: "/user",
+            }).then(function(res){
+                console.log(res);
+            });
         });
+        return newPlayerResults;
     },
 
     //stored player kill values
@@ -314,3 +359,8 @@ var battle = {
     storedArchers: 0
 }
 
+//when modal "close" button is clicked, update player info
+$(document).on("click", "#close", function(){
+    location.reload();
+});
+    
