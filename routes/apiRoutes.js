@@ -88,14 +88,9 @@ module.exports = function (app) {
   /* USER/ARMY ROUTES */
   /* ================================================================================== */
 
-<<<<<<< HEAD
-  app.get("/api/user/", function (req, res) {
-    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
-=======
   // Route for getting user data from database.
   app.get("/api/user/", function(req, res){
     db.User.findOne({where:{id: req.session.userId}}).then(function(user){
->>>>>>> refs/heads/develop
       res.json(user);
     })
   })
