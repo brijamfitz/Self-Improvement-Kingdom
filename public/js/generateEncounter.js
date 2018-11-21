@@ -1,7 +1,6 @@
 nameArray = [];
 
 
-
 var encounterGen = {
     //takes in initial values, takes total player army size and total player provinces to calculate
     encounterInit: function(armyTotal, provinceTotal){
@@ -64,43 +63,109 @@ var encounterGen = {
     },
     nameGeneration: function() {
         randomizer = Math.floor(Math.random() * 199);
-        encounterGen.exportObject.battleName = "The Battle of " + nameArray[randomizer].trim();
+        this.exportObject.encounterName = "The Battle of " + nameArray[randomizer].trim();
         encounterGen.troopTotals(genArmy);
 
     },
     //static array used to help with random generation
     typeArray: ["knight", "mage", "archer"],
-    //the object that gets exported at the end of the script, is updated as troops are
+    //the object that gets exported at the end of the script, is updated as troops are  added
     exportObject: {
         knightCount: 0,
         mageCount: 0,
         archerCount: 0,
-        battleName: this.name
+        encounterName: "test"
     },
     exportFunction: function(){
         console.log(encounterGen.exportObject);
-        return encounterGen.exportObject;
+        $.ajax({
+            method: "POST",
+            url: "/api/encounter/new",
+            data: encounterGen.exportObject
+        }).then(function(result){
+            console.log("here?")
+            console.log(result);
+            return encounterGen.exportObject;
+            
+        })
+        
     }
 
 }
 
+//function used to display encounters in their appropriate locations
+function displayEncounter(encounterObject){
+    $("#battleName").text(encounterObject.encounterName);
+    $("#enemy-archer-count").text(encounterObject.archerCount);
+    $("#enemy-mage-count").text(encounterObject.mageCount);
+    $("#enemy-knight-count").text(encounterObject.knightCount);
+}
+
+//script for when page loads
 $(document).ready(function(){
     
+    //get user information to see if they completed an encounter or not
     $.ajax({
         method: "GET",
-        url: "/api/encounterNames"
-      }).then(function(result){
-        nameArray = result.toString().split(",")
-        var playerKnights = $("#player-knight-count").text();
-        var playerMages = $("#player-mage-count").text();
-        var playerArchers = $("#player-archer-count").text();
-        var armyTotal = parseInt(playerKnights) + parseInt(playerMages) + parseInt(playerArchers);
-        var provinceTotal = 10;
-        encounterGen.encounterInit(armyTotal, provinceTotal);
-        var exportedObject = encounterGen.exportFunction();
-        $("#battleName").text(exportedObject.battleName);
-        console.log(exportedObject);
-        
-    });
+        url: "/api/user/"
+    }).then(function(result){
+        //all player army saved to variables
+        var playerKnights = result.knightCount;
+        var playerMages = result.mageCount;
+        var playerArchers = result.archerCount;
+        var provinceTotal = result.provinceCount;
+        var armyTotal = playerKnights + playerMages + playerArchers;
+        console.log(armyTotal);
+        console.log(provinceTotal);
+        //check to see if an encounter was completed today
+        if (result.encounterCompleted === false){
+            //check to see if encounter was generated
+            if (result.encounterGenerated === false){
+                //calls api for text file containing random name generator
+                $.ajax({
+                    method: "GET",
+                    url: "/api/encounterNames"
+
+                  }).then(function(result){
+                    //split up text file by ,
+                    nameArray = result.toString().split(",");
+                    //generate new encounter based upon existing values
+                    encounterGen.encounterInit(armyTotal, provinceTotal);
+                    var exportedObject = encounterGen.exportObject;
+                    //display encounter on page
+                    displayEncounter(exportedObject);
+                    //object to update user page
+                    var encounterUpdate = {
+                        encounterGenerated: true
+                    }
+                    $.ajax({
+                        method: "PUT",
+                        url: "/api/user/encounterUpdate",
+                        data: encounterUpdate
+                    }).then(function(result){
+                        console.log(result);
+                    })
+                });
+            // if encounter already generated, take existing values and display on page
+            } else {
+
+                 $.ajax({
+                     method: "GET",
+                     url:"/api/encounter/"
+                 }).then(function(result){
+                    displayEncounter(result);
+                 })
+            }
+        //displays if battle already completed
+        } else {
+            $("#encounter-card").html("");
+            var newDiv = $("<div>");
+            $(newDiv).text("Encounter already completed today, come back tomorrow!");
+            $(newDiv).addClass("text-align-center");
+            $("#encounter-card").append(newDiv);
+        }
+    })
+    
+   
 
 });

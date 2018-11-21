@@ -88,11 +88,26 @@ module.exports = function (app) {
   /* USER/ARMY ROUTES */
   /* ================================================================================== */
 
+  //route for front end to get data from user api
   app.get("/api/user/:id", function (req, res) {
-    db.User.findOne({where: {id: req.params.id}}).then(function (user) {
+     db.User.findOne({where: {id: req.params.id}}).then(function (user) {
+       console.log(user);
+       res.json(user);
+     })
+  });
+
+  app.get("/api/user/", function(req, res){
+    db.User.findOne({where:{id: req.session.userId}}).then(function(user){
       res.json(user);
     })
-  });
+  })
+
+  app.get("/api/user/:id", function (req, res) {
+    db.User.findOne({where: {id: req.params.userId}}).then(function (user) {
+      console.log(user);
+      res.json(user);
+    })
+ });
 
   // PUT route for adding to player army on task completion
   app.put("/api/user/army/:id", function(req, res){
@@ -107,6 +122,22 @@ module.exports = function (app) {
     })
   });
 
+  //PUT route to update user values after combat
+  app.put("/api/user/armyLosses", function(req, res){
+    db.User.update({
+      archerCount: req.body.archerCount,
+      knightCount: req.body.knightCount,
+      mageCount: req.body.mageCount,
+      provinceCount: req.body.provinceCount,
+      encounterCompleted: true
+    }, {
+      where: {id: req.session.userId}
+    }).then(function(result){
+      console.log(result);
+      res.redirect('/user') 
+    })
+  });
+
   // DELETE THIS ROUTE? POSSIBLY NOT IN USE
   app.get("/api/army", function (req, res) {
     var playerArmy = {
@@ -117,14 +148,52 @@ module.exports = function (app) {
     res.json(playerArmy);
   });
 
+  //update to user to show encounter has been generated
+  app.put("/api/user/encounterUpdate", function(req, res){
+
+    db.User.update({
+      encounterGenerated: req.body.encounterGenerated
+    },{
+      where: {id:req.session.userId}
+    }).then(function(update){
+      res.json(update);
+    })
+  })
+
+//route for txt file containing list of potential battle names
   app.get("/api/encounterNames", function(req, res){
     fs.readFile('text/names.txt', "utf-8", (err, data) => {
       if (err) throw err;
       var nameArray = data.split(",")
       res.json(nameArray);
+  });
+
+});
+
+//new encounter route
+  app.post("/api/encounter/new", function(req, res){
+    var newEncounter = {
+      knightCount: req.body.knightCount,
+      mageCount: req.body.mageCount,
+      archerCount: req.body.archerCount,
+      encounterName: req.body.encounterName,
+      UserId: req.session.userId
+    };
+    console.log(newEncounter);
+    db.Encounter.create(newEncounter).then(function(newEncounter){
+      res.json(newEncounter);
+    })
+  });
+
+  //route to get information on encounters 
+  app.get("/api/encounter/", function(req, res){
+    db.Encounter.findOne({where:{UserId: req.session.userId}}).then(function(encounter){
+      res.json(encounter);
+    })
   })
 
-})
+
+
 
 }
 

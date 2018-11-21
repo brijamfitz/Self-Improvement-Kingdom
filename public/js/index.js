@@ -1,3 +1,4 @@
+
 $(function() {
 // ==================================================================================================
 // DATABASE TESTING WITH DUMMY DATA
@@ -5,16 +6,16 @@ $(function() {
 // Ajax call to grab user army counts and display to both encounter card and user info bar
 $.ajax({
   method: "GET",
-  url: "/api/user"
+  url: "/api/user/all"
 }).then(function(response) {
   console.log(response);
-  var user = response[0];
-  $("#user-archer-count").append(user.archerCount);
-  $("#user-knight-count").append(user.knightCount);
-  $("#user-mage-count").append(user.mageCount);
-  $("#encounter-archer-count").append(user.archerCount);
-  $("#encounter-knight-count").append(user.knightCount);
-  $("#encounter-mage-count").append(user.mageCount);
+  var user = response;
+  $("#user-archer-count").text(user.archerCount);
+  $("#user-knight-count").text(user.knightCount);
+  $("#user-mage-count").text(user.mageCount);
+  $("#encounter-archer-count").text(user.archerCount);
+  $("#encounter-knight-count").text(user.knightCount);
+  $("#encounter-mage-count").text(user.mageCount);
 });
 
 $("#fight-btn").on("click", function() {

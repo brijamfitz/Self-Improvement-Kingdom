@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         encounterCompleted: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            defaultValue: false
         }
     });
     Encounter.associate = function(models) {
