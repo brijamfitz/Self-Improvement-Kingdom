@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "Ulgo1149",
     "port": 3306,
     "database": "project2db",
     "host": "localhost",
