@@ -99,6 +99,14 @@ module.exports = function (sequelize, DataTypes) {
         groupId: {
             type: DataTypes.INTEGER,
             allowNull: true,
+        },
+        encounterCompleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        encounterGenerated: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
 
