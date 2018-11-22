@@ -82,7 +82,7 @@ function updateArmy(taskId, userId, difficulty, bonusType, troopSelected) {
 
   var user;
   $.ajax({
-    url: "api/user",
+    url: "api/user/",
     method: "GET",
     user: user
   }).then(function(user) {

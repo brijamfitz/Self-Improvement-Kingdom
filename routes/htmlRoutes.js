@@ -1,5 +1,5 @@
 var db = require("../models");
-var taskSort = require("../public/js/taskSort")
+var onLoad = require("../public/js/onLoad")
 
 module.exports = function (app) {
 
@@ -30,8 +30,14 @@ module.exports = function (app) {
 
   // Load index page
   app.get("/user", function (req, res) {
-    db.Task.findAll({ where: { UserId: req.user.id } }).then(function (allTasks) {
-      var renderObject = taskSort(allTasks, req);
+    var id;
+    if (req.user){
+      id = req.user.id
+    } else {
+      id = req.session.userId
+    }
+    db.Task.findAll({ where: { UserId: id } }).then(function (allTasks) {
+      var renderObject = onLoad(allTasks, req);
       res.render("index", renderObject);
     });
   });
