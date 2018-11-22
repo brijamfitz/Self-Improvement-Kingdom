@@ -1,8 +1,7 @@
 var armyOne;
 var battleSounds;
 var battleStart; 
-var battleGif = $("<img>");
-$(battleGif).attr("src", "https://media2.giphy.com/media/6wpHEQNjkd74Q/giphy.gif?cid=3640f6095bef6acc35795a526f03a450");
+var battleGif = $('<img class="battle-gif" src="./images/crossed-swords.png">');
 // test values for the computer army
 var armyTwo = {
     knightCount: 3,

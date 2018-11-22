@@ -23,7 +23,8 @@ body {
 #encounter-card {
   margin: 30px 0px 30px 0px;
   width: 100%;
-  background-color: #fff;
+  background: url(../images/battlefield.png);
+  background-size: cover;
 }
 
 #encounter-card .btn {
@@ -135,6 +136,23 @@ img {
 
 #army {
   padding: 0px;
+}
+
+.battle-gif {
+  height: 125px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1)
+  }
+  50% {
+    transform: scale(1.2)
+  }
+  100% {
+    transform: scale(1)
+  }
 }
 /* ================================================================================== */
 
