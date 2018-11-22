@@ -88,27 +88,14 @@ module.exports = function (app) {
   /* USER/ARMY ROUTES */
   /* ================================================================================== */
 
-  //route for front end to get data from user api
-  app.get("/api/user/:id", function (req, res) {
-     db.User.findOne({where: {id: req.params.id}}).then(function (user) {
-       console.log(user);
-       res.json(user);
-     })
-  });
-
+  // Route for getting user data from database.
   app.get("/api/user/", function(req, res){
     db.User.findOne({where:{id: req.session.userId}}).then(function(user){
       res.json(user);
     })
   })
 
-  app.get("/api/user/:id", function (req, res) {
-    db.User.findOne({where: {id: req.params.userId}}).then(function (user) {
-      console.log(user);
-      res.json(user);
-    })
- });
-
+  
   // PUT route for adding to player army on task completion
   app.put("/api/user/army/:id", function(req, res){
     db.User.update({
@@ -132,9 +119,8 @@ module.exports = function (app) {
       encounterCompleted: true
     }, {
       where: {id: req.session.userId}
-    }).then(function(result){
-      console.log(result);
-      res.redirect('/user') 
+    }).then(function(user){
+      res.json(user);
     })
   });
 

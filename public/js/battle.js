@@ -337,6 +337,18 @@ var battle = {
             $("#result-body").append(mageDiv);
         }
         console.log(newPlayerResults);
+        $.ajax({
+            method: "PUT",
+            url: "/api/user/armyLosses",
+            data: battle.exportObject
+        }).then(function(response){
+            $.ajax({
+                method: "GET",
+                url: "/user",
+            }).then(function(res){
+                console.log(res);
+            });
+        });
         return newPlayerResults;
     },
 
@@ -348,17 +360,6 @@ var battle = {
 
 //when modal "close" button is clicked, update player info
 $(document).on("click", "#close", function(){
-    $.ajax({
-        method: "PUT",
-        url: "/api/user/armyLosses",
-        data: battle.exportObject
-    }).then(function(){
-        location.reload();
-    });
     location.reload();
-    asyncReload();
 });
-
-function asyncReload(){
-    location.reload();
-}
+    
