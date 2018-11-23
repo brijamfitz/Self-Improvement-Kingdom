@@ -21,15 +21,76 @@ body {
 }
 
 #encounter-card {
+  position: relative;
   margin: 30px 0px 30px 0px;
   width: 100%;
-  background: url(../images/battlefield.png);
+  background-image: url(../images/battlefield.png);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: 400px;
+  height: 530px;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#battleName {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.message-box {
+  width: 100%;
+  background: linear-gradient(to bottom, #1F2497, #0A1152);
+  border: 4px solid #F2F7FF;
+  border-radius: 10px;
+  color: #fff;
+}
+.message-box--top {
+  height: 52px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.message-box--bottom {
+  position: absolute;
+  height: 130px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 8px;
+}
+
+.encounter-army {
+  position: absolute;
+  top: 160px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.user-army {
+  left: 150px;
+}
+
+.user-army .encounter-troop:nth-child(2) {
+  position: relative;
+  left: 58px;
+}
+
+.enemy-army {
+  right: 150px;
+  text-align: right;
+}
+
+.enemy-army .encounter-troop:nth-child(2) {
+  position: relative;
+  right: 58px;
 }
 
 #encounter-card .btn {
   margin: 10px;
-  background-color: royalblue;
 }
 
 img {
@@ -59,10 +120,6 @@ img {
   margin-top: 22px;
 }
 
-#enemy {
-  text-align: right;
-}
-
 #profile-img {
   border-radius: 50%;
   height: 50px;
@@ -82,6 +139,14 @@ img {
 
 .modal-header {
   text-align: center;
+}
+
+.encounter-troop {
+  display: block;
+}
+
+.encounter-troop__img {
+  height: 60px;
 }
 
 #encounter-img-archer,
@@ -139,19 +204,29 @@ img {
 }
 
 .battle-gif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 125px;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% {
-    transform: scale(1)
+    /* transform: scale(1) */
+    height: 165px;
+    width: 165px
   }
   50% {
-    transform: scale(1.2)
+    /* transform: scale(1.2) */
+    height: 125px;
+    width: 125px
   }
   100% {
-    transform: scale(1)
+    /* transform: scale(1) */
+    height: 165px;
+    width: 165px
   }
 }
 /* ================================================================================== */
@@ -480,7 +555,9 @@ img {
 }
 
 .subtractor {
-  color: red
+  color: red;
+  margin: 0 5px;
+  display: inline-block;
 }
 
 .collapse-completed {

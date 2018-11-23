@@ -10,7 +10,6 @@ var provinceTotal;
 //varibles for sound clips
 var battleSounds;
 var battleStart; 
-var battleGif = $('<img class="battle-gif" src="./images/crossed-swords.png">');
 
 
 $(document).ready(function(){
@@ -44,7 +43,7 @@ $(document).on("click", "#fight-btn", function(){
     battleSounds.play();
     battleStart.play();
     $("#battle-buttons").html("");
-    $("#fight-flee").append(battleGif);
+    $(".battle-gif").removeClass("d-none");
 
      battle.battleInit(armyOne, armyTwo);
 });
@@ -311,7 +310,7 @@ var battle = {
         }
 
         $("#resultModal").modal();
-        $(battleGif).remove();
+        $('.battle-gif').addClass("d-none");
         var newPlayerResults = this.exportObject;
         var endGame = $("<div>");
         if (isVictory === false){
