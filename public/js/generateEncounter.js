@@ -107,7 +107,7 @@ $(document).ready(function(){
     //get user information to see if they completed an encounter or not
     $.ajax({
         method: "GET",
-        url: "/api/user/"
+        url: "/api/user"
     }).then(function(result){
         //all player army saved to variables
         var playerKnights = result.knightCount;

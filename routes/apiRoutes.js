@@ -1,5 +1,4 @@
 var db = require("../models");
-var isAuthenticated = require("../config/middleware/isAuthenticated");
 var passport = require("../config/passport")
 var fs = require("fs");
 
@@ -90,6 +89,7 @@ module.exports = function (app) {
 
   // Route for getting user data from database.
   app.get("/api/user/", function(req, res){
+    
     db.User.findOne({where:{id: req.session.userId}}).then(function(user){
       res.json(user);
     })
@@ -173,13 +173,36 @@ module.exports = function (app) {
 
   //route to get information on encounters 
   app.get("/api/encounter/", function(req, res){
-    db.Encounter.findOne({where:{UserId: req.session.userId}}).then(function(encounter){
+    db.Encounter.findOne({where:{UserId: req.session.userId}}).then((encounter) => {
       res.json(encounter);
     })
   })
 
+  app.get("/api/friends", function(req, res){
+    db.sequelize.query("SELECT Users.id, username, title, status FROM Users JOIN Friends ON ? = Friends.requestee AND username = Friends.requester AND status = 'pending' OR ? = Friends.requester AND username = Friends.requestee AND status = 'accepted' OR ? = Friends.requestee AND username = Friends.requester AND status = 'accepted'" , {replacements:[req.session.username, req.session.username, req.session.username]})
+    .spread((results, metaData) => {
+      console.log(results)
+      res.send(results)
+    })
+  });
+  
+  app.post("/api/friends", function(req, res){
+    var fReq = {
+        requester: req.session.username,
+        status: 'pending',
+        requestee: req.body.username
+    }
+    db.Friend.create(fReq).then(function(friends){
+      res.json(friends);
+    })
+  });
 
-
-
+  app.put("/api/friends", function(req, res){
+    console.log(req.body);
+    var newStatus = req.body.status;
+    db.Friend.update({'status': newStatus}, {where:{'requestee': req.session.username, 'requester': req.body.username ,'status': "pending"}}).then(function(user){
+      res.json(user);
+    })
+  });
 }
 

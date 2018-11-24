@@ -1,6 +1,7 @@
 //Export function for sorting tasks
 module.exports = function (allTasks, req) {
     req.session.userId = req.user.id;
+    req.session.username = req.user.username;
     req.session.provinceCount = req.user.provinceCount;
     req.session.encounterCompleted = req.user.encounterCompleted;
 

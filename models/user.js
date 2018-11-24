@@ -117,6 +117,10 @@ module.exports = function (sequelize, DataTypes) {
         });
     };
 
+    User.associate  = function (models) {
+        User.hasMany(models.User, {as: 'Friends', through: models.Friend})
+    }
+
     // generating encryption for locally stored passwords
     // the .hook "beforeCreate" runs the encryption function before generating the actual database object
     User.hook("beforeCreate", function(user){

@@ -18,7 +18,6 @@ passport.use('local-login', new LocalStrat({
             return done(null, false, { message: "incorrect password" });
             // if it clears both check return the user
         } else {
-            console.log("+++++++++++++++++++++++++++++>successful auth<=====================================")
             return done(null, user);
         }
     })
