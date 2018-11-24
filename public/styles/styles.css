@@ -71,22 +71,12 @@ body {
 }
 
 .user-army {
-  left: 150px;
-}
-
-.user-army .encounter-troop:nth-child(2) {
-  position: relative;
-  left: 58px;
+  left: 10px;
 }
 
 .enemy-army {
-  right: 150px;
+  right: 10px;
   text-align: right;
-}
-
-.enemy-army .encounter-troop:nth-child(2) {
-  position: relative;
-  right: 58px;
 }
 
 #encounter-card .btn {
@@ -207,26 +197,38 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
+  visibility: hidden;
   transform: translate(-50%, -50%);
-  height: 125px;
-  animation: pulse 2s infinite;
+  animation: pulse-small 2s infinite;
 }
 
 @keyframes pulse {
   0% {
-    /* transform: scale(1) */
-    height: 165px;
-    width: 165px
+    height: 125px;
+    width: 125px;
   }
   50% {
-    /* transform: scale(1.2) */
-    height: 125px;
-    width: 125px
-  }
-  100% {
-    /* transform: scale(1) */
     height: 165px;
     width: 165px
+  }
+  100% {
+    height: 125px;
+    width: 125px;
+  }
+}
+
+@keyframes pulse-small {
+  0% {
+    height: 75px;
+    width: 75px;
+  }
+  50% {
+    height: 100px;
+    width: 100px
+  }
+  100% {
+    height: 75px;
+    width: 75px;
   }
 }
 /* ================================================================================== */
@@ -575,4 +577,43 @@ img {
 
 .troop-mage .collapse-completed {
   background: linear-gradient(to right, rgba(23,62,184,.25), rgba(23,62,184,.25) 65%, rgb(255,255,255));
+}
+
+/* ================================================================================== */
+/* MEDIA QUERIES */
+/* ================================================================================== */
+
+@media (min-width: 768px) {
+  .user-army {
+    left: 50px;
+  }
+
+  .enemy-army {
+    right: 50px;
+  }
+
+  .battle-gif {
+    animation: pulse 2s infinite;
+    visibility: visible;
+  }
+}
+
+@media (min-width: 992px) {
+  .user-army {
+    left: 150px;
+  }
+
+  .enemy-army {
+    right: 150px;
+  }
+
+  .user-army .encounter-troop:nth-child(2) {
+    position: relative;
+    left: 58px;
+  }
+
+  .enemy-army .encounter-troop:nth-child(2) {
+    position: relative;
+    right: 58px;
+  }
 }
