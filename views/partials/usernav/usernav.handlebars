@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4" id="avatar">
-                <h5 class="card-title"><span>{{data.username}}</span>&nbsp;<span><img src="./images/castle-{{data.castle}}.png" id="castle-img" /></span>&nbsp;<span>{{data.title}}</span></h5>
+                <h5 class="card-title"><span>{{data.username}}</span>&nbsp;<span><img src="{{data.castle}}" id="castle-img" /></span>&nbsp;<span id="title">{{data.title}}</span></h5>
             </div>
             <div class="col-md-4" id="user-progress">
-                <h5 class="card-title">Provinces: {{data.provinceCount}}</h5>
+                <h5 class="card-title">Provinces: <span id="province-count">{{data.provinceCount}}</span></h5>
                 <div class="progress" id="progress-usernav">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>

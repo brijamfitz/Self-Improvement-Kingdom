@@ -178,7 +178,18 @@ module.exports = function (app) {
     })
   })
 
-
+// PUT route to update user level-up (castle image and title)
+app.put("/api/user/progress/", function(req, res){
+  db.User.update({
+    provinceCount: req.body.provinceCount,
+    castle: req.body.castle,
+    title: req.body.title,
+  }, {
+    where: {id: req.session.userId}
+  }).then(function(dbResults){
+    res.json(dbResults);
+  })
+});
 
 
 }
