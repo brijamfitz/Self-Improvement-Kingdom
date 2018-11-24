@@ -441,7 +441,6 @@ $(document).on("click", "#close", function(){
     // ===================================================================================
     // Brian's added block of code
     // ===================================================================================
-    provinces++;
     // display this number to the dom
     $("#province-count").text(provinces);
     // mulitply the number of provinces by 10 to get the percentage
