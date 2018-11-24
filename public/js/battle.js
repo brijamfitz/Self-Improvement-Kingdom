@@ -11,10 +11,6 @@ var provinceTotal;
 var battleSounds;
 var battleStart; 
 
-//gif that displays fire during battle
-var battleGif = $("<img>");
-$(battleGif).attr("src", "https://media2.giphy.com/media/6wpHEQNjkd74Q/giphy.gif?cid=3640f6095bef6acc35795a526f03a450");
-
 
 $(document).ready(function(){
 
@@ -48,7 +44,7 @@ $(document).on("click", "#fight-btn", function(){
     battleSounds.play();
     battleStart.play();
     $("#battle-buttons").html("");
-    $("#fight-flee").append(battleGif);
+    $(".battle-gif").removeClass("d-none");
 
     battle.battleInit(armyOne, armyTwo);
 });
@@ -315,7 +311,7 @@ var battle = {
         }
 
         $("#resultModal").modal();
-        $(battleGif).remove();
+        $('.battle-gif').addClass("d-none");
         var newPlayerResults = this.exportObject;
         var endGame = $("<div>");
         if (isVictory === false){
