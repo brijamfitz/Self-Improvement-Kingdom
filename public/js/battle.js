@@ -307,7 +307,8 @@ var battle = {
             knightCount: pKnight,
             mageCount: pMage,
             archerCount: pArcher,
-            provinceCount: provinceTotal
+            provinceCount: provinceTotal,
+            encounterCompleted: true
         }
 
         $("#resultModal").modal();
@@ -336,7 +337,7 @@ var battle = {
         console.log(newPlayerResults);
         $.ajax({
             method: "PUT",
-            url: "/api/user/armyLosses",
+            url: "/api/user",
             data: battle.exportObject
         }).then(function(response){
             $.ajax({

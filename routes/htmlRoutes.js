@@ -4,7 +4,6 @@ var onLoad = require("../public/js/onLoad")
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    console.log("+++++++++++++++++++++++++++++++++++++>>>>>"+req.user+"<++++++++++++++++++++++++++");
       if (req.user) {
         res.redirect("/user");
       } else {
@@ -35,7 +34,7 @@ module.exports = function (app) {
     } else {
       id = req.session.userId
     }
-    db.Task.findAll({ where: { UserId: id } }).then(function (allTasks) {
+    db.Task.findAll({ where: { UserId: id }, order:['createdAt'] }).then(function (allTasks) {
       var renderObject = onLoad(allTasks, req);
       res.render("index", renderObject);
     });

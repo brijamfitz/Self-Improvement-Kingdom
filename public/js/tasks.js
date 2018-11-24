@@ -95,7 +95,7 @@ function updateArmy(taskId, userId, difficulty, bonusType, troopSelected) {
   
     // Send put request to update user's army with new totals
     $.ajax({
-      url: "/api/user/army/" + userId,
+      url: "/api/user",
       type: "PUT",
       data: newArmyObj
     }).then(function() {

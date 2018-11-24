@@ -80,7 +80,7 @@ var encounterGen = {
         console.log(encounterGen.exportObject);
         $.ajax({
             method: "POST",
-            url: "/api/encounter/new",
+            url: "/api/encounter",
             data: encounterGen.exportObject
         }).then(function(result){
             console.log("here?")
@@ -118,7 +118,7 @@ $(document).ready(function(){
         console.log(armyTotal);
         console.log(provinceTotal);
         //check to see if an encounter was completed today
-        if (result.encounterCompleted === false){
+        if ((result.encounterCompleted === false)&&(armyTotal > 1)){
             //check to see if encounter was generated
             if (result.encounterGenerated === false){
                 //calls api for text file containing random name generator
@@ -160,7 +160,11 @@ $(document).ready(function(){
         } else {
             $("#encounter-card").html("");
             var newDiv = $("<div>");
-            $(newDiv).text("Encounter already completed today, come back tomorrow!");
+            if(armyTotal == 0){
+                $(newDiv).text("Your forces are too weak to attempt battle, perform some tasks and bolster your forces.")
+            } else {
+                $(newDiv).text("Encounter already completed today, come back tomorrow!");
+            }
             $(newDiv).addClass("text-align-center");
             $("#encounter-card").append(newDiv);
         }

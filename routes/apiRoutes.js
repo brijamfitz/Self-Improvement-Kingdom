@@ -14,8 +14,7 @@ module.exports = function (app) {
       console.log("Here's the returned user: " + user);
       if (err) {
         return next(err);
-      }
-      ;
+      };
       if (!user) {
         return res.redirect('/login', { msg: "Username or Password incorrect, please try again or follow the link to sign up." });
       };
@@ -90,34 +89,28 @@ module.exports = function (app) {
 
   // Route for getting user data from database.
   app.get("/api/user/", function (req, res) {
-
     db.User.findOne({ where: { id: req.session.userId } }).then(function (user) {
       res.json(user);
     })
   })
 
-
-  // PUT route for adding to player army on task completion
-  app.put("/api/user/army/:id", function (req, res) {
+  //PUT route to update user values after combat or on task completion
+  app.put("/api/user", function (req, res) {
+    var pCount;
+    var eComp;
+    if (req.body.provinceCount){
+      pCount = req.body.provinceCount;
+      eComp = true;
+    } else {
+      pCount = req.session.provinceCount;
+      eComp = req.session.encounterCompleted;
+    }
     db.User.update({
       archerCount: req.body.archerCount,
       knightCount: req.body.knightCount,
       mageCount: req.body.mageCount,
-    }, {
-        where: { id: req.params.id }
-      }).then(function (army) {
-        res.json(army);
-      })
-  });
-
-  //PUT route to update user values after combat
-  app.put("/api/user/armyLosses", function (req, res) {
-    db.User.update({
-      archerCount: req.body.archerCount,
-      knightCount: req.body.knightCount,
-      mageCount: req.body.mageCount,
-      provinceCount: req.body.provinceCount,
-      encounterCompleted: true
+      provinceCount: pCount,
+      encounterCompleted: eComp
     }, {
         where: { id: req.session.userId }
       }).then(function (user) {
@@ -125,19 +118,9 @@ module.exports = function (app) {
       })
   });
 
-  // DELETE THIS ROUTE? POSSIBLY NOT IN USE
-  app.get("/api/army", function (req, res) {
-    var playerArmy = {
-      knightCount: req.user.knightCount,
-      mageCount: req.user.mageCount,
-      archerCount: req.user.archerCount
-    }
-    res.json(playerArmy);
-  });
-
+  
   //update to user to show encounter has been generated
   app.put("/api/user/encounterUpdate", function (req, res) {
-
     db.User.update({
       encounterGenerated: req.body.encounterGenerated
     }, {
@@ -158,7 +141,7 @@ module.exports = function (app) {
   });
 
   //new encounter route
-  app.post("/api/encounter/new", function (req, res) {
+  app.post("/api/encounter", function (req, res) {
     var newEncounter = {
       knightCount: req.body.knightCount,
       mageCount: req.body.mageCount,
@@ -173,7 +156,7 @@ module.exports = function (app) {
   });
 
   //route to get information on encounters 
-  app.get("/api/encounter/", function (req, res) {
+  app.get("/api/encounter", function (req, res) {
     db.Encounter.findOne({ where: { UserId: req.session.userId } }).then((encounter) => {
       res.json(encounter);
     })

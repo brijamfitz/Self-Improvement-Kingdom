@@ -1,4 +1,4 @@
-//Export function for sorting tasks
+//Export function for sorting tasks, setting session variables and delivering user info to front end
 module.exports = function (allTasks, req) {
     req.session.userId = req.user.id;
     req.session.username = req.user.username;
@@ -46,7 +46,7 @@ module.exports = function (allTasks, req) {
             username: req.user.username,
             photo: req.user.photo,
             title: req.user.title,
-            castle: castle,
+            castle: req.user.castle,
             provinceCount: req.user.provinceCount,
             knightCount: req.user.knightCount,
             archerCount: req.user.archerCount,
