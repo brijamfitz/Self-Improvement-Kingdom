@@ -95,7 +95,7 @@ function updateArmy(taskId, userId, difficulty, bonusType, troopSelected) {
   
     // Send put request to update user's army with new totals
     $.ajax({
-      url: "/api/user/army/" + userId,
+      url: "/api/user",
       type: "PUT",
       data: newArmyObj
     }).then(function() {
@@ -131,6 +131,19 @@ $(function() {
     createTask(newTask)
   })
 
+  $(".btn-delete").on("click", function() {
+    var id = $(this).parent().attr('data-id');
+    console.log(id)
+    $.ajax({
+      url: "api/task/" + id,
+      type: "DELETE"
+    }).then(
+      function() {
+        location.reload();
+      }
+    );
+  })
+});
   // Handler for editing tasks
   $(".edit-task-form").on("submit", function(event) {
     event.preventDefault();
@@ -182,5 +195,4 @@ $(function() {
     event.preventDefault()
     $(this).parents(".edit-task-form").addClass("d-none")
     $(this).parents(".edit-task-form").siblings(".task-view").removeClass("d-none")
-  })
-})
+  });

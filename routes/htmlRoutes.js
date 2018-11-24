@@ -4,28 +4,26 @@ var onLoad = require("../public/js/onLoad")
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    process.nextTick(function () {
       if (req.user) {
         res.redirect("/user");
       } else {
-        res.redirect("/login")
+        res.redirect("/login");
       }
-    });
   });
 
   // Getting the local login form
   app.get("/login", function (req, res) {
-    if(!req.user){
-    res.render('login');
-    } else {
-      res.redirect("/");
-    }
+      if (req.user) {
+        res.redirect("/");
+      } else {
+        res.render('login', {msg: req.flash('error')});
+      }
   });
 
   // Getting the signup form
   app.get("/signup", function (req, res) {
     console.log("you're hitting the route")
-    res.render('signup', { msg: req.flash('message') });
+    res.render('signup', {msg: req.flash('message')});
   });
 
   // Load index page
@@ -36,7 +34,7 @@ module.exports = function (app) {
     } else {
       id = req.session.userId
     }
-    db.Task.findAll({ where: { UserId: id } }).then(function (allTasks) {
+    db.Task.findAll({ where: { UserId: id }, order:['createdAt'] }).then(function (allTasks) {
       var renderObject = onLoad(allTasks, req);
       res.render("index", renderObject);
     });
