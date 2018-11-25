@@ -297,11 +297,31 @@ var battle = {
 
     //returns an object that contains remaining player army values
     exportResults: function(isVictory){
+        var battleStatus;
+
         if (isVictory === true){
+            battleStatus= "victorious"
             provinceTotal++;
         } else {
+            battleStatus= "defeated"
             provinceTotal--;
-        }
+        };
+
+        $.ajax({
+            method:"PUT",
+            url:"/api/activity",
+            data: {battleStatus:battleStatus,
+            category: "battle"}
+        }).then(function(battleActivity){
+            console.log(battleActivity);
+            $.ajax({
+                method:"POST",
+                url:"/api/activity",
+                data: battleActivity
+            }).then(function(){
+                console.log("successful response")
+            })
+        });
 
         this.exportObject = {
             knightCount: pKnight,

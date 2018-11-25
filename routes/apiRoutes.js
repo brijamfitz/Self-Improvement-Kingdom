@@ -1,6 +1,7 @@
 var db = require("../models");
 var passport = require("../config/passport")
 var fs = require("fs");
+var activity = require("../public/js/activity")
 
 module.exports = function (app) {
 
@@ -98,7 +99,7 @@ module.exports = function (app) {
   app.put("/api/user", function (req, res) {
     var pCount;
     var eComp;
-    if (req.body.provinceCount){
+    if (req.body.provinceCount) {
       pCount = req.body.provinceCount;
       eComp = true;
     } else {
@@ -118,7 +119,7 @@ module.exports = function (app) {
       })
   });
 
-  
+
   //update to user to show encounter has been generated
   app.put("/api/user/encounterUpdate", function (req, res) {
     db.User.update({
@@ -162,6 +163,12 @@ module.exports = function (app) {
     })
   })
 
+
+  /* ================================================================================== */
+  /* Social Routes */
+  /* ================================================================================== */
+
+
   app.get("/api/friends", function (req, res) {
     db.sequelize.query("SELECT Users.id, username, title, status FROM Users JOIN Friends ON ? = Friends.requestee AND username = Friends.requester AND status = 'pending' OR ? = Friends.requester AND username = Friends.requestee AND status = 'accepted' OR ? = Friends.requestee AND username = Friends.requester AND status = 'accepted'", { replacements: [req.session.username, req.session.username, req.session.username] })
       .spread((results, metaData) => {
@@ -185,5 +192,25 @@ module.exports = function (app) {
       res.json(user);
     })
   });
+
+  app.get("/api/activity", function(req, res){
+    db.Activity.findAll({where:{'actor': req.session.username}}).then(function(result){
+      console.log(result);
+      res.json(result);
+    })
+  })
+
+  app.put("/api/activity", function (req, res) {
+    console.log("hitting the middleware route");
+    res.json(activity(req));
+  });
+
+  app.post("/api/activity", function (req, res){
+    console.log("hitting the post route")
+    db.Activity.create(req.body.battleActivity).then(function (activity){
+      res.json(activity);
+    })
+  })
+
 }
 

@@ -134,6 +134,15 @@ $(document).ready(function(){
                     var exportedObject = encounterGen.exportObject;
                     //display encounter on page
                     displayEncounter(exportedObject);
+                    //adding an ajax call to send encounter data to activity middleware
+                    exportedObject.category = "battle";
+                    $.ajax({
+                        method:"PUT",
+                        url:"/api/activity",
+                        data: exportedObject
+                    }).then(function(res){
+                        console.log("succesful response");
+                    })
                     //object to update user page
                     var encounterUpdate = {
                         encounterGenerated: true
