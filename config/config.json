@@ -10,7 +10,7 @@
   "test": {
     "username": "root",
     "password": null,
-    "port": 8889,
+    "port": 3306,
     "database": "project2db",
     "host": "localhost",
     "dialect": "mysql",

@@ -162,6 +162,18 @@ module.exports = function (app) {
     })
   })
 
+// PUT route to update user level-up (castle image and title)
+app.put("/api/user/progress/", function(req, res){
+  db.User.update({
+    provinceCount: req.body.provinceCount,
+    castle: req.body.castle,
+    title: req.body.title,
+  }, {
+    where: {id: req.session.userId}
+  }).then(function(dbResults){
+    res.json(dbResults);
+  })
+});
   app.get("/api/friends", function (req, res) {
     db.sequelize.query("SELECT Users.id, username, title, status FROM Users JOIN Friends ON ? = Friends.requestee AND username = Friends.requester AND status = 'pending' OR ? = Friends.requester AND username = Friends.requestee AND status = 'accepted' OR ? = Friends.requestee AND username = Friends.requester AND status = 'accepted'", { replacements: [req.session.username, req.session.username, req.session.username] })
       .spread((results, metaData) => {

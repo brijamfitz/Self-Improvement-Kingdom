@@ -1,24 +1,28 @@
-<div class="container">
+<div class="container" id="login-signup-body">
     <div class="jumbotron" id="signup-card">
-        <h1 class="display-4">The Self Improvement Kingdom!</h1>
-        <img src="images/login-castle.png" alt="login-castle" />
+        <h1 class="display-4" id="login-title">The Self-Improvement Kingdom</h1>
+        <img src="images/castle-1.png" alt="login-castle" id="login-hut" />
+        <img src="images/archer.png" alt="login-castle" id="login-archer" />
+        <img src="images/knight.png" alt="login-castle" id="login-knight" />
+        <img src="images/mage.png" alt="login-castle" id="login-mage" />
+        <img src="images/login-castle.png" alt="login-castle" id="login-castle" />
         <p class="lead">Build your army and battle your way to self improvement!</p>
         <hr class="my-4">
         <div class="col-md-12" id="signup-container">
             <p>Create a username and password to begin your quest!</p>
             <form action="/api/signup" method="post">
                 <div>
-                    <input type="text" name="username" placeholder="Username" id="username-input" />
+                    <input type="text" name="username" placeholder=" Username" id="username-input" />
                 </div>
                 <div>
-                    <input type="password" name="password" placeholder="Password" id="password-input" />
+                    <input type="password" name="password" placeholder=" Password" id="password-input" />
                 </div>
                 <div>
                     <input type="submit" value="Create Account" class="btn btn-lg btn-primary" id="create-account-btn" />
                 </div>
             </form>
-            <p>Already have an account? Login <a href="/login">here</a>.</p>
-            <p id="about">Learn more about the Self Improvement Kingdom <a href="#">here</a>.</p>
+            <p>Already have an account? Login <a href="/login" id="login-link">here</a>.</p>
+            <p id="about">Learn more about the Self Improvement Kingdom <a href="#" id="about-link">here</a>.</p>
         </div>
     </div>
 </div>

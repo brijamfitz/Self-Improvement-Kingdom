@@ -1,7 +1,11 @@
-<div class="container">
+<div class="container" id="login-signup-body">
     <div class="jumbotron" id="login-card">
-        <h1 class="display-4">The Self Improvement Kingdom!</h1>
-        <img src="images/login-castle.png" alt="login-castle" />
+        <h1 class="display-4" id="login-title">The Self-Improvement Kingdom</h1>
+        <img src="images/castle-1.png" alt="login-castle" id="login-hut" />
+        <img src="images/archer.png" alt="login-castle" id="login-archer" />
+        <img src="images/knight.png" alt="login-castle" id="login-knight" />
+        <img src="images/mage.png" alt="login-castle" id="login-mage" />
+        <img src="images/login-castle.png" alt="login-castle" id="login-castle" />
         <p class="lead">Build your army and battle your way to self improvement!</p>
         <hr class="my-4">
         <div class="col-md-12" id="login-container">
@@ -9,21 +13,19 @@
             <form action="/api/login/local" method="post">
                 <div>
                     {{!-- <label>Username:</label> --}}
-                    <input type="text" name="username" placeholder="Username" id="username-input" />
+                    <input type="text" name="username" placeholder=" Username" id="username-input" />
                 </div>
                 <div>
                     {{!-- <label>Password:</label> --}}
-                    <input type="password" name="password" placeholder="Password" id="password-input" />
+                    <input type="password" name="password" placeholder=" Password" id="password-input" />
                 </div>
                 <div>
                     <input type="submit" value="Login" class="btn btn-lg btn-primary" id="login-btn" />
                 </div>
             </form>
-            <p>Don't have an account yet? Create one <a href="/signup">here</a>.</p>
-            <p id="about">Learn more about the Self Improvement Kingdom <a href="#">here</a>.</p>
+            <p>Don't have an account yet? Create one <a href="/signup" id="create-link">here</a>.</p>
+            <p id="about">Learn more about the Self Improvement Kingdom <a href="#" id="about-link">here</a>.</p>
         </div>
     </div>
-</form>
-
-
+    </form>
 </div>

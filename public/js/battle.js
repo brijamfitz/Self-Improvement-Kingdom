@@ -12,6 +12,56 @@ var battleSounds;
 var battleStart; 
 
 
+// ===================================================================================
+// Brian's added code block
+// ===================================================================================
+// Array of title/image hierarchy
+var rankings = [
+    {
+      title: "Farmer (Lv. 1)",
+      image: "./images/castle-1.png"
+    },
+    {
+      title: "Mayor (Lv. 2)",
+      image: "./images/castle-2.png"
+    },
+    {
+      title: "Aristocrat (Lv. 3)",
+      image: "./images/castle-3.png"
+    },
+    {
+      title: "Baron (Lv. 4)",
+      image: "./images/castle-4.png"
+    },
+    {
+      title: "Viscount (Lv. 5)",
+      image: "./images/castle-5.png"
+    },
+    {
+      title: "Earl (Lv. 6)",
+      image: "./images/castle-6.png"
+    },
+    {
+      title: "Marquees (Lv. 7)",
+      image: "./images/castle-7.png"
+    },
+    {
+      title: "Duke (Lv. 8)",
+      image: "./images/castle-8.png"
+    },
+    {
+      title: "King (Lv. 9)",
+      image: "./images/castle-9.png"
+    },
+    {
+      title: "Emperor (Lv. 10)",
+      image: "./images/castle-10.png"
+    }
+  ];
+// ===================================================================================
+// ===================================================================================
+
+
 $(document).ready(function(){
 
 
@@ -28,8 +78,37 @@ $(document).ready(function(){
         provinceTotal = response.provinceCount;
         armyOne = response;
         console.log(armyOne)
-    });
 
+        // ===================================================================================
+        // Brian's added code block
+        // ===================================================================================
+        provinces = response.provinceCount;
+
+        // Display the current user progress on page load depending on province count
+        // If it is greater than 10 - need to use string and slice method
+        if (provinceTotal <= 9) {
+            var percent = provinceTotal * 10;
+            // increase the progress bar based on the percentage
+            $(".progress-bar").attr("style", "width:" + percent + "%");
+        }
+        else if (provinceTotal >= 10) {
+            var percent = provinceTotal * 10;
+            var percentString = percent.toString();
+            console.log(percentString);
+            // slice off the first character in the string to start at 0 percent again
+            var newPercentage = percentString.slice(1);
+            console.log(newPercentage);
+            // convert that newly sliced string back into an integer
+            var integerPercent = parseInt(newPercentage);
+            console.log(integerPercent);
+            // set percent to equal that integer
+            percent = integerPercent;
+            $(".progress-bar").attr("style", "width:" + percent + "%");
+        }
+        // ===================================================================================
+        // ===================================================================================
+   
+    });
 
 });
 
@@ -358,6 +437,303 @@ var battle = {
 
 //when modal "close" button is clicked, update player info
 $(document).on("click", "#close", function(){
+
+    // ===================================================================================
+    // Brian's added block of code
+    // ===================================================================================
+    // provinces++;
+    // display this number to the dom
+    $("#province-count").text(provinceTotal);
+    // mulitply the number of provinceTotal by 10 to get the percentage
+    var percent = provinceTotal * 10;
+    // increase the progress bar based on the percentage
+    $(".progress-bar").attr("style", "width:" + percent + "%");
+
+    if (provinceTotal === 10) {
+        $.ajax({
+        url: "api/user/progress/",
+        type: "PUT",
+        data: {
+            provinceCount: provinceTotal,
+            castle: rankings[1].image,
+            title: rankings[1].title
+        }
+        }).then(function(response) {
+        console.log(response);
+        location.reload();
+        });
+        // update castle image with next level image
+        $("#castle-img").attr("src", rankings[1].image);
+        // update title with next level title
+        $("#title").text(rankings[1].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+    } else if (provinceTotal >= 11 && provinceTotal <= 19) {
+        $(".progress-bar").attr("style", "width:0%");
+        // convert 100 percent to a string
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 20 && provinceTotal <= 29) {
+        if (provinceTotal === 20) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[2].image,
+            title: rankings[2].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[2].image);
+        // update title with next level title
+        $("#title").text(rankings[2].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 30 && provinceTotal <= 39) {
+        if (provinceTotal === 30) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[3].image,
+            title: rankings[3].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[3].image);
+        // update title with next level title
+        $("#title").text(rankings[3].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 40 && provinceTotal <= 49) {
+        if (provinceTotal === 40) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[4].image,
+            title: rankings[4].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[4].image);
+        // update title with next level title
+        $("#title").text(rankings[4].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 50 && provinceTotal <= 59) {
+        if (provinceTotal === 50) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[5].image,
+            title: rankings[5].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[5].image);
+        // update title with next level title
+        $("#title").text(rankings[5].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 60 && provinceTotal <= 69) {
+        if (provinceTotal === 60) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[6].image,
+            title: rankings[6].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        console.log("sixties");
+        $("#castle-img").attr("src", rankings[6].image);
+        // update title with next level title
+        $("#title").text(rankings[6].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 70 && provinceTotal <= 79) {
+        if (provinceTotal === 70) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[7].image,
+            title: rankings[7].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[7].image);
+        // update title with next level title
+        $("#title").text(rankings[7].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 80 && provinceTotal <= 89) {
+        if (provinceTotal === 80) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[8].image,
+            title: rankings[8].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[8].image);
+        // update title with next level title
+        $("#title").text(rankings[8].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 90 && provinceTotal <= 99) {
+        if (provinceTotal === 90) {
+        $.ajax({
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+            provinceCount: provinceTotal,
+            castle: rankings[9].image,
+            title: rankings[9].title
+            }
+        }).then(function(response) {
+            console.log(response);
+            location.reload();
+        });
+        }
+        $("#castle-img").attr("src", rankings[9].image);
+        // update title with next level title
+        $("#title").text(rankings[9].title);
+        // update the progress bar with the new integer of 0 percent
+        $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    } else if (provinceTotal >= 100) {
+        $.ajax({
+        url: "api/user/progress/",
+        type: "PUT",
+        data: {
+            provinceCount: provinceTotal,
+            castle: rankings[9].image,
+            title: rankings[9].title
+        }
+        }).then(function(response) {
+        console.log(response);
+        // location.reload();
+        });
+        $("#castle-img").attr("src", rankings[9].image);
+        // update title with next level title
+        $("#title").text(rankings[9].title);
+        // update the progress bar with the new integer of 0 percent
+        // $(".progress-bar").attr("style", "width:0%");
+        var percentString = percent.toString();
+        // slice off the first character in the string to start at 0 percent again
+        var newPercentage = percentString.slice(1);
+        // convert that newly sliced string back into an integer
+        var integerPercent = parseInt(newPercentage);
+        // set percent to equal that integer
+        percent = integerPercent;
+        $(".progress-bar").attr("style", "width:" + percent + "%");
+    }
+    // ===================================================================================
+    // ===================================================================================
+
     location.reload();
 });
     
