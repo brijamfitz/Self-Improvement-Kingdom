@@ -667,4 +667,8 @@ img {
   #army-counts {
     margin-top: 20px;
   }
+
+  .empty-container {
+    padding-top: 220px;
+  }
 }
