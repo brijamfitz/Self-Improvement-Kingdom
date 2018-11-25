@@ -79,6 +79,18 @@ body {
   justify-content: center;
 }
 
+.info-link {
+  color: yellow;
+  font-size: 20px;
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+}
+
+.info-link:hover, .info-link:focus {
+  color: #fff;
+}
+
 .encounter-army {
   position: absolute;
   top: 160px;
