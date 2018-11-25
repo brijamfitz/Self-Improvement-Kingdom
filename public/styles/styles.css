@@ -633,6 +633,7 @@ img {
     animation: pulse 2s infinite;
     visibility: visible;
   }
+
 }
 
 @media (min-width: 992px) {
@@ -652,5 +653,18 @@ img {
   .enemy-army .encounter-troop:nth-child(2) {
     position: relative;
     right: 58px;
+  }
+
+}
+
+@media (max-width: 886px) {
+  #nbsp {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #army-counts {
+    margin-top: 20px;
   }
 }
