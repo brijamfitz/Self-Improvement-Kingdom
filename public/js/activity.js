@@ -1,3 +1,4 @@
+// Middleware for parsing various activities
 module.exports = function (input) {
     var localBattle;
     var battleActivity = {};
@@ -12,13 +13,7 @@ module.exports = function (input) {
             battleActivity.actor = localBattle.user;
             battleActivity.category = "battle";
             battleActivity.action = "" + localBattle.user + " has been " + localBattle.battleStatus + " at the battle of " + localBattle.encounterName;
-            $.ajax({
-                method: "POST",
-                url: "/api/activity",
-                data: battleActivity
-            }).then(function(res){
-                console.log("new battle pushed");
-            })
+            return battleActivity;
         };
     }
 }

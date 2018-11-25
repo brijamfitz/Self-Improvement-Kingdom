@@ -1,16 +1,16 @@
 {
   "development": {
     "username": "root",
-    "password": "Ulgo1149",
+    "password": "",
     "port": 3306,
     "database": "project2db",
     "host": "localhost",
     "dialect": "mysql"
   },
-  "test": {
+  "test": { 
     "username": "root",
     "password": null,
-    "port": 8889,
+    "port": 3306,
     "database": "project2db",
     "host": "localhost",
     "dialect": "mysql",

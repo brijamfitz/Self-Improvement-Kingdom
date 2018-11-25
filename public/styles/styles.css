@@ -1,14 +1,23 @@
 body {
-  background-color: #1E1E1F;
+  background-image: url("/images/battlefield.png");
+  background-position: center;
+  background-size: cover;
+}
+
+#login-signup-body {
+  padding-top: 80px;
+  margin-bottom: 200px;
+}
+
+#home {
   padding-top: 100px;
+  background-color: #1E1E1F;
 }
 
 .list-group-item {
   line-height: 2.5;
 }
-/* ================================================================================== */
-/* BRIAN'S CSS FOR ENCOUNTER CARD AND USER NAVBAR INFO */
-/* ================================================================================== */
+
 #navbar {
   background-color: royalblue;
   color: white;
@@ -165,13 +174,20 @@ img {
 
 #create-account-btn,
 #login-btn {
-  margin: 10px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
+  background: yellow;
+  color: royalblue;
 }
 
 #signup-card,
 #login-card {
   font-weight: bold;
   text-align: center;
+  background-color: royalblue;
+  color: white;
+  border: solid;
+  border-width: 4px;
+  border-color: yellow;
 }
 
 #about {
@@ -200,6 +216,32 @@ img {
   visibility: hidden;
   transform: translate(-50%, -50%);
   animation: pulse-small 2s infinite;
+}
+
+#login-hut {
+  width: 100px;
+}
+
+#login-archer,
+#login-knight,
+#login-mage {
+  width: 50px;
+}
+
+#login-castle {
+  width: 125px;
+}
+
+#login-link,
+#create-link,
+#about-link {
+  color: yellow;
+  font-weight: bold;
+}
+
+#logout-btn-container {
+  text-align: center;
+  margin-bottom: 80px;
 }
 
 @keyframes pulse {
@@ -231,8 +273,6 @@ img {
     width: 75px;
   }
 }
-/* ================================================================================== */
-
 
 /* ================================================================================== */
 /* Todo list styles */
@@ -596,6 +636,7 @@ img {
     animation: pulse 2s infinite;
     visibility: visible;
   }
+
 }
 
 @media (min-width: 992px) {
@@ -615,5 +656,40 @@ img {
   .enemy-army .encounter-troop:nth-child(2) {
     position: relative;
     right: 58px;
+  }
+
+}
+
+@media (max-width: 886px) {
+  #nbsp {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #army-counts {
+    margin-top: 20px;
+  }
+
+  #home {
+    padding-top: 220px;
+  }
+
+  #login-hut {
+    width: 50px;
+  }
+  
+  #login-archer,
+  #login-knight,
+  #login-mage {
+    width: 25px;
+  }
+  
+  #login-castle {
+    width: 75px;
+  }
+
+  #login-title {
+    font-size: 36px;
   }
 }

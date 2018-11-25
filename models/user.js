@@ -39,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "Land Owner",
+            defaultValue: "Farmer (Lv. 1)",
             validate: {
                 len: [1]
             }
