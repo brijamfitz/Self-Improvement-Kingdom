@@ -671,4 +671,22 @@ img {
   .empty-container {
     padding-top: 220px;
   }
+
+  #login-hut {
+    width: 50px;
+  }
+  
+  #login-archer,
+  #login-knight,
+  #login-mage {
+    width: 25px;
+  }
+  
+  #login-castle {
+    width: 75px;
+  }
+
+  #title {
+    font-size: 36px;
+  }
 }
