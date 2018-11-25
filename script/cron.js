@@ -3,7 +3,9 @@ const CronJob = require('cron').CronJob;
 var db = require("../models");
 
 var userArray = [];
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//functions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //constructor for object used to update user data within database
 function UserObject(provinceCount, id, username){
 	this.provinceCount = provinceCount;
@@ -25,13 +27,15 @@ function updateData(array){
 	}
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //begin script
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log('Before job instantiation');
 //cron time control, currently rigged for 11:59PM(23:59) every day
 const job = new CronJob("59 23 * * *", function() {
 	db.User.findAll().then(function(user) {
 		console.log("Finding users")
-		// projects will be an array of all Project instances
+		// user will be an array of all user instances
 		for (i = 0; i < user.length; i++){
 			var newObject = new UserObject(user[i].provinceCount, user[i].id, user[i].username);
 			//if the user does not complete the encounter, they will lose a province

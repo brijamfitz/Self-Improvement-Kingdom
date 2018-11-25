@@ -7,7 +7,7 @@
     "host": "localhost",
     "dialect": "mysql"
   },
-  "test": {
+  "test": { 
     "username": "root",
     "password": null,
     "port": 3306,
