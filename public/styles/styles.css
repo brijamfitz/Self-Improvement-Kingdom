@@ -6,7 +6,7 @@ body {
 
 #login-signup-body {
   padding-top: 80px;
-  margin-bottom: 80px;
+  margin-bottom: 200px;
 }
 
 #home {
@@ -185,6 +185,9 @@ img {
   text-align: center;
   background-color: royalblue;
   color: white;
+  border: solid;
+  border-width: 4px;
+  border-color: yellow;
 }
 
 #about {
