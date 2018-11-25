@@ -244,6 +244,17 @@ img {
   margin-bottom: 80px;
 }
 
+#login-btn:hover,
+#create-account-btn:hover {
+  background-color: rgb(164,228,252);
+}
+
+#login-link:hover,
+#create-link:hover,
+#about-link:hover {
+  color: rgb(164,228,252);
+}
+
 @keyframes pulse {
   0% {
     height: 125px;
