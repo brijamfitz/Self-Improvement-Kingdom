@@ -377,7 +377,7 @@ var battle = {
     //returns an object that contains remaining player army values
     exportResults: function(isVictory){
         var battleStatus;
-
+        var battleName = $("#battleName").text()
         if (isVictory === true){
             battleStatus= "victorious"
             provinceTotal++;
@@ -390,7 +390,9 @@ var battle = {
             method:"PUT",
             url:"/api/activity",
             data: {battleStatus:battleStatus,
-            category: "battle"}
+            category: "battle",
+            battleName: battleName
+        }
         }).then(function(battleActivity){
             console.log(battleActivity);
             $.ajax({

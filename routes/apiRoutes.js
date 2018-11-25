@@ -14,10 +14,10 @@ module.exports = function (app) {
     passport.authenticate('local-login', function (err, user, info) {
       console.log("Here's the returned user: " + user);
       if (err) {
-        return next(err);
+        return res.redirect('/');
       };
       if (!user) {
-        return res.redirect('/login', { msg: "Username or Password incorrect, please try again or follow the link to sign up." });
+        return res.redirect('/');
       };
       req.logIn(user, function (err) {
         if (err) {
@@ -30,8 +30,8 @@ module.exports = function (app) {
 
   // Processing the signup form
   app.post("/api/signup", passport.authenticate('local-signup', {
-    successRedirect: "/user",
-    failureRedirect: "/signup",
+    successRedirect: "/",
+    failureRedirect: "/",
   }));
 
   /* ================================================================================== */
@@ -163,22 +163,24 @@ module.exports = function (app) {
     })
   })
 
-// PUT route to update user level-up (castle image and title)
-app.put("/api/user/progress/", function(req, res){
-  db.User.update({
-    provinceCount: req.body.provinceCount,
-    castle: req.body.castle,
-    title: req.body.title,
-  }, {
-    where: {id: req.session.userId}
-  }).then(function(dbResults){
-    res.json(dbResults);
-  })
-});
+  // PUT route to update user level-up (castle image and title)
+  app.put("/api/user/progress/", function (req, res) {
+    db.User.update({
+      provinceCount: req.body.provinceCount,
+      castle: req.body.castle,
+      title: req.body.title,
+    }, {
+        where: { id: req.session.userId }
+      }).then(function (dbResults) {
+        res.json(dbResults);
+      })
+  });
 
   /* ================================================================================== */
   /* Social Routes */
   /* ================================================================================== */
+
+  // get friend data
   app.get("/api/friends", function (req, res) {
     db.sequelize.query("SELECT Users.id, username, title, status FROM Users JOIN Friends ON ? = Friends.requestee AND username = Friends.requester AND status = 'pending' OR ? = Friends.requester AND username = Friends.requestee AND status = 'accepted' OR ? = Friends.requestee AND username = Friends.requester AND status = 'accepted'", { replacements: [req.session.username, req.session.username, req.session.username] })
       .spread((results, metaData) => {
@@ -186,6 +188,7 @@ app.put("/api/user/progress/", function(req, res){
       })
   });
 
+  // make new friend requests
   app.post("/api/friends", function (req, res) {
     var fReq = {
       requester: req.session.username,
@@ -197,27 +200,28 @@ app.put("/api/user/progress/", function(req, res){
     })
   });
 
+  // accept, reject, or delete friend requests
   app.put("/api/friends", function (req, res) {
     db.Friend.update({ 'status': req.body.status }, { where: { 'requestee': req.session.username, 'requester': req.body.username, 'status': "pending" } }).then(function (user) {
       res.json(user);
     })
   });
 
-  app.get("/api/activity", function(req, res){
-    db.Activity.findAll({where:{'actor': req.session.username}}).then(function(result){
-      console.log(result);
-      res.json(result);
+  // get feed data
+  app.get("/api/activity", function (req, res) {
+    db.sequelize.query("Select * FROM Activities JOIN Friends ON ? = Friends.requester AND  Friends.status='accepted' AND Friends.requestee = Activities.actor OR Activities.actor = Friends.requester AND Friends.status='accepted' and ? = Friends.requestee OR ? = Friends.requester AND Friends.status = 'accepted' AND category <> 'battle'", {replacements: [req.session.username, req.session.username, req.session.username]}).then(function (result, metadata) {
+      res.json(result[0]);
     })
   })
 
+  // call middle ware to parse outgoing data
   app.put("/api/activity", function (req, res) {
-    console.log("hitting the middleware route");
     res.json(activity(req));
   });
 
-  app.post("/api/activity", function (req, res){
-    console.log("hitting the post route")
-    db.Activity.create(req.body.battleActivity).then(function (activity){
+  // post feed data
+  app.post("/api/activity", function (req, res) {
+    db.Activity.create(req.body).then(function (activity) {
       res.json(activity);
     })
   })
