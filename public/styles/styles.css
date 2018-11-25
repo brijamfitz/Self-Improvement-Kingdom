@@ -72,6 +72,25 @@ body {
   padding-top: 8px;
 }
 
+.message-box--center {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-link {
+  color: yellow;
+  font-size: 20px;
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+}
+
+.info-link:hover, .info-link:focus {
+  color: #fff;
+}
+
 .encounter-army {
   position: absolute;
   top: 160px;
@@ -83,9 +102,18 @@ body {
   left: 10px;
 }
 
+.user-army--middle {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
 .enemy-army {
   right: 10px;
   text-align: right;
+}
+
+.encounter-message {
+  font-size: 20px;
 }
 
 #encounter-card .btn {
@@ -151,12 +179,10 @@ img {
 #encounter-img-archer,
 #encounter-img-mage {
   height: 30px;
-  width: 30px;
 }
 
 #encounter-img-knight {
   height: 30px;
-  width: 25px;
 }
 
 #signup-container,
@@ -242,6 +268,17 @@ img {
 #logout-btn-container {
   text-align: center;
   margin-bottom: 80px;
+}
+
+#login-btn:hover,
+#create-account-btn:hover {
+  background-color: rgb(164,228,252);
+}
+
+#login-link:hover,
+#create-link:hover,
+#about-link:hover {
+  color: rgb(164,228,252);
 }
 
 @keyframes pulse {
