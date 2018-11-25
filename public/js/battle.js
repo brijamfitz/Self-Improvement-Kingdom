@@ -86,13 +86,13 @@ $(document).ready(function(){
 
         // Display the current user progress on page load depending on province count
         // If it is greater than 10 - need to use string and slice method
-        if (provinces <= 9) {
-            var percent = provinces * 10;
+        if (provinceTotal <= 9) {
+            var percent = provinceTotal * 10;
             // increase the progress bar based on the percentage
             $(".progress-bar").attr("style", "width:" + percent + "%");
         }
-        else if (provinces >= 10) {
-            var percent = provinces * 10;
+        else if (provinceTotal >= 10) {
+            var percent = provinceTotal * 10;
             var percentString = percent.toString();
             console.log(percentString);
             // slice off the first character in the string to start at 0 percent again
@@ -441,19 +441,20 @@ $(document).on("click", "#close", function(){
     // ===================================================================================
     // Brian's added block of code
     // ===================================================================================
+    // provinces++;
     // display this number to the dom
-    $("#province-count").text(provinces);
-    // mulitply the number of provinces by 10 to get the percentage
-    var percent = provinces * 10;
+    $("#province-count").text(provinceTotal);
+    // mulitply the number of provinceTotal by 10 to get the percentage
+    var percent = provinceTotal * 10;
     // increase the progress bar based on the percentage
     $(".progress-bar").attr("style", "width:" + percent + "%");
 
-    if (provinces === 10) {
+    if (provinceTotal === 10) {
         $.ajax({
         url: "api/user/progress/",
         type: "PUT",
         data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[1].image,
             title: rankings[1].title
         }
@@ -467,7 +468,7 @@ $(document).on("click", "#close", function(){
         $("#title").text(rankings[1].title);
         // update the progress bar with the new integer of 0 percent
         $(".progress-bar").attr("style", "width:0%");
-    } else if (provinces >= 11 && provinces <= 19) {
+    } else if (provinceTotal >= 11 && provinceTotal <= 19) {
         $(".progress-bar").attr("style", "width:0%");
         // convert 100 percent to a string
         var percentString = percent.toString();
@@ -478,13 +479,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 20 && provinces <= 29) {
-        if (provinces === 20) {
+    } else if (provinceTotal >= 20 && provinceTotal <= 29) {
+        if (provinceTotal === 20) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[2].image,
             title: rankings[2].title
             }
@@ -506,13 +507,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 30 && provinces <= 39) {
-        if (provinces === 30) {
+    } else if (provinceTotal >= 30 && provinceTotal <= 39) {
+        if (provinceTotal === 30) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[3].image,
             title: rankings[3].title
             }
@@ -534,13 +535,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 40 && provinces <= 49) {
-        if (provinces === 40) {
+    } else if (provinceTotal >= 40 && provinceTotal <= 49) {
+        if (provinceTotal === 40) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[4].image,
             title: rankings[4].title
             }
@@ -562,13 +563,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 50 && provinces <= 59) {
-        if (provinces === 50) {
+    } else if (provinceTotal >= 50 && provinceTotal <= 59) {
+        if (provinceTotal === 50) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[5].image,
             title: rankings[5].title
             }
@@ -590,13 +591,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 60 && provinces <= 69) {
-        if (provinces === 60) {
+    } else if (provinceTotal >= 60 && provinceTotal <= 69) {
+        if (provinceTotal === 60) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[6].image,
             title: rankings[6].title
             }
@@ -619,13 +620,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 70 && provinces <= 79) {
-        if (provinces === 70) {
+    } else if (provinceTotal >= 70 && provinceTotal <= 79) {
+        if (provinceTotal === 70) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[7].image,
             title: rankings[7].title
             }
@@ -647,13 +648,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 80 && provinces <= 89) {
-        if (provinces === 80) {
+    } else if (provinceTotal >= 80 && provinceTotal <= 89) {
+        if (provinceTotal === 80) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[8].image,
             title: rankings[8].title
             }
@@ -675,13 +676,13 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 90 && provinces <= 99) {
-        if (provinces === 90) {
+    } else if (provinceTotal >= 90 && provinceTotal <= 99) {
+        if (provinceTotal === 90) {
         $.ajax({
             url: "api/user/progress/",
             type: "PUT",
             data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[9].image,
             title: rankings[9].title
             }
@@ -703,12 +704,12 @@ $(document).on("click", "#close", function(){
         // set percent to equal that integer
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
-    } else if (provinces >= 100) {
+    } else if (provinceTotal >= 100) {
         $.ajax({
         url: "api/user/progress/",
         type: "PUT",
         data: {
-            provinceCount: provinces,
+            provinceCount: provinceTotal,
             castle: rankings[9].image,
             title: rankings[9].title
         }
@@ -728,7 +729,7 @@ $(document).on("click", "#close", function(){
         var integerPercent = parseInt(newPercentage);
         // set percent to equal that integer
         percent = integerPercent;
-        // $(".progress-bar").attr("style", "width:" + percent + "%");
+        $(".progress-bar").attr("style", "width:" + percent + "%");
     }
     // ===================================================================================
     // ===================================================================================

@@ -1,6 +1,18 @@
 body {
   background-color: #1E1E1F;
+  /* padding-top: 100px; */
+}
+
+.empty-container {
   padding-top: 100px;
+}
+
+#login-signup-body {
+  padding-top: 80px;
+  background-image: url("/images/battlefield.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .list-group-item {
@@ -165,13 +177,17 @@ img {
 
 #create-account-btn,
 #login-btn {
-  margin: 10px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
+  background: yellow;
+  color: royalblue;
 }
 
 #signup-card,
 #login-card {
   font-weight: bold;
   text-align: center;
+  background-color: royalblue;
+  color: white;
 }
 
 #about {
@@ -200,6 +216,27 @@ img {
   visibility: hidden;
   transform: translate(-50%, -50%);
   animation: pulse-small 2s infinite;
+}
+
+#login-hut {
+  width: 100px;
+}
+
+#login-archer,
+#login-knight,
+#login-mage {
+  width: 50px;
+}
+
+#login-castle {
+  width: 125px;
+}
+
+#login-link,
+#create-link,
+#about-link {
+  color: yellow;
+  font-weight: bold;
 }
 
 @keyframes pulse {
