@@ -1,26 +1,23 @@
 body {
-  background-color: #1E1E1F;
-  /* padding-top: 100px; */
-}
-
-.empty-container {
-  padding-top: 100px;
+  background-image: url("/images/battlefield.png");
+  background-position: center;
+  background-size: cover;
 }
 
 #login-signup-body {
   padding-top: 80px;
-  background-image: url("/images/battlefield.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin-bottom: 80px;
+}
+
+#home {
+  padding-top: 100px;
+  background-color: #1E1E1F;
 }
 
 .list-group-item {
   line-height: 2.5;
 }
-/* ================================================================================== */
-/* BRIAN'S CSS FOR ENCOUNTER CARD AND USER NAVBAR INFO */
-/* ================================================================================== */
+
 #navbar {
   background-color: royalblue;
   color: white;
@@ -241,7 +238,7 @@ img {
 
 #logout-btn-container {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
 @keyframes pulse {
@@ -273,8 +270,6 @@ img {
     width: 75px;
   }
 }
-/* ================================================================================== */
-
 
 /* ================================================================================== */
 /* Todo list styles */
