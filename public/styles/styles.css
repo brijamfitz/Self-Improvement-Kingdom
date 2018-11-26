@@ -1,17 +1,21 @@
 body {
-  background-image: url("/images/battlefield.png");
-  background-position: center;
-  background-size: cover;
 }
 
-#login-signup-body {
-  padding-top: 80px;
-  margin-bottom: 200px;
+.login-signup-body {
+  padding: 40px;
+  background-image: url("/images/battlefield.png");
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #home {
   padding-top: 100px;
-  background-color: #1E1E1F;
+  background-color: rgb(30, 30, 31);
 }
 
 .list-group-item {
@@ -22,7 +26,7 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 3px;
   position: fixed;
   top: 0;
   z-index: 1;
@@ -72,6 +76,25 @@ body {
   padding-top: 8px;
 }
 
+.message-box--center {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-link {
+  color: yellow;
+  font-size: 20px;
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+}
+
+.info-link:hover, .info-link:focus {
+  color: #fff;
+}
+
 .encounter-army {
   position: absolute;
   top: 160px;
@@ -83,9 +106,18 @@ body {
   left: 10px;
 }
 
+.user-army--middle {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
 .enemy-army {
   right: 10px;
   text-align: right;
+}
+
+.encounter-message {
+  font-size: 20px;
 }
 
 #encounter-card .btn {
@@ -104,15 +136,60 @@ img {
   text-align: center;
 }
 
-#progress-usernav,
+#user-progress {
+  padding-top: 18px;
+  font-size: 24px;
+}
+
+#army-counts {
+  padding-top: 8px;
+  padding-right: 3px;
+}
+
+#castle-container, {
+  margin: 0px;
+}
+
+#username-container {
+  margin-top: -24px;
+  font-weight: normal;
+}
+
+#menu-dropdown {
+  text-align: center;
+  padding-top: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#usernav-text,
+#menu-dropdown {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.menu-btn {
+  background-color: white;
+  color: royalblue;
+}
+
+.menu-btn:hover {
+  background-color: rgb(22,27,122);
+  color: white;
+}
+
+.usernav-text {
+  font-size: 14px;
+}
+
 #avatar {
-  position: relative;
-  top: 5px;
+  padding-top: 5px;
 }
 
 #army {
   position: relative;
   bottom: 8px;
+  padding-left: 20px;
 }
 
 #user-level .level {
@@ -126,8 +203,8 @@ img {
 }
 
 #castle-img {
-  height: 50px;
-  width: 50px;
+  width: 35px;
+  height: 35px;
 }
 
 #user-experience .progress {
@@ -151,16 +228,14 @@ img {
 #encounter-img-archer,
 #encounter-img-mage {
   height: 30px;
-  width: 30px;
 }
 
 #encounter-img-knight {
   height: 30px;
-  width: 25px;
 }
 
-#signup-container,
-#login-container {
+.signup-container,
+.login-container {
   text-align: center;
 }
 
@@ -179,15 +254,13 @@ img {
   color: royalblue;
 }
 
-#signup-card,
-#login-card {
+.signup-card,
+.login-card {
   font-weight: bold;
   text-align: center;
   background-color: royalblue;
   color: white;
-  border: solid;
-  border-width: 4px;
-  border-color: yellow;
+  border: 4px solid yellow;
 }
 
 #about {
@@ -198,15 +271,8 @@ img {
   font-size: 12px;
 }
 
-/* #user-archer-count,
-#user-knight-count,
-#user-mage-count {
-  position: absolute;
-  top: 57%;
-} */
-
 #army {
-  padding: 0px;
+  padding-top: 27px;
 }
 
 .battle-gif {
@@ -218,17 +284,35 @@ img {
   animation: pulse-small 2s infinite;
 }
 
-#login-hut {
+.home-container {
+  text-align: center;
+}
+
+#home-link {
+  color: white;
+}
+
+#home-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#castle-home {
+  width: 40px;
+  margin-bottom: 0px;
+}
+
+.login-hut {
   width: 100px;
 }
 
-#login-archer,
-#login-knight,
-#login-mage {
+.login-archer,
+.login-knight,
+.login-mage {
   width: 50px;
 }
 
-#login-castle {
+.login-castle {
   width: 125px;
 }
 
@@ -462,7 +546,7 @@ img {
 
 .troop-select p {
   display: inline;
-  margin-bottom: 0;
+  /* margin-bottom: 0; */
   font-size: 16px;
 }
 
@@ -631,6 +715,57 @@ img {
 }
 
 /* ================================================================================== */
+/* Social Partial */
+/* ================================================================================== */
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.tcontainer{
+  width: 100%;
+  height: 62px;
+  overflow: hidden;
+  float: right;
+}
+
+.ticker-wrap {
+  width: 100%;
+  height: 100%;
+  padding-left: 100%;
+  background-color: rgba(30,30,31,0.9);
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  height: 100%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: ticker;
+  animation-duration: 24s;
+
+}
+
+.ticker-move:hover{
+  animation-play-state: paused;
+}
+
+.ticker-item{
+  display: inline-block;
+  font-size: 36px;
+  padding: 0 2rem;
+  color: #fff;
+}
+
+footer{
+  background-color: rgb(30, 30, 31);
+  height: 60px;
+  margin-bottom: -10px;
+}
+/* ================================================================================== */
 /* MEDIA QUERIES */
 /* ================================================================================== */
 
@@ -686,21 +821,63 @@ img {
     padding-top: 220px;
   }
 
-  #login-hut {
+  .login-hut {
     width: 50px;
   }
   
-  #login-archer,
-  #login-knight,
-  #login-mage {
+  .login-archer,
+  .login-knight,
+  .login-mage {
     width: 25px;
   }
   
-  #login-castle {
+  .login-castle {
     width: 75px;
   }
 
-  #login-title {
+  .login-title {
     font-size: 36px;
+  }
+
+  #menu-dropdown {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+
+  #army-counts {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  #army {
+    padding-left: 0px;
+  }
+
+  #user-progress {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #avatar {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #home-body {
+    /* margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px; */
+    display: none;
+  }
+
+  #usernav-text {
+    margin-bottom: 10px;
   }
 }

@@ -41,16 +41,21 @@ $(document).ready(function () {
         location.reload()
     });
 
-    $(document).on("click", ".accept-pending", function () {
+    $(document).on("click", ".accept-pending", function() {
         var username = $(this).attr("name");
         socialPut('accepted', username)
         
     });
 
-    $(".reject-pending").on("click", function (event) {
+    $(document).on("click", ".reject-pending",function() {
         var username = $(this).attr("name");
         socialPut('rejected', username)
     });
+
+    $(document).on("click", ".delete-friend", function() {
+        var username = $(this).attr("name");
+        socialPut('deleted', username)
+    })
 
 
     function socialPut(status, username) {
@@ -62,7 +67,24 @@ $(document).ready(function () {
                 username: username,
                 status: status
             }
-        }).then(function () {
+        }).then(function() {
+            $.ajax({
+                method: "PUT",
+                url: "/api/activity",
+                data: {
+                    username: username,
+                    status: status,
+                    category: "friend"
+                }
+            }).then(function(response) {
+                $.ajax({
+                    method: "POST",
+                    url: "/api/activity",
+                    data: response
+                }).then(function(){
+                    console.log("successful response");
+                })
+            })
             location.reload();
         });
     }
@@ -71,7 +93,7 @@ $(document).ready(function () {
         console.log(res)
         var friend = $("<div>");
         friend.attr("data", res.id);
-        friend.addClass("friend");
+        friend.addClass("friend mb-2");
         var name = $("<h5>");
         name.text(res.username);
         name.addClass("friend-name");
@@ -80,11 +102,16 @@ $(document).ready(function () {
         title.addClass("text-muted friend-title");
         title.text(res.title);
         friend.append(title);
+        var deleteButton = $("<button>");
+        deleteButton.attr("type", "button");
+        deleteButton.attr("name", res.username);
+        deleteButton.addClass("btn btn-secondary delete-friend");
+        deleteButton.text("Delete");
+        friend.append(deleteButton);
         $("#friend-zone").append(friend)
     };
 
     function pendingFriend(res) {
-        console.log(res);
         var pending = $("<div>");
         pending.addClass("pending-friend");
         var name = $("<h5>");

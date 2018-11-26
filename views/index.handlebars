@@ -60,41 +60,51 @@
     </div>
 
     <!-- ======================================================================================== -->
+    <!-- 100 PROVINCE MODAL -->
+    <!-- ======================================================================================== -->
+    <div class="modal fade bd-example-modal-md" id="godEmperorModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">God-Emperor!</h4>
+            <button type="button" class="close" data-dismiss="modal">x</button>
+          </div>
+          <div class="modal-body">
+            <!-- Content goes here -->
+            <p>Congratulations!</p>
+            <p>You have achieved God-Emperor status over the Self-Improvement Kingdom!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================================== -->
     <!-- TODO LISTS -->
     <!-- ======================================================================================== -->
 
     <div class="row" id="userId" data="{{data.userId}}">
       {{> todo-layout/category-list category="personal" troop-type="archer" tasksObj=personalTasks }}
       {{> todo-layout/category-list category="wellness" troop-type="archer" tasksObj=wellnessTasks }}
-      {{!-- {{> todo-lists/personal category="personal" troop-type="archer" tasksObj=personalTasks}} --}}
-      {{!-- {{> todo-lists/wellness category="wellness" troop-type="archer"}} --}}
     </div>
 
     <div class="row">
       {{> todo-layout/category-list category="exercise" troop-type="knight" tasksObj=exerciseTasks }}
       {{> todo-layout/category-list category="chores" troop-type="knight" tasksObj=choresTasks }}
-      {{!-- {{> todo-lists/exercise category="exercise" troop-type="knight"}} --}}
-      {{!-- {{> todo-lists/chores category="chores" troop-type="knight"}} --}}
     </div>
 
     <div class="row">
       {{> todo-layout/category-list category="learning" troop-type="mage" tasksObj=learningTasks }}
       {{> todo-layout/category-list category="creativity" troop-type="mage" tasksObj=creativityTasks }}
-      {{!-- {{> todo-lists/learning category="learning" troop-type="mage"}} --}}
-      {{!-- {{> todo-lists/creativity category="creativity" troop-type="mage"}} --}}
     </div>
 
   </div>
-  <!-- ======================================================================================== -->
-  <!-- Social Stuff-->
-  <!-- ======================================================================================== -->
-  {{>social/social}}
 </div>
 
-
-
-
-
+ {{>social/social}}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/battle.js"></script>
@@ -102,3 +112,4 @@
 <script src="/js/tasks.js"></script>
 <script src="/js/generateEncounter.js"></script>
 <script src="/js/social.js"></script>
+<script src="/js/feed.js"></script>

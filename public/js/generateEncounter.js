@@ -133,7 +133,7 @@ $(document).ready(function(){
                     encounterGen.encounterInit(armyTotal, provinceTotal);
                     var exportedObject = encounterGen.exportObject;
                     //display encounter on page
-                    displayEncounter(exportedObject);
+                    displayEncounter(exportedObject);                
                     //object to update user page
                     var encounterUpdate = {
                         encounterGenerated: true
@@ -158,18 +158,20 @@ $(document).ready(function(){
             }
         //displays if battle already completed
         } else {
-            $("#encounter-card").html("");
-            var newDiv = $("<div>");
+            // $("#encounter-card").html("");
+            $(".user-army").addClass("user-army--middle")
+            $(".enemy-army").addClass("d-none")
+            $(".battle-buttons").addClass("d-none")
+            $(".encounter-name").addClass("d-none")
+            $(".message-box--bottom").addClass("message-box--center")
+            $(".message-box--bottom > .container").addClass("d-none")
+            $(".encounter-message").removeClass("d-none")
+
             if(armyTotal == 0){
-                $(newDiv).text("Your forces are too weak to attempt battle, perform some tasks and bolster your forces.")
+                $(".encounter-message").text("Your forces are too weak to attempt battle, perform some tasks and bolster your forces.")
             } else {
-                $(newDiv).text("Encounter already completed today, come back tomorrow!");
+                $(".encounter-message").text("Encounter already completed today, come back tomorrow!");
             }
-            $(newDiv).addClass("text-align-center");
-            $("#encounter-card").append(newDiv);
         }
     })
-    
-   
-
 });
