@@ -34,7 +34,11 @@ module.exports = function (app) {
     } else {
       id = req.session.userId
     }
+<<<<<<< HEAD
     db.Task.findAll({ where: { UserId: id }, order:['createdAt'], include:[db.User] }).then(function (allTasks) {
+=======
+    db.Task.findAll({ where: { UserId: id }, order:[['createdAt', 'DESC']] }).then(function (allTasks) {
+>>>>>>> c8c8903422f996b10433a59adb2e96f75d83b6a1
       var renderObject = onLoad(allTasks, req);
       res.render("index", renderObject);
     });

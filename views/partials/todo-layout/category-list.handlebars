@@ -13,7 +13,7 @@
     <form data-category="{{category}}" class="task-form">
       <div class="form-group">
         <label class="sr-only" for="{{category}}-task-input">New task</label>
-        <input type="text" class="form-control task-input" id="{{category}}-task-input" placeholder="Add a task" required>
+        <input type="text" class="form-control task-input" id="{{category}}-task-input" placeholder="Add a task" maxlength="100" required>
       </div>
       <div class="task-options d-none">
         <div class="difficulty-select">
@@ -45,7 +45,7 @@
         <form data-category="{{category}}" class="edit-task-form d-none">
           <div class="form-group">
             <label class="sr-only" for="{{category}}-task-input">New task</label>
-            <input type="text" class="form-control task-input" id="{{category}}-task-input" value="{{name}}" required>
+            <input type="text" class="form-control task-input" id="{{category}}-task-input" value="{{name}}" maxlength="100" required>
           </div>
           <div class="task-options text-center">
             <div class="difficulty-select">

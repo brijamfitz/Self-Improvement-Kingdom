@@ -127,8 +127,11 @@ $(function() {
       difficulty: $(this).find("input:checked").val(),
       category: $(this).data('category'),
     }
-
-    createTask(newTask)
+    if (parseInt(newTask.name.length) > 100) {
+      alert("The text you entered is too long.")
+    } else {
+      createTask(newTask)
+    }
   })
 
   $(".btn-delete").on("click", function() {

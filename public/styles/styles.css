@@ -1,12 +1,16 @@
 body {
-  background-image: url("/images/battlefield.png");
-  background-position: center;
-  background-size: cover;
 }
 
-#login-signup-body {
-  padding-top: 80px;
-  margin-bottom: 200px;
+.login-signup-body {
+  padding: 40px;
+  background-image: url("/images/battlefield.png");
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #home {
@@ -22,7 +26,7 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 3px;
   position: fixed;
   top: 0;
   z-index: 1;
@@ -132,15 +136,60 @@ img {
   text-align: center;
 }
 
-#progress-usernav,
+#user-progress {
+  padding-top: 18px;
+  font-size: 24px;
+}
+
+#army-counts {
+  padding-top: 8px;
+  padding-right: 3px;
+}
+
+#castle-container, {
+  margin: 0px;
+}
+
+#username-container {
+  margin-top: -24px;
+  font-weight: normal;
+}
+
+#menu-dropdown {
+  text-align: center;
+  padding-top: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#usernav-text,
+#menu-dropdown {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.menu-btn {
+  background-color: white;
+  color: royalblue;
+}
+
+.menu-btn:hover {
+  background-color: rgb(22,27,122);
+  color: white;
+}
+
+.usernav-text {
+  font-size: 14px;
+}
+
 #avatar {
-  position: relative;
-  top: 5px;
+  padding-top: 5px;
 }
 
 #army {
   position: relative;
   bottom: 8px;
+  padding-left: 20px;
 }
 
 #user-level .level {
@@ -154,8 +203,8 @@ img {
 }
 
 #castle-img {
-  height: 50px;
-  width: 50px;
+  width: 35px;
+  height: 35px;
 }
 
 #user-experience .progress {
@@ -185,8 +234,8 @@ img {
   height: 30px;
 }
 
-#signup-container,
-#login-container {
+.signup-container,
+.login-container {
   text-align: center;
 }
 
@@ -205,15 +254,13 @@ img {
   color: royalblue;
 }
 
-#signup-card,
-#login-card {
+.signup-card,
+.login-card {
   font-weight: bold;
   text-align: center;
   background-color: royalblue;
   color: white;
-  border: solid;
-  border-width: 4px;
-  border-color: yellow;
+  border: 4px solid yellow;
 }
 
 #about {
@@ -224,15 +271,8 @@ img {
   font-size: 12px;
 }
 
-/* #user-archer-count,
-#user-knight-count,
-#user-mage-count {
-  position: absolute;
-  top: 57%;
-} */
-
 #army {
-  padding: 0px;
+  padding-top: 27px;
 }
 
 .battle-gif {
@@ -244,17 +284,35 @@ img {
   animation: pulse-small 2s infinite;
 }
 
-#login-hut {
+.home-container {
+  text-align: center;
+}
+
+#home-link {
+  color: white;
+}
+
+#home-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#castle-home {
+  width: 40px;
+  margin-bottom: 0px;
+}
+
+.login-hut {
   width: 100px;
 }
 
-#login-archer,
-#login-knight,
-#login-mage {
+.login-archer,
+.login-knight,
+.login-mage {
   width: 50px;
 }
 
-#login-castle {
+.login-castle {
   width: 125px;
 }
 
@@ -488,7 +546,7 @@ img {
 
 .troop-select p {
   display: inline;
-  margin-bottom: 0;
+  /* margin-bottom: 0; */
   font-size: 16px;
 }
 
@@ -763,21 +821,63 @@ footer{
     padding-top: 220px;
   }
 
-  #login-hut {
+  .login-hut {
     width: 50px;
   }
   
-  #login-archer,
-  #login-knight,
-  #login-mage {
+  .login-archer,
+  .login-knight,
+  .login-mage {
     width: 25px;
   }
   
-  #login-castle {
+  .login-castle {
     width: 75px;
   }
 
-  #login-title {
+  .login-title {
     font-size: 36px;
+  }
+
+  #menu-dropdown {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+
+  #army-counts {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  #army {
+    padding-left: 0px;
+  }
+
+  #user-progress {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #avatar {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #home-body {
+    /* margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px; */
+    display: none;
+  }
+
+  #usernav-text {
+    margin-bottom: 10px;
   }
 }
