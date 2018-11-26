@@ -57,7 +57,8 @@ var syncOptions = { force: false };
 
 
 // If running a test, set syncOptions.force to true
-if (process.env.NODE_ENV === "production") {
+// clearing the `testdb`
+if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
