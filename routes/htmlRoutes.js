@@ -29,12 +29,12 @@ module.exports = function (app) {
   // Load index page
   app.get("/user", function (req, res) {
     var id;
-    if (req.user){
+    if (req.user.id){
       id = req.user.id
     } else {
       id = req.session.userId
     }
-    db.Task.findAll({ where: { UserId: id }, order:['createdAt'] }).then(function (allTasks) {
+    db.Task.findAll({ where: { UserId: id }, order:['createdAt'], include:[db.User] }).then(function (allTasks) {
       var renderObject = onLoad(allTasks, req);
       res.render("index", renderObject);
     });
