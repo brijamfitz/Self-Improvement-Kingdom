@@ -1,31 +1,98 @@
-<div class="col-12">
-    <div class="jumbotron" id="encounter-card">
-        <div class="row">
-            <div class="col-md-4" id="user-army">
-                <h4>Your Army</h4>
-                <hr class="my-4">
-                <img src="./images/archer.png" id="encounter-img-archer"><p>Archers x <span id="encounter-archer-count">{{data.archerCount}}</span> -<span id="encounter-archer-loss"></span></p>
-                <img src="./images/knight.png" id="encounter-img-knight"><p>Knights x <span id="encounter-knight-count">{{data.knightCount}}</span> -<span id="encounter-knight-loss"></span></p>
-                <img src="./images/mage.png" id="encounter-img-mage"><p>Mages x <span id="encounter-mage-count">{{data.mageCount}}</span> -<span id="encounter-mage-loss"></span></p>
+<div class="row">
+    <div class="col-12">
+        <div id="encounter-card">
+
+            <div class="message-box message-box--top encounter-name">
+                <h2 id="battleName"></h2>
             </div>
-            <div class="col-md-4" id="fight-flee">
-                <h4>Encounter Name</h4>
-                <hr class="my-4">
-                <div class="battle-buttons">
-                    <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" id="fight-btn" data-target="#fightModal">Fight!</a>
-                    <span> OR </span>
-                    <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#fleeModal">Flee!</a>
-                    <hr class="my-4">
+            <div class="encounter-army user-army">
+                <div class="encounter-troop">
+                    <img src="./images/archer.png" class="encounter-troop__img" alt="archer pixel art">
+                    <span>&times; </span>
+                    <span id="player-archer-count">{{data.archerCount}}</span>
+                    <span id="player-archer-loss" class="subtractor"></span>
                 </div>
-                
+                <div class="encounter-troop">
+                    <img src="./images/knight.png" class="encounter-troop__img" alt="knight pixel art">
+                    <span>&times; </span>
+                    <span id="player-knight-count">{{data.knightCount}}</span>
+                    <span id="player-knight-loss" class="subtractor"></span>
+                </div>
+                <div class="encounter-troop">
+                    <img src="./images/mage.png" class="encounter-troop__img" alt="mage pixel art">
+                    <span>&times; </span>
+                    <span id="player-mage-count">{{data.mageCount}}</span>
+                    <span id="player-mage-loss" class="subtractor"></span>
+                </div>
             </div>
-            <div class="col-md-4" id="enemy">
-                <h4>Enemy Army</h4>
-                <hr class="my-4">
-                <img src="./images/archer.png" id="encounter-img-archer"><p>Archers x <span id="enemy-archer-count">20</span> -<span id="enemy-archer-loss"></span></p>
-                <img src="./images/knight.png" id="encounter-img-knight"><p>Knights x <span id="enemy-archer-count">10</span> -<span id="enemy-archer-loss"></span></p>
-                <img src="./images/mage.png" id="encounter-img-mage"><p>Mages x <span id="enemy-archer-count">5</span> -<span id="enemy-archer-loss"></span></p>
+            <div class="encounter-army enemy-army">
+                <div class="encounter-troop">
+                    <span id="enemy-archer-loss" class="subtractor"></span>
+                    <span id="enemy-archer-count">{{data.archerCount}}</span>
+                    <span> &times;</span>
+                    <img src="./images/archer-left.png" class="encounter-troop__img" alt="archer pixel art">
+                </div>
+                <div class="encounter-troop">
+                    <span id="enemy-knight-loss" class="subtractor"></span>
+                    <span id="enemy-knight-count">{{data.knightCount}}</span>
+                    <span> &times;</span>
+                    <img src="./images/knight-left.png" class="encounter-troop__img" alt="knight pixel art">
+                </div>
+                <div class="encounter-troop">
+                    <span id="enemy-mage-loss" class="subtractor"></span>
+                    <span id="enemy-mage-count">{{data.mageCount}}</span>
+                    <span> &times;</span>
+                    <img src="./images/mage-left.png" class="encounter-troop__img" alt="mage pixel art">
+                </div>
+            </div>
+            <img class="battle-gif d-none" src="./images/crossed-swords.png">
+            <div class="message-box message-box--bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <h3>Your Army</h3>
+                        </div>
+
+                        <div class="col-6 text-center">
+                            <h3>Enemy Army</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="battle-buttons mx-auto">
+                            <a class="btn btn-success btn-lg" href="#" id="fight-btn">Fight!</a>
+                            <span> OR </span>
+                            <a class="btn btn-danger btn-lg" href="#" role="button" data-toggle="modal" data-target="#fleeModal">Flee!</a>
+                            <hr class="my-4">
+                        </div>
+                    </div>
+                </div>
+                <h3 class="encounter-message text-center"></h3>
+                <a class="info-link" href="#"><i class="fas fa-info-circle"></i></a>
             </div>
         </div>
+
+        <div class="modal fade bd-example-modal-md" id="resultModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">RESULTS</h4>
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                    </div>
+                    <div class="modal-body" id="result-body">
+                        <!-- Content goes here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <audio id="battleEffects">
+            <source src="/sounds/battlesfx.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="battleStart">
+            <source src="/sounds/start.mp3" type="audio/mpeg">
+        </audio>
     </div>
 </div>

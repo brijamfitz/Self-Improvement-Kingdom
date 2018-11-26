@@ -9,8 +9,7 @@ var PORT = process.env.PORT || 8080;
 var session = require("express-session");
 var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
-// var cron = require("./script/cron")
-
+var cron = require("./script/cron")
 
 var myStore = new SequelizeStore({
   db: db.sequelize,

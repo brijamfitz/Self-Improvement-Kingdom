@@ -7,10 +7,10 @@ module.exports = {
     "host": "localhost",
     "dialect": "mysql"
   },
-  "test": {
+  "test": { 
     "username": "root",
     "password": null,
-    "port": 8889,
+    "port": 3306,
     "database": "project2db",
     "host": "localhost",
     "dialect": "mysql",
@@ -19,5 +19,6 @@ module.exports = {
   "production": {
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
+    
   }
 }
