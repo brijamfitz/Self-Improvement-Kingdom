@@ -208,6 +208,25 @@ module.exports = function (app) {
     })
   });
 
+  // get feed data
+  app.get("/api/activity", function (req, res) {
+    db.sequelize.query("Select * FROM Activities JOIN Friends ON ? = Friends.requester AND  Friends.status='accepted' AND Friends.requestee = Activities.actor OR Activities.actor = Friends.requester AND Friends.status='accepted' and ? = Friends.requestee OR ? = Friends.requester AND Friends.status = 'accepted' AND category <> 'battle'", {replacements: [req.session.username, req.session.username, req.session.username]}).then(function (result, metadata) {
+      res.json(result[0]);
+    })
+  })
+
+  // call middle ware to parse outgoing data
+  app.put("/api/activity", function (req, res) {
+    res.json(activity(req));
+  });
+
+  // post feed data
+  app.post("/api/activity", function (req, res) {
+    db.Activity.create(req.body).then(function (activity) {
+      res.json(activity);
+    })
+  })
+
     /* ================================================================================== */
   /* BATTLE ROUTES */
   /* ================================================================================== */
@@ -287,24 +306,7 @@ module.exports = function (app) {
     });
   });
 
-  // get feed data
-  app.get("/api/activity", function (req, res) {
-    db.sequelize.query("Select * FROM Activities JOIN Friends ON ? = Friends.requester AND  Friends.status='accepted' AND Friends.requestee = Activities.actor OR Activities.actor = Friends.requester AND Friends.status='accepted' and ? = Friends.requestee OR ? = Friends.requester AND Friends.status = 'accepted' AND category <> 'battle'", {replacements: [req.session.username, req.session.username, req.session.username]}).then(function (result, metadata) {
-      res.json(result[0]);
-    })
-  })
-
-  // call middle ware to parse outgoing data
-  app.put("/api/activity", function (req, res) {
-    res.json(activity(req));
-  });
-
-  // post feed data
-  app.post("/api/activity", function (req, res) {
-    db.Activity.create(req.body).then(function (activity) {
-      res.json(activity);
-    })
-  })
+  
 
 }
 
