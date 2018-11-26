@@ -18,10 +18,6 @@
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
-    "dialect": "mysql",
-    "username": "nrua17amuyqgxk1t",
-    "password": "ns9h87my3fzbfr0r",
-    "port": "3306",
-    "database":"nlkgabzywml2vi1u"
+    "dialect": "mysql"
   }
 }
