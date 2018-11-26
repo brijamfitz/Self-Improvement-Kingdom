@@ -11,16 +11,8 @@ var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var cron = require("./script/cron")
 
-var sequelize = new Sequelize(process.env.DB_name, process.env.DB_username, process.env.DB_password,
-  {
-    "dialect": "mysql",
-    "port": process.env.DB_port,
-    "storage": "./session.sqlite"
-  }
-);
-
 var myStore = new SequelizeStore({
-  db: sequelize,
+  db: db.sequelize,
 });
 
 // Middleware

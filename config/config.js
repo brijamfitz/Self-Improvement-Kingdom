@@ -1,10 +1,9 @@
-{
+module.exports = {
   "development": {
-    "username": "root",
-    "password": "",
-    "port": 3306,
-    "database": "project2db",
-    "host": "localhost",
+    "username": process.env.DB_username,
+    "password": process.env.DB_password,
+    "database": process.env.DB_name,
+    "host": process.env.DB_host,
     "dialect": "mysql"
   },
   "test": { 
