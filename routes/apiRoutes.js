@@ -230,6 +230,8 @@ module.exports = function (app) {
     /* ================================================================================== */
   /* BATTLE ROUTES */
   /* ================================================================================== */
+
+  //route for the battle logic to get the unit counts for user and encounter armies
   app.get("/api/battle/status/user", function(req, res){
     db.User.findOne( { where: {id: req.session.userId}}).then(function(user){
       var responseObject = {
@@ -242,9 +244,9 @@ module.exports = function (app) {
     })
   })
 
+  //route used to calculate wave damage 
   app.post("/api/battle/waveCalc", function(req, res){
-    console.log("WAVE CALC")
-    console.log(req.body.isPlayer);
+    //first determines who is taking turn
     isPlayer = JSON.parse(req.body.isPlayer);
   if (isPlayer === true){
     console.log("player turn")
@@ -260,16 +262,15 @@ module.exports = function (app) {
 
   });
 
+  //route to update user army count after wave casualties
   app.post("/api/battle/waveResult/player", function(req, res){
+    //number of units the computer has killed is taken in
     var killObject = req.body;
-    console.log(killObject);
     db.User.findOne( {where: {id: req.session.userId} }).then(function(user){
       var userObject = user;
-
-      console.log("KILL OBJECT HERE")
-      console.log(req.body)
+      //determines player deaths from computer army
       var newPlayerArmy = battleCalc.waveResult(userObject, killObject);
-      console.log(newPlayerArmy);
+      //update user army
       db.User.update({
         knightCount: newPlayerArmy.knightCount,
         mageCount: newPlayerArmy.mageCount,
@@ -284,13 +285,14 @@ module.exports = function (app) {
     })
   });
 
+  //route to update encounter army ocunt after wave casualties
   app.post("/api/battle/waveResult/computer", function(req, res){
     db.Encounter.findOne( {where: {UserId: req.session.userId} }).then(function(computer){
       var computerObject = computer;
       var killObject = req.body;
-      console.log(killObject);
+      //determines computer deaths from player army
       var newComputerArmy = battleCalc.waveResult(computerObject, killObject);
-      console.log(newComputerArmy);
+      //update computer army
       db.Encounter.update({
         knightCount: newComputerArmy.knightCount,
         mageCount: newComputerArmy.mageCount,
