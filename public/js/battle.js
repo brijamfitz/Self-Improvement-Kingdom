@@ -139,239 +139,213 @@ var battle = {
         cKnight = computerArmy.knightCount;
         cMage = computerArmy.mageCount;
         cArcher = computerArmy.archerCount;
-        this.updateCounts();
 
         //begin calculations of waves (fourth argument checks if player or not)
-        this.waveCalc(pKnight, pMage, pArcher, true);
-        this.waveCalc(cKnight, cMage, cArcher, false);
+        this.waveCalc();
     },
 
     //a calculator that checks the inflicted casualties of one side
-    waveCalc: function (knightCalc, mageCalc, archerCalc, isPlayer) {
-        var deadKnights = 0;
-        var deadMages = 0;
-        var deadArchers = 0;
-        //calculates for each knight if they hit their target or not
-        for (i = 0; i < knightCalc; i++) {
-            knightRoll = Math.floor((Math.random() * 100) + 1);
-            if (knightRoll <= 3) {
-                deadKnights++;
-            }
-            else if (knightRoll <= 6) {
-                deadMages++;
-            }
-            else if (knightRoll <= 15) {
-                deadArchers++;
-            };
-        };
+    waveCalc: function () {
+        var playerKills;
+        var computerKills;
+        // first an ajax call for player results
+        var isPlayer = {
+            isPlayer:true
+        }
+        $.ajax({
+            url: "/api/battle/waveCalc",
+            method: "POST",
+            data: isPlayer
+        }).then(function(response){
+            playerKills = response;
+            isPlayer.isPlayer = false;
+            //next, an ajax call for computer results
+            $.ajax({
+                url: "/api/battle/waveCalc",
+                method: "POST",
+                data: isPlayer
+            }).then(function(response){
+                computerKills = response;
+                console.log("KILLS HERE")
+                console.log(playerKills)
+                console.log(computerKills)
+                battle.waveResults(playerKills, computerKills);
+            });
 
-        //calculates for each mage if they hit their target or not
-        for (i = 0; i < mageCalc; i++) {
-            mageRoll = Math.floor((Math.random() * 100) + 1);
-            if (mageRoll <= 3) {
-                deadMages++;
-            }
-            else if (mageRoll <= 6) {
-                deadArchers++;
-            }
-            else if (mageRoll <= 15) {
-                deadKnights++;
-            };
-        };
-        //calculates for each archer if they hit their target or not
-        for (i = 0; i < archerCalc; i++) {
-            archerRoll = Math.floor((Math.random() * 100) + 1);
-            if (archerRoll <= 3) {
-                deadArchers++;
-            }
-            else if (archerRoll <= 6) {
-                deadKnights++;
-            }
-            else if (archerRoll <= 15) {
-                deadMages++;
-            };
-        };
-        //if the first part of wave(player turn), stores all player kills for casualty calculation after the computer turn
-        if (isPlayer === true) {
-            this.storedKnights = deadKnights;
-            this.storedMages = deadMages;
-            this.storedArchers = deadArchers;
-        } else {
-            //fires both results at the same time
-            this.playerResults(this.storedKnights, this.storedMages, this.storedArchers)
-            this.computerResults(deadKnights, deadMages, deadArchers)
-        };
+        });
     },
-
+    waveResults: function(playerKills, computerKills){
+        console.log("WAVE RESULTS")
+        console.log(playerKills);
+        console.log(computerKills);
+        // first an ajax call to update player values on the database
+        $.ajax({
+            url: "/api/battle/waveResult/player",
+            method: "POST",
+            data: computerKills
+        }).then(function(response){
+            var storedResults = response;
+            console.log(response);
+            $.ajax({
+                url: "/api/battle/waveResult/computer",
+                method: "POST",
+                data: playerKills
+            }).then(function(response){
+                var secondResults = response;
+                battle.playerResults(secondResults);
+               battle.computerResults(storedResults);
+            })
+        });
+    },
     //function that takes in player kills
-    playerResults: function (knightResult, mageResult, archerResult) {
-        //first a check to make sure that the player doesn't kill more than the enemy has
-        if (knightResult > cKnight) {
-            knightResult = cKnight;
-        };
-        if (mageResult > cMage) {
-            mageResult = cMage;
-        };
-        if (archerResult > cArcher) {
-            archerResult = cArcher;
-        };
+    playerResults: function (resultObject) {
+        console.log("result object here")
+        console.log(resultObject);
+        cArcher = parseInt($("#enemy-archer-count").text());
+        console.log("cArcher variable: " + cArcher)
+        cKnight = parseInt($("#enemy-knight-count").text());
+        cMage = parseInt($("#enemy-mage-count").text());
+        deadArchers = cArcher - resultObject.archerCount;
+        deadKnights = cKnight - resultObject.knightCount;
+        deadMages = cMage - resultObject.mageCount;
+
         //check to display DODGED only for live groups
-        if (archerResult === 0 && cArcher > 0){
+        if (deadArchers === 0 && cArcher > 0){
             $("#enemy-archer-loss").removeClass("subtractor");
             $("#enemy-archer-loss").text("(DODGED)")
         //if casualties taken, display damage done
         } else if (cArcher > 0) {
-            $("#enemy-archer-loss").text("(-" + archerResult + ")");
+            $("#enemy-archer-loss").text("(-" + deadArchers + ")");
         }
-        if (knightResult === 0 && cKnight > 0) {
+        if (deadKnights === 0 && cKnight > 0) {
             $("#enemy-knight-loss").removeClass("subtractor");
             $("#enemy-knight-loss").text("(DODGED)");
         } else if (cKnight > 0) {
-            $("#enemy-knight-loss").text("(-" + knightResult + ")");
+            $("#enemy-knight-loss").text("(-" + deadKnights + ")");
         }
-        if (mageResult === 0 && cMage > 0) {
+        if (deadMages === 0 && cMage > 0) {
             $("#enemy-mage-loss").removeClass("subtractor");
             $("#enemy-mage-loss").text("(DODGED)")
         } else if (cMage > 0) {
-            $("#enemy-mage-loss").text("(-" + mageResult + ")")
+            $("#enemy-mage-loss").text("(-" + deadMages + ")")
         };
 
         //fades out damage hits over jquery default of 400ms (can change please refer to jquery documentation)
         $("#enemy-archer-loss").fadeOut();
         $("#enemy-knight-loss").fadeOut();
         $("#enemy-mage-loss").fadeOut();
-        //a check to see if no casualties are taken
-        if (knightResult === 0 && mageResult === 0 && archerResult === 0) {
-            console.log("Enemy forces took no casualties!");
-        } else {
-            console.log("Enemy forces lost " + knightResult + " Knights, " + mageResult + " Mages, and " + archerResult + " Archers!");
-        };
-        //enemy forces updated
-        cKnight = cKnight - knightResult;
-        cMage = cMage - mageResult;
-        cArcher = cArcher - archerResult;
-        console.log("COMPUTER TOTAL: KNIGHTS: " + cKnight + " MAGES: " + cMage + " ARCHERS: " + cArcher);
+
     },
 
     //function that takes in computer kills, displays them and then calls for a status check
-    computerResults: function (knightResult, mageResult, archerResult) {
+    computerResults: function (resultObject) {
+        pArcher = parseInt($("#player-archer-count").text());
+        pKnight = parseInt($("#player-knight-count").text());
+        pMage = parseInt($("#player-mage-count").text());
+        deadArchers = pArcher - resultObject.archerCount;
+        deadKnights = pKnight - resultObject.knightCount;
+        deadMages = pMage - resultObject.mageCount;
 
-        //first a check to make sure that the computer doesn't lose more troops than they have
-        if (knightResult > pKnight) {
-            knightResult = pKnight;
-        }
-        if (mageResult > pMage) {
-            mageResult = pMage;
-        }
-        if (archerResult > pArcher) {
-            archerResult = pArcher;
-        };
         //check to display DODGED only for live groups
-        if (archerResult === 0 && pArcher > 0){
+        if (deadArchers === 0 && pArcher > 0){
             $("#player-archer-loss").removeClass("subtractor");
             $("#player-archer-loss").text("(DODGED)  ")
         } else if (pArcher > 0) {
-            $("#player-archer-loss").text("(-" + archerResult + ")  ");
+            $("#player-archer-loss").text("(-" + deadArchers + ")  ");
         }
-        if (knightResult === 0 && pKnight > 0) {
+        if (deadKnights === 0 && pKnight > 0) {
             $("#player-knight-loss").removeClass("subtractor");
             $("#player-knight-loss").text("(DODGED)  ");
         } else if (pKnight > 0) {
-            $("#player-knight-loss").text("(-" + knightResult + ")  ");
+            $("#player-knight-loss").text("(-" + deadKnights + ")  ");
         }
-        if (mageResult === 0 && pMage > 0) {
+        if (deadMages === 0 && pMage > 0) {
             $("#player-mage-loss").removeClass("subtractor");
             $("#player-mage-loss").text("(DODGED)  ")
         } else if (pMage > 0) {
-            $("#player-mage-loss").text("(-" + mageResult + ")  ")
+            $("#player-mage-loss").text("(-" + deadMages + ")  ")
         }
         $("#player-archer-loss").fadeOut();
         $("#player-knight-loss").fadeOut();
         $("#player-mage-loss").fadeOut();
-        //a check to see if no casulaties are taken
-        if (knightResult === 0 && mageResult === 0 && archerResult === 0) {
-            console.log("Your forces took no casualties!");
-        } else {
-            console.log("Your forces lost " + knightResult + " Knights, " + mageResult + " Mages, and " + archerResult + " Archers!");
-        };
-        //player forces updated
-        pKnight = pKnight - knightResult;
-        pMage = pMage - mageResult;
-        pArcher = pArcher - archerResult;
-        console.log("PLAYER TOTAL: KNIGHTS: " + pKnight + " MAGES: " + pMage + " ARCHERS: " + pArcher);
-        this.updateCounts();
         this.statusCheck();
     },
 
     //a function called by the computer side's calculation of results that checks to see if one side is defeated
     statusCheck: function () {
-        //clears the text from these divs and fades them back in for preparation for new values
-        setTimeout(function () {
-            $("#player-archer-loss").addClass("subtractor");
-            $("#player-knight-loss").addClass("subtractor");
-            $("#player-mage-loss").addClass("subtractor");
-            $("#enemy-archer-loss").addClass("subtractor");
-            $("#enemy-knight-loss").addClass("subtractor");
-            $("#enemy-mage-loss").addClass("subtractor");
-            $("#player-archer-loss").text("");
-            $("#player-knight-loss").text("");
-            $("#player-mage-loss").text("");
-            $("#enemy-archer-loss").text("");
-            $("#enemy-knight-loss").text("");
-            $("#enemy-mage-loss").text("");
-            $("#player-archer-loss").fadeIn("fast");
-            $("#player-knight-loss").fadeIn("fast");
-            $("#player-mage-loss").fadeIn("fast");
-            $("#enemy-archer-loss").fadeIn("fast");
-            $("#enemy-knight-loss").fadeIn("fast");
-            $("#enemy-mage-loss").fadeIn("fast");
-        }, 400);
+        $.ajax({
+            url: "/api/battle/status/user",
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            pArcher = response.userStorage.archerCount;
+            pKnight = response.userStorage.knightCount;
+            pMage = response.userStorage.mageCount;
+            cArcher = response.encounterStorage.archerCount;
+            cKnight = response.encounterStorage.knightCount;
+            cMage = response.encounterStorage.mageCount;
 
-        //used to determine end state 
-        var playerDefeated = false;
-        var computerDefeated = false;
-        if (pKnight === 0 && pMage === 0 && pArcher === 0) {
-            playerDefeated = true;
-        }
-        if (cKnight === 0 && cMage === 0 && cArcher === 0) {
-            computerDefeated = true;
-        }
+            $("#player-archer-count").text(pArcher);
+            $("#player-knight-count").text(pKnight);
+            $("#player-mage-count").text(pMage);
 
-        if (playerDefeated === true && computerDefeated === true) {
-            console.log("The dust settles on the aftermath of the battle, both sides lay completely defeated. You won this battle, but at what cost?");
-            this.exportResults(true);
-            battleSounds.pause();
-        } else if (playerDefeated === true) {
-            console.log("The retreat horn is called, but it is too late! Your forces have been obliterated and you have lost the battle!");
-            this.exportResults(false);
-            battleSounds.pause();
-        } else if (computerDefeated === true) {
-            console.log("Your troops cheer, the enemy lays vanquished before your army!");
-            this.exportResults(true);
-            battleSounds.pause();
-        } else {
-            console.log("====================WAVE END====================")
+            $("#enemy-archer-count").text(cArcher);
+            $("#enemy-knight-count").text(cKnight);
+            $("#enemy-mage-count").text(cMage);
+
+            //clears the text from these divs and fades them back in for preparation for new values
             setTimeout(function () {
-                battle.waveCalc(pKnight, pMage, pArcher, true);
-                battle.waveCalc(cKnight, cMage, cArcher, false);
-            }, 1000)
+                $("#player-archer-loss").addClass("subtractor");
+                $("#player-knight-loss").addClass("subtractor");
+                $("#player-mage-loss").addClass("subtractor");
+                $("#enemy-archer-loss").addClass("subtractor");
+                $("#enemy-knight-loss").addClass("subtractor");
+                $("#enemy-mage-loss").addClass("subtractor");
+                $("#player-archer-loss").text("");
+                $("#player-knight-loss").text("");
+                $("#player-mage-loss").text("");
+                $("#enemy-archer-loss").text("");
+                $("#enemy-knight-loss").text("");
+                $("#enemy-mage-loss").text("");
+                $("#player-archer-loss").fadeIn("fast");
+                $("#player-knight-loss").fadeIn("fast");
+                $("#player-mage-loss").fadeIn("fast");
+                $("#enemy-archer-loss").fadeIn("fast");
+                $("#enemy-knight-loss").fadeIn("fast");
+                $("#enemy-mage-loss").fadeIn("fast");
+            }, 400);
 
-        }
+            //used to determine end state 
+            var playerDefeated = false;
+            var computerDefeated = false;
+            if (pKnight === 0 && pMage === 0 && pArcher === 0) {
+                playerDefeated = true;
+            }
+            if (cKnight === 0 && cMage === 0 && cArcher === 0) {
+                computerDefeated = true;
+            }
 
-    },
-    updateCounts: function () {
-        $("#player-knight-count").text(pKnight);
-        $("#player-mage-count").text(pMage);
-        $("#player-archer-count").text(pArcher);
-        $("#enemy-knight-count").text(cKnight);
-        $("#enemy-mage-count").text(cMage);
-        $("#enemy-archer-count").text(cArcher);
-    },
-    exportObject: {
-        knightCount: 0,
-        mageCount: 0,
-        archerCount: 0,
-        provinceCount: 0
+            if (playerDefeated === true && computerDefeated === true) {
+                console.log("The dust settles on the aftermath of the battle, both sides lay completely defeated. You won this battle, but at what cost?");
+                battle.exportResults(true);
+                battleSounds.pause();
+            } else if (playerDefeated === true) {
+                console.log("The retreat horn is called, but it is too late! Your forces have been obliterated and you have lost the battle!");
+                battle.exportResults(false);
+                battleSounds.pause();
+            } else if (computerDefeated === true) {
+                console.log("Your troops cheer, the enemy lays vanquished before your army!");
+                battle.exportResults(true);
+                battleSounds.pause();
+            } else {
+                console.log("====================WAVE END====================")
+                setTimeout(function () {
+                battle.waveCalc();
+                }, 1000)
+            }
+        });
+
+
     },
 
     //returns an object that contains remaining player army values
@@ -382,7 +356,7 @@ var battle = {
             provinceTotal--;
         }
 
-        this.exportObject = {
+        exportObject = {
             knightCount: pKnight,
             mageCount: pMage,
             archerCount: pArcher,
@@ -392,7 +366,6 @@ var battle = {
 
         $("#resultModal").modal();
         $('.battle-gif').addClass("d-none");
-        var newPlayerResults = this.exportObject;
         var endGame = $("<div>");
         if (isVictory === false){
             $(endGame).text("Your army has been obliterated. Enemy forces will certainly use this opportunity to take one of your provinces, prepare for your counter attack tomorrow.")
@@ -413,11 +386,22 @@ var battle = {
             $("#result-body").append(knightDiv);
             $("#result-body").append(mageDiv);
         }
-        console.log(newPlayerResults);
+        $.ajax({
+            url:"/api/user",
+            method: "GET",
+        }).then(function(response){
+            
+            exportObject = {
+            knightCount: response.knightCount,
+            mageCount: response.mageCount,
+            archerCount: response.archerCount,
+            provinceCount: provinceTotal,
+            encounterCompleted: true
+        }
         $.ajax({
             method: "PUT",
             url: "/api/user",
-            data: battle.exportObject
+            data: exportObject
         }).then(function(response){
             $.ajax({
                 method: "GET",
@@ -426,7 +410,7 @@ var battle = {
                 console.log(res);
             });
         });
-        return newPlayerResults;
+        });
     },
 
     //stored player kill values

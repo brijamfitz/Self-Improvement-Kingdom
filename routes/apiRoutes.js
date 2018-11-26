@@ -1,6 +1,7 @@
 var db = require("../models");
 var passport = require("../config/passport")
 var fs = require("fs");
+var battle = require("../script/battleCalculations")
 
 module.exports = function (app) {
 
@@ -197,5 +198,85 @@ app.put("/api/user/progress/", function(req, res){
       res.json(user);
     })
   });
+
+    /* ================================================================================== */
+  /* BATTLE ROUTES */
+  /* ================================================================================== */
+  app.get("/api/battle/status/user", function(req, res){
+    db.User.findOne( { where: {id: req.session.userId}}).then(function(user){
+      var responseObject = {
+        userStorage: user
+      }
+      db.Encounter.findOne( { where: {UserId: req.session.userId}}).then(function(encounter){
+        responseObject.encounterStorage = encounter;
+        res.json(responseObject);
+      })
+    })
+  })
+
+  app.post("/api/battle/waveCalc", function(req, res){
+    console.log("WAVE CALC")
+    console.log(req.body.isPlayer);
+    isPlayer = JSON.parse(req.body.isPlayer);
+  if (isPlayer === true){
+    console.log("player turn")
+    db.User.findOne( { where: { id: req.session.userId} }).then(function(user) {
+      res.json( battle.waveCalc(user)); 
+    });
+  } else if (isPlayer === false){
+    console.log("computer turn")
+    db.Encounter.findOne( { where: {UserId: req.session.userId} }).then(function(encounter){
+      res.json(battle.waveCalc(encounter));
+    })
+  }
+
+  });
+
+  app.post("/api/battle/waveResult/player", function(req, res){
+    var killObject = req.body;
+    console.log(killObject);
+    db.User.findOne( {where: {id: req.session.userId} }).then(function(user){
+      var userObject = user;
+
+      console.log("KILL OBJECT HERE")
+      console.log(req.body)
+      var newPlayerArmy = battleCalc.waveResult(userObject, killObject);
+      console.log(newPlayerArmy);
+      db.User.update({
+        knightCount: newPlayerArmy.knightCount,
+        mageCount: newPlayerArmy.mageCount,
+        archerCount: newPlayerArmy.archerCount
+      },
+      {where:{
+        id: req.session.userId
+      }}).then(function(){
+        res.json(newPlayerArmy);
+      })
+
+    })
+  });
+
+  app.post("/api/battle/waveResult/computer", function(req, res){
+    db.Encounter.findOne( {where: {UserId: req.session.userId} }).then(function(computer){
+      var computerObject = computer;
+      var killObject = req.body;
+      console.log(killObject);
+      var newComputerArmy = battleCalc.waveResult(computerObject, killObject);
+      console.log(newComputerArmy);
+      db.Encounter.update({
+        knightCount: newComputerArmy.knightCount,
+        mageCount: newComputerArmy.mageCount,
+        archerCount: newComputerArmy.archerCount
+      },
+      {
+        where:{
+          UserId: req.session.userId
+        }
+      }).then(function(){
+        res.json(newComputerArmy);
+      })
+    })
+  })
+
 }
 
