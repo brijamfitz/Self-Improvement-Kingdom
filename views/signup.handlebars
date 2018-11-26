@@ -1,20 +1,22 @@
-<div class="container" id="login-signup-body">
-    <div class="jumbotron" id="signup-card">
-        <h1 class="display-4" id="login-title">The Self-Improvement Kingdom</h1>
-        <img src="images/castle-1.png" alt="login-castle" id="login-hut" />
-        <img src="images/archer.png" alt="login-castle" id="login-archer" />
-        <img src="images/knight.png" alt="login-castle" id="login-knight" />
-        <img src="images/mage.png" alt="login-castle" id="login-mage" />
-        <img src="images/login-castle.png" alt="login-castle" id="login-castle" />
+<div class="login-signup-body">
+    <div class="jumbotron signup-card">
+        <h1 class="display-4 login-title">The Self-Improvement Kingdom</h1>
+        <img src="images/castle-1.png" alt="wood hut" class="login-hut" />
+        <img src="images/archer.png" alt="archer" class="login-archer" />
+        <img src="images/knight.png" alt="knight" class="login-knight" />
+        <img src="images/mage.png" alt="mage" class="login-mage" />
+        <img src="images/login-castle.png" alt="castle" class="login-castle" />
         <p class="lead">Build your army and battle your way to self-improvement!</p>
         <hr class="my-4">
-        <div class="col-md-12" id="signup-container">
+        <div class="col-md-12 signup-container">
             <p>Create a username and password to begin your quest!</p>
             <form action="/api/signup" method="post">
                 <div>
+                    <label class="sr-only">Username:</label>
                     <input type="text" name="username" placeholder="Username" id="username-input" />
                 </div>
                 <div>
+                    <label class="sr-only">Password:</label>
                     <input type="password" name="password" placeholder="Password" id="password-input" />
                 </div>
                 <div>
