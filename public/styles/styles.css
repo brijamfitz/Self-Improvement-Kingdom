@@ -11,7 +11,7 @@ body {
 
 #home {
   padding-top: 100px;
-  background-color: #1E1E1F;
+  background-color: rgb(30, 30, 31);
 }
 
 .list-group-item {
@@ -77,6 +77,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.info-link {
+  color: yellow;
+  font-size: 20px;
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+}
+
+.info-link:hover, .info-link:focus {
+  color: #fff;
 }
 
 .encounter-army {
@@ -697,6 +709,57 @@ img {
   background: linear-gradient(to right, rgba(23,62,184,.25), rgba(23,62,184,.25) 65%, rgb(255,255,255));
 }
 
+/* ================================================================================== */
+/* Social Partial */
+/* ================================================================================== */
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.tcontainer{
+  width: 100%;
+  height: 62px;
+  overflow: hidden;
+  float: right;
+}
+
+.ticker-wrap {
+  width: 100%;
+  height: 100%;
+  padding-left: 100%;
+  background-color: rgba(30,30,31,0.9);
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  height: 100%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: ticker;
+  animation-duration: 24s;
+
+}
+
+.ticker-move:hover{
+  animation-play-state: paused;
+}
+
+.ticker-item{
+  display: inline-block;
+  font-size: 36px;
+  padding: 0 2rem;
+  color: #fff;
+}
+
+footer{
+  background-color: rgb(30, 30, 31);
+  height: 60px;
+  margin-bottom: -10px;
+}
 /* ================================================================================== */
 /* MEDIA QUERIES */
 /* ================================================================================== */

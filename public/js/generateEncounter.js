@@ -133,7 +133,7 @@ $(document).ready(function(){
                     encounterGen.encounterInit(armyTotal, provinceTotal);
                     var exportedObject = encounterGen.exportObject;
                     //display encounter on page
-                    displayEncounter(exportedObject);
+                    displayEncounter(exportedObject);                
                     //object to update user page
                     var encounterUpdate = {
                         encounterGenerated: true
