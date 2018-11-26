@@ -22,7 +22,7 @@ body {
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 3px;
   position: fixed;
   top: 0;
   z-index: 1;
@@ -120,10 +120,53 @@ img {
   text-align: center;
 }
 
-#progress-usernav,
+#user-progress {
+  padding-top: 18px;
+  font-size: 24px;
+}
+
+#army-counts {
+  padding-top: 8px;
+  padding-right: 3px;
+}
+
+#castle-container, {
+  margin: 0px;
+}
+
+#username-container {
+  margin-top: -24px;
+  font-weight: normal;
+}
+
+#menu-dropdown {
+  text-align: center;
+  padding-top: 25px;
+  padding-left: 0px;
+}
+
+#usernav-text,
+#menu-dropdown {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.menu-btn {
+  background-color: white;
+  color: royalblue;
+}
+
+.menu-btn:hover {
+  background-color: rgb(22,27,122);
+  color: white;
+}
+
+.usernav-text {
+  font-size: 14px;
+}
+
 #avatar {
-  position: relative;
-  top: 5px;
+  padding-top: 5px;
 }
 
 #army {
@@ -142,8 +185,7 @@ img {
 }
 
 #castle-img {
-  height: 50px;
-  width: 50px;
+  width: 35px;
 }
 
 #user-experience .progress {
@@ -212,15 +254,8 @@ img {
   font-size: 12px;
 }
 
-/* #user-archer-count,
-#user-knight-count,
-#user-mage-count {
-  position: absolute;
-  top: 57%;
-} */
-
 #army {
-  padding: 0px;
+  padding-top: 27px;
 }
 
 .battle-gif {
@@ -230,6 +265,24 @@ img {
   visibility: hidden;
   transform: translate(-50%, -50%);
   animation: pulse-small 2s infinite;
+}
+
+.home-container {
+  text-align: center;
+}
+
+#home-link {
+  color: white;
+}
+
+#home-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#castle-home {
+  width: 40px;
+  margin-bottom: 0px;
 }
 
 #login-hut {
@@ -716,5 +769,43 @@ img {
 
   #login-title {
     font-size: 36px;
+  }
+
+  #menu-dropdown {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+
+  #army-counts {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  #user-progress {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #avatar {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  #home-body {
+    /* margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px; */
+    display: none;
+  }
+
+  #usernav-text {
+    margin-bottom: 10px;
   }
 }
