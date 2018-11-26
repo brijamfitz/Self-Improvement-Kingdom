@@ -74,10 +74,8 @@ $(document).ready(function(){
         url: "/api/user/",
         method: "GET"
     }).then(function(response){
-        console.log(response);
         provinceTotal = response.provinceCount;
         armyOne = response;
-        console.log(armyOne)
 
         // ===================================================================================
         // Brian's added code block
@@ -166,18 +164,12 @@ var battle = {
                 data: isPlayer
             }).then(function(response){
                 computerKills = response;
-                console.log("KILLS HERE")
-                console.log(playerKills)
-                console.log(computerKills)
                 battle.waveResults(playerKills, computerKills);
             });
 
         });
     },
     waveResults: function(playerKills, computerKills){
-        console.log("WAVE RESULTS")
-        console.log(playerKills);
-        console.log(computerKills);
         // first an ajax call to update player values on the database
         $.ajax({
             url: "/api/battle/waveResult/player",
@@ -185,7 +177,6 @@ var battle = {
             data: computerKills
         }).then(function(response){
             var storedResults = response;
-            console.log(response);
             $.ajax({
                 url: "/api/battle/waveResult/computer",
                 method: "POST",
@@ -199,10 +190,7 @@ var battle = {
     },
     //function that takes in player kills
     playerResults: function (resultObject) {
-        console.log("result object here")
-        console.log(resultObject);
         cArcher = parseInt($("#enemy-archer-count").text());
-        console.log("cArcher variable: " + cArcher)
         cKnight = parseInt($("#enemy-knight-count").text());
         cMage = parseInt($("#enemy-mage-count").text());
         deadArchers = cArcher - resultObject.archerCount;
@@ -277,7 +265,6 @@ var battle = {
             url: "/api/battle/status/user",
             method: "GET"
         }).then(function(response){
-            console.log(response);
             pArcher = response.userStorage.archerCount;
             pKnight = response.userStorage.knightCount;
             pMage = response.userStorage.mageCount;
@@ -318,6 +305,7 @@ var battle = {
             //used to determine end state 
             var playerDefeated = false;
             var computerDefeated = false;
+            //if statements to determine if battle is over
             if (pKnight === 0 && pMage === 0 && pArcher === 0) {
                 playerDefeated = true;
             }
@@ -326,19 +314,16 @@ var battle = {
             }
 
             if (playerDefeated === true && computerDefeated === true) {
-                console.log("The dust settles on the aftermath of the battle, both sides lay completely defeated. You won this battle, but at what cost?");
                 battle.exportResults(true);
                 battleSounds.pause();
             } else if (playerDefeated === true) {
-                console.log("The retreat horn is called, but it is too late! Your forces have been obliterated and you have lost the battle!");
                 battle.exportResults(false);
                 battleSounds.pause();
             } else if (computerDefeated === true) {
-                console.log("Your troops cheer, the enemy lays vanquished before your army!");
                 battle.exportResults(true);
                 battleSounds.pause();
+            //if no end state reached, 1 second timeout followed by another wave
             } else {
-                console.log("====================WAVE END====================")
                 setTimeout(function () {
                 battle.waveCalc();
                 }, 1000)
