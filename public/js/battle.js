@@ -340,9 +340,11 @@ var battle = {
         if (isVictory === true){
             battleStatus= "victorious"
             provinceTotal++;
-        } else {
+        } else if (provinceTotal > 1){
             battleStatus= "defeated"
             provinceTotal--;
+        } else {
+            battleStatus= "defeated"
         };
 
         $.ajax({
@@ -374,7 +376,10 @@ var battle = {
         $("#resultModal").modal();
         $('.battle-gif').addClass("d-none");
         var endGame = $("<div>");
-        if (isVictory === false){
+        if (isVictory === false && provinceTotal === 1){
+            $(endGame).text("Your army has been obliterated. You have lost your army, and you are down to your last province. Prepare your counter attack tomorrow!")
+            $("#result-body").append(endGame);
+        }else if (isVictory === false){
             $(endGame).text("Your army has been obliterated. Enemy forces will certainly use this opportunity to take one of your provinces, prepare for your counter attack tomorrow.")
             $("#result-body").append(endGame);
         } else if (isVictory === true && pKnight === 0 && pMage === 0 && pArcher ===0) {
