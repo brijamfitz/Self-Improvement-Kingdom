@@ -48,6 +48,10 @@ const job = new CronJob("59 23 * * *", function() {
 		updateData(userArray);
 
 	});
+	db.Encounter.destroy({
+		where: {},
+		truncate: true
+	});
 
 });
 console.log('After job instantiation');
