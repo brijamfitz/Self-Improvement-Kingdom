@@ -15,7 +15,8 @@ $(document).ready(function () {
                         pendingFriend(res[i]);
                         break;
                 }
-            }
+            };
+            
         })
     };
 
@@ -38,17 +39,23 @@ $(document).ready(function () {
 
     $(document).on("click", ".accept-pending", function () {
         var username = $(this).attr("name");
-        socialPut('accepted', username)
+        socialPut('accepted', username);
+        getFriends();
+        location.reload();
     });
 
     $(document).on("click", ".reject-pending", function () {
         var username = $(this).attr("name");
-        socialPut('rejected', username)
+        socialPut('rejected', username);
+        getFriends();
+        location.reload();
     });
 
     $(document).on("click", ".delete-friend", function () {
         var username = $(this).attr("name");
-        socialPut('deleted', username)
+        socialPut('deleted', username);
+        getFriends();
+        location.reload();
     })
 
 
