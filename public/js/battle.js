@@ -375,24 +375,24 @@ var battle = {
 
         $("#resultModal").modal();
         $('.battle-gif').addClass("d-none");
-        var endGame = $("<div>");
+        var endGame = $("<h5>");
         if (isVictory === false && provinceTotal === 1){
-            $(endGame).text("Your army has been obliterated. You have lost your army, and you are down to your last province. Prepare your counter attack tomorrow!")
+            $(endGame).text("Your army has been obliterated. You have lost your army, and are down to your last province. Prepare for your counter attack tomorrow!")
             $("#result-body").append(endGame);
         }else if (isVictory === false){
-            $(endGame).text("Your army has been obliterated. Enemy forces will certainly use this opportunity to take one of your provinces, prepare for your counter attack tomorrow.")
+            $(endGame).text("Your army has been obliterated. Enemy forces will certainly use this opportunity to take one of your provinces. Prepare for your counter attack tomorrow.")
             $("#result-body").append(endGame);
         } else if (isVictory === true && pKnight === 0 && pMage === 0 && pArcher ===0) {
-            $(endGame).text("Both armies were completely destroyed in the fighting. You have gained this province, but at a great cost.")
+            $(endGame).text("Both armies were completely destroyed in the battle. You have gained this province, but at a great cost.")
             $("#result-body").append(endGame);
         } else {
             $(endGame).text("Victory! Your troops have vanquished the enemy! Remaining troops:")
             var knightDiv = $("<p>");
             var mageDiv = $("<p>");
             var archerDiv = $("<p>");
-            $(archerDiv).text("Remaining Archers: " + pArcher);
-            $(knightDiv).text("Remaining Knights: " + pKnight);
-            $(mageDiv).text("Remaining Mages: " + pMage);
+            $(archerDiv).text("Archers: " + pArcher);
+            $(knightDiv).text("Knights: " + pKnight);
+            $(mageDiv).text("Mages: " + pMage);
             $("#result-body").append(endGame);
             $("#result-body").append(archerDiv);
             $("#result-body").append(knightDiv);
