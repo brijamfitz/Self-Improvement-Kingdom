@@ -4,12 +4,12 @@ $(document).ready(function(){
         url: "/api/activity",
     }).then(function(response){
         console.log(response);
-        for(var i = 0; i< response.length; i++){
+        for(var i = 0; i < 5; i++){
             var news = response[i].action;
             var tickerItem = $("<div>");
-            tickerItem.addClass("ticker-item");
+            tickerItem.addClass("ticker__item");
             tickerItem.text(news);
-            $(".ticker-move").append(tickerItem);
+            $(".ticker").append(tickerItem);
         }
     })
 

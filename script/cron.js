@@ -39,7 +39,7 @@ const job = new CronJob("59 23 * * *", function() {
 		for (i = 0; i < user.length; i++){
 			var newObject = new UserObject(user[i].provinceCount, user[i].id, user[i].username);
 			//if the user does not complete the encounter, they will lose a province
-			if (user[i].encounterCompleted === false){
+			if (user[i].encounterCompleted === false && newObject.provinceCount > 1){
 				newObject.provinceCount--;
 				console.log(newObject);			
 			}
@@ -47,6 +47,10 @@ const job = new CronJob("59 23 * * *", function() {
 		}
 		updateData(userArray);
 
+	});
+	db.Encounter.destroy({
+		where: {},
+		truncate: true
 	});
 
 });
