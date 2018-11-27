@@ -213,8 +213,8 @@ module.exports = function (app) {
 
   // accept, reject, or delete friend requests
   app.put("/api/friends", function (req, res) {
-    console.log(reg.body);
-    db.Friend.update({ 'status': req.body.status }, { where: {[Op.or]:[{'requester':req.body.username},{'requestee': req.body.username}]} }).then(function (user) {
+    console.log(req.body);
+    db.sequelize.query("UPDATE Friends SET status = ? WHERE requester = ? AND requestee = ? OR requestee = ? AND requester = ? ", {replacements: [req.body.status, req.body.username, req.session.username, req.body.username, req.session.username]}).then(function (user) {
       res.json(user);
     })
   });
