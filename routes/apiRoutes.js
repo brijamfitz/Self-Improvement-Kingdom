@@ -30,7 +30,7 @@ module.exports = function (app) {
 
   // Processing the signup form
   app.post("/api/signup", function (req, res, next) {
-    passport.authenticate('local-login', function (err, user, info) {
+    passport.authenticate('local-signup', function (err, user, info) {
       if (err) {
         return res.redirect('/');
       };
@@ -213,7 +213,8 @@ module.exports = function (app) {
 
   // accept, reject, or delete friend requests
   app.put("/api/friends", function (req, res) {
-    db.Friend.update({ 'status': req.body.status }, { where: { 'requestee': req.session.username, 'requester': req.body.username, 'status': "pending" } }).then(function (user) {
+    console.log(reg.body);
+    db.Friend.update({ 'status': req.body.status }, { where: {[Op.or]:[{'requester':req.body.username},{'requestee': req.body.username}]} }).then(function (user) {
       res.json(user);
     })
   });
