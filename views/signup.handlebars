@@ -1,15 +1,36 @@
-<h1>{{msg}}</h1>
+<div class="login-signup-body">
+    <div class="jumbotron signup-card">
+        <h1 class="display-4 login-title">Self-Improvement Kingdom</h1>
+        <img src="/images/castle-1.png" alt="wood hut" class="login-hut" />
+        <img src="/images/archer.png" alt="archer" class="login-archer" />
+        <img src="/images/knight.png" alt="knight" class="login-knight" />
+        <img src="/images/mage.png" alt="mage" class="login-mage" />
+        <img src="/images/login-castle.png" alt="castle" class="login-castle" />
+        <p class="lead">Build your army and battle your way to self-improvement!</p>
+        <hr class="my-4">
 
-<form action="/api/signup" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
+        <div class="col-md-12 signup-container">
+            <h5>Create a username and password to begin your quest!</h5>
+            <p style="color:crimson">
+                {{#if msg}}
+                {{msg}}
+                {{/if}}
+            </p>
+            <form action="/api/signup" method="post">
+                <div>
+                    <label class="sr-only">Username:</label>
+                    <input type="text" name="username" placeholder="Username" id="username-input" />
+                </div>
+                <div>
+                    <label class="sr-only">Password:</label>
+                    <input type="password" name="password" placeholder="Password" id="password-input" />
+                </div>
+                <div>
+                    <input type="submit" value="Create Account" class="btn btn-lg btn-primary" id="create-account-btn" />
+                </div>
+            </form>
+            <p>Already have an account? Login <a href="/login" id="login-link">here</a>.</p>
+            <p id="about">Learn more about Self-Improvement Kingdom <a href="#" id="about-link">here</a>.</p>
+        </div>
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="signup"/>
-    </div>
-</form>
+</div>

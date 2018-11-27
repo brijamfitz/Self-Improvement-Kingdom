@@ -1,34 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
     var Task = sequelize.define("Task", {
         //stores the name of the task
-        taskName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
-            }
-        },
-        //stores the body of the text describing task
-        taskBody: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        categoryName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
+                len: [1, 100]
             }
         },
         //assigned difficulty value by the user
-        taskDifficulty: {
+        difficulty: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 len: [1]
             }
         },
-        taskCompleted: {
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        completed: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         }
@@ -37,8 +32,8 @@ module.exports = function (sequelize, DataTypes) {
     Task.associate = function(models) {
         //this sets which user owns the current task
         Task.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
+            foreignKey:{
+                allowNull: false,
             }
         });
     };

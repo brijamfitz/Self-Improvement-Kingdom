@@ -8,9 +8,7 @@
     <!-- ======================================================================================== -->
     <!-- ENCOUNTER CARD -->
     <!-- ======================================================================================== -->
-    <div class="row">
-     {{> encounter/encounter-card}}
-    </div>
+    {{> encounter/encounter-card}}
 
     <!-- ======================================================================================== -->
     <!-- FIGHT MODAL -->
@@ -30,108 +28,64 @@
           </div>
           <div class="modal-footer">
             <h5>Reward: You have gained 1 Province!</h5>
-            {{!-- <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button> --}}
+            {{!-- <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
+            --}}
           </div>
         </div>
       </div>
     </div>
 
     <!-- ======================================================================================== -->
-    <!-- FLEE MODAL -->
+    <!-- 100 PROVINCE MODAL -->
     <!-- ======================================================================================== -->
-    <div class="modal fade bd-example-modal-md" id="fleeModal" role="dialog">
+    <div class="modal fade bd-example-modal-md" id="godEmperorModal" role="dialog">
       <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Flee!</h4>
+            <h4 class="modal-title">God-Emperor!</h4>
             <button type="button" class="close" data-dismiss="modal">x</button>
           </div>
           <div class="modal-body">
             <!-- Content goes here -->
-            <p>Your army has retreated!</p>
-            <p>You have lost 1 province for this act of cowardice.</p>
-            <p>Return tomorrow &mdash; if you are ready for battle!</p>
+            <p>Congratulations!</p>
+            <p>You have achieved God-Emperor status over the Self-Improvement Kingdom!</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
+            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ======================================================================================== -->
-    <!-- TASK CARD -->
+    <!-- TODO LISTS -->
     <!-- ======================================================================================== -->
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card todo-card" id="personal">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-6 todo-cat">
-                <h2>Personal</h2>
-              </div>
-              <div class="col-6 cat-level">
-                <h2>Level
-                  <span class="level">1</span>
-                </h2>
-              </div>
-              <div class="bonus">
-                <img src="./images/archer.png" alt="archer pixel art">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-primary btn-add-task" id="new-personal-task">Add Task</button>
-          <ul class="tasks">
-            {{!-- Loop through and add tasks in this category --}}
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Pay credit card bill</span>
-            </li>
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Clean out garage</span>
-            </li>
-            <li id="{{!-- task-{{task_id}} --}}">
-              <span>Schedule oil change</span>
-            </li>
-          </ul>
-          <div class="accordion completed" id="personal-completed">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="mb-0">
-                  <button class="btn btn-link btn-expand ml-auto d-block" type="button" data-toggle="collapse"
-                    data-target="#collapse-personal-completed" aria-expanded="true" aria-controls="collapse-personal-completed">
-                    Completed tasks
-                  </button>
-                </h5>
-              </div>
-              <div id="collapse-personal-completed" class="collapse hide" data-parent="#personal-completed">
 
-                <ul class="tasks completed">
-                  {{!-- loop through and add completed tasks in this category --}}
-                  <li id="{{!-- task-{{task_id}} --}}">
-                    <span>Deliver rent check</span>
-                  </li>
-                  <li id="{{!-- task-{{task_id}} --}}">
-                    <span>Empty litter box</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row" id="userId" data="{{data.userId}}">
+      {{> todo-layout/category-list category="personal" troop-type="archer" tasksObj=personalTasks }}
+      {{> todo-layout/category-list category="wellness" troop-type="archer" tasksObj=wellnessTasks }}
+    </div>
+
+    <div class="row">
+      {{> todo-layout/category-list category="exercise" troop-type="knight" tasksObj=exerciseTasks }}
+      {{> todo-layout/category-list category="chores" troop-type="knight" tasksObj=choresTasks }}
+    </div>
+
+    <div class="row">
+      {{> todo-layout/category-list category="learning" troop-type="mage" tasksObj=learningTasks }}
+      {{> todo-layout/category-list category="creativity" troop-type="mage" tasksObj=creativityTasks }}
     </div>
 
   </div>
 </div>
 
+ {{>social/social}}
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/battle.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/tasks.js"></script>
+<script src="/js/generateEncounter.js"></script>
+<script src="/js/social.js"></script>
+<script src="/js/feed.js"></script>
