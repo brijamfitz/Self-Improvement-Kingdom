@@ -317,7 +317,8 @@ img {
   border: solid;
   border-color: yellow;
   border-radius: 10px;
-  margin-bottom: 5px;
+  margin-top: 2px;
+  margin-bottom: 6px;
   background-color: rgb(22,27,122);
 }
 
