@@ -16,7 +16,7 @@ $(document).ready(function () {
                         break;
                 }
             };
-            location.reload();
+            
         })
     };
 
@@ -41,18 +41,21 @@ $(document).ready(function () {
         var username = $(this).attr("name");
         socialPut('accepted', username);
         getFriends();
+        location.reload();
     });
 
     $(document).on("click", ".reject-pending", function () {
         var username = $(this).attr("name");
         socialPut('rejected', username);
         getFriends();
+        location.reload();
     });
 
     $(document).on("click", ".delete-friend", function () {
         var username = $(this).attr("name");
         socialPut('deleted', username);
-        getFriends()
+        getFriends();
+        location.reload();
     })
 
 
