@@ -9,8 +9,9 @@ var PORT = process.env.PORT || 8080;
 var session = require("express-session");
 var Sequelize = require("sequelize");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
-var cron = require("./script/cron")
-var config = require("./config/config")
+var cron = require("./script/cron");
+var config = require("./config/config");
+var Op = Sequelize.Op;
 
 var myStore = new SequelizeStore({
   db: db.sequelize,
@@ -45,7 +46,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
+require("./routes/apiRoutes")(app, Op);
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
