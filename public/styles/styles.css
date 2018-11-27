@@ -41,11 +41,14 @@
   background-color: royalblue;
   color: white;
   width: 100%;
-  padding-top: 5px;
+  padding: 5px 15px;
   position: fixed;
   top: 0;
   z-index: 1;
   box-shadow: 0 0 15px black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #encounter-card {
@@ -144,14 +147,15 @@ img {
 }
 
 #fight-flee,
-#avatar,
-#user-progress,
+.avatar,
+.user-progress,
 #user-level,
-#army-counts {
+.army-counts {
   text-align: center;
+  flex-grow: 0;
 }
 
-#user-progress {
+.user-progress {
   padding-top: 18px;
   font-size: 24px;
 }
@@ -164,25 +168,23 @@ img {
   transition: none;
 }
 
-#army-counts {
-  padding-top: 8px;
-  padding-right: 3px;
+.army-counts {
+  padding: 0;
 }
 
-#castle-container, {
+.castle-container {
   margin: 0px;
+  text-align: center;
 }
 
-#username-container {
-  margin-top: -24px;
+.username-container {
   font-weight: normal;
+  margin: 0;
 }
 
 #menu-dropdown {
   text-align: center;
-  padding-top: 25px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0px;
 }
 
 .dropdown-item {
@@ -214,14 +216,16 @@ img {
   font-size: 14px;
 }
 
-#avatar {
+.avatar {
   padding-top: 5px;
 }
 
-#army {
-  position: relative;
-  bottom: 8px;
-  padding-left: 20px;
+.army {
+  padding: 0;
+}
+
+.army img {
+  margin: 0;
 }
 
 #user-level .level {
@@ -297,10 +301,6 @@ img {
 
 #about {
   font-weight: normal;
-}
-
-#army {
-  padding-top: 27px;
 }
 
 .battle-gif {
@@ -904,7 +904,7 @@ footer{
 }
 
 @media (max-width: 767px) {
-  #army-counts {
+  .army-counts {
     margin-top: 20px;
   }
 
@@ -938,24 +938,24 @@ footer{
     padding-right: 0px;
   }
 
-  #army-counts {
+  .army-counts {
     margin: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
   }
 
-  #army {
+  .army {
     padding-left: 0px;
   }
 
-  #user-progress {
+  .user-progress {
     margin: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
   }
 
-  #avatar {
+  .avatar {
     margin: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -965,7 +965,7 @@ footer{
     /* margin: 0px;
     padding-top: 0px;
     padding-bottom: 0px; */
-    display: none;
+    /* display: none; */
   }
 
   #usernav-text {
