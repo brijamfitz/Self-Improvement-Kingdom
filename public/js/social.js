@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    $.ajax({
+        method:"DELETE",
+        url: "/api/friends"
+    }).then(function (res){
+        console.log("should be deleted");
+    })
+
     function getFriends() {
         $.ajax({
             method: "GET",
