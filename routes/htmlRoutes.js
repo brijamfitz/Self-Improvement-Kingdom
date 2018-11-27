@@ -16,7 +16,7 @@ module.exports = function (app) {
       if (req.user) {
         res.redirect("/");
       } else {
-        res.render('login', {msg: req.flash('error')});
+        res.render('login');
       }
   });
 

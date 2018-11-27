@@ -1,20 +1,27 @@
 $(document).ready(function () {
-    $.ajax({
-        method: "GET",
-        url: "/api/friends"
-    }).then(function (res) {
-        console.log(res)
-        for (var i = 0; i < res.length; i++) {
-            switch (res[i].status) {
-                case "accepted":
-                    showFriend(res[i]);
-                    break;
-                case "pending":
-                    pendingFriend(res[i]);
-                    break;
+    function getFriends() {
+        $.ajax({
+            method: "GET",
+            url: "/api/friends"
+        }).then(function (res) {
+            console.log(res)
+            for (var i = 0; i < res.length; i++) {
+                console.log(res[i].status)
+                switch (res[i].status) {
+                    case "accepted":
+                        showFriend(res[i]);
+                        break;
+                    case "pending":
+                        pendingFriend(res[i]);
+                        break;
+                }
             }
-        }
-    });
+        })
+    };
+
+    getFriends();
+
+
 
     $(".request-alliance").on("submit", function (event) {
         event.preventDefault();
@@ -29,18 +36,17 @@ $(document).ready(function () {
         location.reload()
     });
 
-    $(document).on("click", ".accept-pending", function() {
+    $(document).on("click", ".accept-pending", function () {
         var username = $(this).attr("name");
         socialPut('accepted', username)
-        
     });
 
-    $(document).on("click", ".reject-pending",function() {
+    $(document).on("click", ".reject-pending", function () {
         var username = $(this).attr("name");
         socialPut('rejected', username)
     });
 
-    $(document).on("click", ".delete-friend", function() {
+    $(document).on("click", ".delete-friend", function () {
         var username = $(this).attr("name");
         socialPut('deleted', username)
     })
@@ -48,6 +54,7 @@ $(document).ready(function () {
 
     function socialPut(status, username) {
         var status = status;
+        console.log(status)
         $.ajax({
             method: "PUT",
             url: "/api/friends",
@@ -55,7 +62,7 @@ $(document).ready(function () {
                 username: username,
                 status: status
             }
-        }).then(function() {
+        }).then(function () {
             $.ajax({
                 method: "PUT",
                 url: "/api/activity",
@@ -64,16 +71,15 @@ $(document).ready(function () {
                     status: status,
                     category: "friend"
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 $.ajax({
                     method: "POST",
                     url: "/api/activity",
                     data: response
-                }).then(function(){
+                }).then(function () {
                     console.log("successful response");
                 })
             })
-            location.reload();
         });
     }
 
