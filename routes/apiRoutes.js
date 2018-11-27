@@ -13,12 +13,11 @@ module.exports = function (app) {
   // Processing the local login form
   app.post("/api/login/local", function (req, res, next) {
     passport.authenticate('local-login', function (err, user, info) {
-      console.log("Here's the returned user: " + user);
       if (err) {
         return res.redirect('/');
       };
       if (!user) {
-        return res.redirect('/');
+        return res.render("login", {msg: 'Incorrect username or password, please try again.'});
       };
       req.logIn(user, function (err) {
         if (err) {
@@ -30,11 +29,22 @@ module.exports = function (app) {
   });
 
   // Processing the signup form
-  app.post("/api/signup", passport.authenticate('local-signup', {
-    successRedirect: "/",
-    failureRedirect: "/",
-  }));
-
+  app.post("/api/signup", function (req, res, next) {
+    passport.authenticate('local-login', function (err, user, info) {
+      if (err) {
+        return res.redirect('/');
+      };
+      if (!user) {
+        return res.render('signup', {msg: 'The username is all ready in use, please choose a new name and try again.'});
+      };
+      req.logIn(user, function (err) {
+        if (err) {
+          return next(err);
+        };
+        res.redirect('/');
+      });
+    })(req, res, next);
+  });
   /* ================================================================================== */
   /* TASK ROUTES */
   /* ================================================================================== */
