@@ -2,10 +2,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2" id="home-body">
-                <a href="/user" id="home-link"><div class="home-container">
-                    <img src="/images/castle-home.png" id="castle-home" />
-                    <p id="usernav-text-title">Self-Improvement Kingdom</p>
-                </div></a>
+                <a href="/user" id="home-link">
+                    <div class="home-container">
+                        <img src="/images/castle-home.png" id="castle-home" />
+                        <p id="usernav-text-title">Self-Improvement Kingdom</p>
+                    </div>
+                </a>
             </div>
             <div class="col-md-2" id="avatar">
                 <h5 class="card-title">
@@ -32,16 +34,13 @@
                 {{!--
                 <h5 class="card-title" id="usernav-text">Army</h5> --}}
                 <div id="army">
-                    <img src="./images/archer.png" id="encounter-img-archer" alt="archer-pixel">
-                    <span id="x">&times;</span>
+                    <img src="./images/archer.png" id="encounter-img-archer" alt="archer-pixel"> &times;
                     <span id="user-archer-count" class="usernav-text">{{data.archerCount}}</span>
                     <span id="nbsp"></span>
-                    <img src="./images/knight.png" id="encounter-img-knight" alt="knight-pixel">
-                    <span id="x">&times;</span>
+                    <img src="./images/knight.png" id="encounter-img-knight" alt="knight-pixel"> &times;
                     <span id="user-knight-count" class="usernav-text">{{data.knightCount}}</span>
                     <span id="nbsp"></span>
-                    <img src="./images/mage.png" id="encounter-img-mage" alt="mage-pixel">
-                    <span id="x">&times;</span>
+                    <img src="./images/mage.png" id="encounter-img-mage" alt="mage-pixel"> &times;
                     <span id="user-mage-count" class="usernav-text">{{data.mageCount}}</span>
                 </div>
             </div>
@@ -79,7 +78,9 @@
 
                 <form class="request-alliance">
                     <div class="form-group">
-                        <label for="username"><strong>Propose an alliance?</strong></label>
+                        <label for="username">
+                            <strong>Propose an alliance?</strong>
+                        </label>
                         <input type="text" placeholder="Ally's username" class="form-control" id="fri-username">
                     </div>
                     <button type="submit" class="btn btn-success d-block mx-auto" id="fri-submit">Dispatch Request</button>
