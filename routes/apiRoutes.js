@@ -23,7 +23,9 @@ module.exports = function (app) {
         if (err) {
           return next(err);
         };
-        res.redirect('/');
+        req.session.save(function(){
+          res.redirect('/');
+        });
       })
     })(req, res, next);
   });
