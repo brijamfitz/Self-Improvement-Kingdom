@@ -8,14 +8,14 @@
         <img src="/images/login-castle.png" alt="castle" class="login-castle" />
         <p class="lead">Build your army and battle your way to self-improvement!</p>
         <hr class="my-4">
-        
+
         <div class="col-md-12 login-container">
             <h5>Login to continue your quest!</H5>
             <p style="color:crimson">
-            {{#if msg}}
-            {{msg}}
-            {{/if}}
-        </p>
+                {{#if msg}}
+                {{msg}}
+                {{/if}}
+            </p>
             <form action="/api/login/local" method="post">
                 <div>
                     <label class="sr-only">Username:</label>
@@ -29,8 +29,54 @@
                     <input type="submit" value="Login" class="btn btn-lg btn-primary" id="login-btn" />
                 </div>
             </form>
-            <p>Don't have an account yet? Create one <a href="/signup" id="create-link">here</a>.</p>
-            <p id="about">Learn more about Self-Improvement Kingdom <a href="#" id="about-link">here</a>.</p>
+            <h6>Don't have an account yet? Create one <a href="/signup" id="create-link">here</a>.</h6>
+            <hr>
+            <h6 id="about">Learn more about Self-Improvement Kingdom <a data-toggle="modal" href="#gameIntroModal" id="about-link">here</a>.</h6>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================================================================== -->
+<!-- GAME INTRO MODAL -->
+<!-- ======================================================================================== -->
+<div class="modal fade bd-example-modal-md" id="gameIntroModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Welcome to Self-Improvement Kingdom!</h4>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+
+                <p class="game-intro">This app is a gamified task manager that helps you build good habits and reward
+                    you
+                    for prioritizing your goals. No
+                    gimmicks, no microtransactions, no ads. So many of today's applications trap users in an endless
+                    cycle,
+                    sucking away their productivity, and money. Our app focuses on just you, and your own
+                    self-improvement.</p>
+
+                <p class="game-intro">We want our users to get out &mdash; to be active, to be productive &mdash; and
+                    all
+                    the while remain immersed in the familiar confines of mobile gaming. Your real life accomplishments
+                    will
+                    directly impact your virtual kingdom, as you build your army and engage in daily battles. The more
+                    productive you are throughout the day, the more your kingdom will grow, and soon enough, you will
+                    be
+                    thriving in both the real world, and in ours.</p>
+
+                <p class="game-intro">Ultimately, Self-Improvement Kingdom will be what you make of it. It leans
+                    heavily on
+                    an honor system,
+                    and your personal objectives are what <em>you</em> define. We hope you enjoy playing this game as
+                    much as
+                    we did
+                    making it.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
