@@ -16,7 +16,7 @@ module.exports = function (app) {
       if (req.user) {
         res.redirect("/");
       } else {
-        res.render('login', {msg: req.flash('error')});
+        res.render('login');
       }
   });
 
@@ -29,7 +29,7 @@ module.exports = function (app) {
   // Load index page
   app.get("/user", function (req, res) {
     var id;
-    if (req.user){
+    if (req.user.id){
       id = req.user.id
     } else {
       id = req.session.userId

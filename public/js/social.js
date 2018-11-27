@@ -1,33 +1,29 @@
 $(document).ready(function () {
-    $("#new-friend").hide();
-    $.ajax({
-        method: "GET",
-        url: "/api/friends"
-    }).then(function (res) {
-        console.log(res)
-        for (var i = 0; i < res.length; i++) {
-            switch (res[i].status) {
-                case "accepted":
-                    showFriend(res[i]);
-                    break;
-                case "pending":
-                    pendingFriend(res[i]);
-                    break;
+    function getFriends() {
+        $.ajax({
+            method: "GET",
+            url: "/api/friends"
+        }).then(function (res) {
+            console.log(res)
+            for (var i = 0; i < res.length; i++) {
+                console.log(res[i].status)
+                switch (res[i].status) {
+                    case "accepted":
+                        showFriend(res[i]);
+                        break;
+                    case "pending":
+                        pendingFriend(res[i]);
+                        break;
+                }
             }
-        }
-    });
+        })
+    };
 
-    $("#add-friend").on("click", function (event) {
-        event.preventDefault();
-        $("#new-friend").show();
-    });
+    getFriends();
 
-    $("#fri-cancel").on("click", function (event) {
-        event.preventDefault();
-        $("#new-friend").hide();
-    });
 
-    $("#fri-submit").on("click", function (event) {
+
+    $(".request-alliance").on("submit", function (event) {
         event.preventDefault();
         var username = $("#fri-username").val().trim();
         $.ajax({
@@ -37,22 +33,20 @@ $(document).ready(function () {
         }).then(function (res) {
             console.log("received rseponse");
         })
-        $("#fri-username").empty();
         location.reload()
     });
 
-    $(document).on("click", ".accept-pending", function() {
+    $(document).on("click", ".accept-pending", function () {
         var username = $(this).attr("name");
         socialPut('accepted', username)
-        
     });
 
-    $(document).on("click", ".reject-pending",function() {
+    $(document).on("click", ".reject-pending", function () {
         var username = $(this).attr("name");
         socialPut('rejected', username)
     });
 
-    $(document).on("click", ".delete-friend", function() {
+    $(document).on("click", ".delete-friend", function () {
         var username = $(this).attr("name");
         socialPut('deleted', username)
     })
@@ -60,6 +54,7 @@ $(document).ready(function () {
 
     function socialPut(status, username) {
         var status = status;
+        console.log(status)
         $.ajax({
             method: "PUT",
             url: "/api/friends",
@@ -67,7 +62,7 @@ $(document).ready(function () {
                 username: username,
                 status: status
             }
-        }).then(function() {
+        }).then(function () {
             $.ajax({
                 method: "PUT",
                 url: "/api/activity",
@@ -76,16 +71,15 @@ $(document).ready(function () {
                     status: status,
                     category: "friend"
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 $.ajax({
                     method: "POST",
                     url: "/api/activity",
                     data: response
-                }).then(function(){
+                }).then(function () {
                     console.log("successful response");
                 })
             })
-            location.reload();
         });
     }
 
@@ -98,15 +92,9 @@ $(document).ready(function () {
         name.text(res.username);
         name.addClass("friend-name");
         friend.append(name);
-        var title = $("<h6>");
-        title.addClass("text-muted friend-title");
-        title.text(res.title);
+        var title = $('<h6 class="text-muted friend-title">' + res.title + '</h6>');
         friend.append(title);
-        var deleteButton = $("<button>");
-        deleteButton.attr("type", "button");
-        deleteButton.attr("name", res.username);
-        deleteButton.addClass("btn btn-secondary delete-friend");
-        deleteButton.text("Delete");
+        var deleteButton = $('<button class="btn btn-danger reject-pending" type="button" name=' + res.username + '>Delete</button>');
         friend.append(deleteButton);
         $("#friend-zone").append(friend)
     };
@@ -114,28 +102,17 @@ $(document).ready(function () {
     function pendingFriend(res) {
         var pending = $("<div>");
         pending.addClass("pending-friend");
-        var name = $("<h5>");
-        name.text(res.username);
-        name.addClass("pending-friend-name");
+        var name = $('<h5 class="pending-friend-name">' + res.username + '</h5>');
         pending.append(name);
-        var title = $("<h6>");
+        var title = $('<h6 class="text-muted pending-friend-title">' + res.title + '</h6>');
         title.addClass("text-muted pending-friend-title");
         title.text(res.title);
         pending.append(title);
-        var acceptButton = $("<button>");
-        acceptButton.attr("type", "button");
-        acceptButton.attr("name", res.username);
-        acceptButton.addClass("btn btn-secondary accept-pending");
-        acceptButton.text("Accept");
+        var acceptButton = $('<button class="btn btn-secondary accept-pending mr-1" type="button" name=' + res.username + '>Accept</button>');
         pending.append(acceptButton);
-        var rejectButton = $("<button>");
-        rejectButton.attr("type", "button");
-        rejectButton.attr("name", res.username);
-        rejectButton.addClass("btn btn-secondary reject-pending");
-        rejectButton.text("Reject");
+        var rejectButton = $('<button class="btn btn-danger reject-pending" type="button" name=' + res.username + '>Reject</button>');
         pending.append(rejectButton);
         $("#friend-zone").prepend(pending);
     };
-
 })
 
