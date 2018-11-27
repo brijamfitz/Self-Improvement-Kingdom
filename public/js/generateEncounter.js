@@ -4,8 +4,11 @@ nameArray = [];
 var encounterGen = {
     //takes in initial values, takes total player army size and total player provinces to calculate
     encounterInit: function(armyTotal, provinceTotal){
+        if (armyTotal > 6){
+            armyTotal = 6
+        }
         //determines the max and min size of the base army(10% above or 20% below)
-        armyCeiling = Math.round(armyTotal * 1.1);
+        armyCeiling = Math.round(armyTotal * 1.3);
         armyFloor = Math.round(armyTotal / 1.2);
         //actual base army size
         baseArmy = Math.floor(Math.random() * (armyCeiling - armyFloor)) + armyFloor;

@@ -4,7 +4,8 @@ var fs = require("fs");
 var battle = require("../script/battleCalculations")
 var activity = require("../public/js/activity")
 
-module.exports = function (app) {
+
+module.exports = function (app, Op) {
 
   /* ================================================================================== */
   /* LOGIN/SIGNUP ROUTES */
@@ -23,7 +24,9 @@ module.exports = function (app) {
         if (err) {
           return next(err);
         };
-        res.redirect('/');
+        req.session.save(function(){
+          res.redirect('/');
+        });
       })
     })(req, res, next);
   });
@@ -218,6 +221,18 @@ module.exports = function (app) {
       res.json(user);
     })
   });
+
+  // destroying rejected and deleted friend requests
+  app.delete("/api/friends", function (req, res){
+    db.Friend.destroy({where:{
+      [Op.or]:[
+        {status: 'deleted'},
+        {status : 'rejected'}
+        ]
+        }}).then(function(){
+        res.end();
+      });
+  })
 
   // get feed data
   app.get("/api/activity", function (req, res) {

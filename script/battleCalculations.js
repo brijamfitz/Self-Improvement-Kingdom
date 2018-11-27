@@ -49,7 +49,6 @@ module.exports = battleCalc = {
             deadArchers: deadArchers
         }
 
-        console.log(returnObject);
         return returnObject;
     },
     waveResult: function(armyObject, killData){
@@ -80,7 +79,6 @@ module.exports = battleCalc = {
       } else {
         newArmy.archerCount = armyObject.archerCount - killData.deadArchers;
       }
-      console.log(newArmy);
       return newArmy;
     }
 }
