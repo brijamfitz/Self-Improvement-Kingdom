@@ -870,6 +870,12 @@ footer{
 /* MEDIA QUERIES */
 /* ================================================================================== */
 
+@media (min-width: 576px) {
+  #about-modal .modal-dialog {
+    max-width: 75vw;
+  }
+}
+
 @media (min-width: 768px) {
   .user-army {
     left: 50px;
@@ -905,12 +911,6 @@ footer{
     right: 58px;
   }
 
-}
-
-@media (max-width: 886px) {
-  #nbsp {
-    display: none;
-  }
 }
 
 @media (max-width: 767px) {
