@@ -56,6 +56,10 @@ var rankings = [
     {
       title: "Emperor (Lv. 10)",
       image: "./images/castle-10.png"
+    },
+    {
+      title: "God-Emperor",
+      image: "./images/god-emperor.png"
     }
   ];
 // ===================================================================================
@@ -701,21 +705,23 @@ $(document).on("click", "#close", function(){
         percent = integerPercent;
         $(".progress-bar").attr("style", "width:" + percent + "%");
     } else if (provinceTotal >= 100) {
+        if (provinceTotal === 100) {
         $.ajax({
-        url: "api/user/progress/",
-        type: "PUT",
-        data: {
-            provinceCount: provinceTotal,
-            castle: rankings[9].image,
-            title: rankings[9].title
+            url: "api/user/progress/",
+            type: "PUT",
+            data: {
+                provinceCount: provinceTotal,
+                castle: rankings[10].image,
+                title: rankings[10].title
+            }
+            }).then(function(response) {
+            console.log(response);
+            location.reload();
+            });
         }
-        }).then(function(response) {
-        console.log(response);
-        // location.reload();
-        });
-        $("#castle-img").attr("src", rankings[9].image);
+        $("#castle-img").attr("src", rankings[10].image);
         // update title with next level title
-        $("#title").text(rankings[9].title);
+        $("#title").text(rankings[10].title);
         // update the progress bar with the new integer of 0 percent
         // $(".progress-bar").attr("style", "width:0%");
         var percentString = percent.toString();
