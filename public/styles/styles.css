@@ -293,6 +293,12 @@ img {
   background-color: royalblue;
   color: white;
   border: 4px solid yellow;
+  max-width: 700px;
+}
+
+.game-intro {
+  font-weight: normal;
+  font-size: 14px;
 }
 
 #about {
@@ -864,6 +870,12 @@ footer{
 /* MEDIA QUERIES */
 /* ================================================================================== */
 
+@media (min-width: 576px) {
+  #about-modal .modal-dialog {
+    max-width: 75vw;
+  }
+}
+
 @media (min-width: 768px) {
   .user-army {
     left: 50px;
@@ -899,12 +911,6 @@ footer{
     right: 58px;
   }
 
-}
-
-@media (max-width: 886px) {
-  #nbsp {
-    display: none;
-  }
 }
 
 @media (max-width: 767px) {
@@ -966,9 +972,6 @@ footer{
   }
 
   #home-body {
-    /* margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px; */
     display: none;
   }
 

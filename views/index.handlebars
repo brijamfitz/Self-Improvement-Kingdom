@@ -1,5 +1,5 @@
 <!-- ======================================================================================== -->
-<!-- USER INFO BAR AT TOP OF DASHBOARD -->
+<!-- USERNAV BAR AT TOP OF UI -->
 <!-- ======================================================================================== -->
 {{> usernav/usernav}}
 
@@ -10,53 +10,6 @@
     <!-- ======================================================================================== -->
     {{> encounter/encounter-card}}
 
-    <!-- ======================================================================================== -->
-    <!-- FIGHT MODAL -->
-    <!-- ======================================================================================== -->
-    <div class="modal fade bd-example-modal-md" id="fightModal" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Fight!</h4>
-            <button type="button" class="close" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <!-- Battle content goes here -->
-            <p id="battle-simulation">Battle simulation content goes here</p>
-            <p id="battle-results">You lost 10 knights, 5 archers, 1 mage</p>
-          </div>
-          <div class="modal-footer">
-            <h5>Reward: You have gained 1 Province!</h5>
-            {{!-- <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="close">Close</button>
-            --}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ======================================================================================== -->
-    <!-- 100 PROVINCE MODAL -->
-    <!-- ======================================================================================== -->
-    <div class="modal fade bd-example-modal-md" id="godEmperorModal" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">God-Emperor!</h4>
-            <button type="button" class="close" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <!-- Content goes here -->
-            <p>Congratulations!</p>
-            <p>You have achieved God-Emperor status over the Self-Improvement Kingdom!</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ======================================================================================== -->
     <!-- TODO LISTS -->
@@ -80,7 +33,7 @@
   </div>
 </div>
 
- {{>social/social}}
+{{>social/social}}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/battle.js"></script>
@@ -89,3 +42,4 @@
 <script src="/js/generateEncounter.js"></script>
 <script src="/js/social.js"></script>
 <script src="/js/feed.js"></script>
+<script src="/js/modals.js"></script>
