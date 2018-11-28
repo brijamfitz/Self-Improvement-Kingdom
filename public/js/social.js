@@ -1,31 +1,30 @@
 $(document).ready(function () {
     $.ajax({
-        method:"DELETE",
+        method: "DELETE",
         url: "/api/friends"
-    }).then(function (res){
+    }).then(function (res) {
         console.log("");
     })
 
-    function getFriends() {
-        $.ajax({
-            method: "GET",
-            url: "/api/friends"
-        }).then(function (res) {
-            for (var i = 0; i < res.length; i++) {
-                switch (res[i].status) {
-                    case "accepted":
-                        showFriend(res[i]);
-                        break;
-                    case "pending":
-                        pendingFriend(res[i]);
-                        break;
-                }
-            };
-            
-        })
-    };
+    $.ajax({
+        method: "GET",
+        url: "/api/friends"
+    }).then(function (res) {
+        console.log(res);
+        for (var i = 0; i < res.length; i++) {
+            switch (res[i].status) {
+                case "accepted":
+                    showFriend(res[i]);
+                    break;
+                case "pending":
+                    pendingFriend(res[i]);
+                    break;
+            }
+        };
 
-    getFriends();
+    });
+
+
 
 
 
