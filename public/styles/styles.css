@@ -29,7 +29,7 @@
 }
 
 #home {
-  padding-top: 100px;
+  padding-top: 65px;
   background-color: rgb(30, 30, 31);
 }
 
@@ -102,18 +102,6 @@
   justify-content: center;
 }
 
-.info-link {
-  color: yellow;
-  font-size: 20px;
-  position: absolute;
-  right: 5px;
-  bottom: 2px;
-}
-
-.info-link:hover, .info-link:focus {
-  color: #fff;
-}
-
 .encounter-army {
   position: absolute;
   top: 160px;
@@ -147,21 +135,6 @@ img {
   margin: 5px;
 }
 
-.user-progress {
-  text-align: center;
-  flex-grow: 1;
-  margin: 0 40px;
-}
-
-.castle-container {
-  margin: 0px;
-  text-align: center;
-}
-
-.user-progress__provinces {
-  margin: 0;
-}
-
 #menu-dropdown {
   text-align: center;
   padding: 0px;
@@ -186,8 +159,19 @@ img {
   color: white;
 }
 
-.army {
-  display: inline-block;
+.home-tile {
+  margin-right: 20px;
+}
+
+.user-progress {
+  display: none;
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 40px 0 0;
+}
+
+.user-progress__provinces {
+  margin: 0;
 }
 
 .progress-bar {
@@ -203,8 +187,12 @@ img {
   margin-top: 10px;
 }
 
+.user-tile {
+  margin: 0 auto;
+}
+
 .user-tile__castle {
-  display: inline-block;
+  text-align: center;
 }
 
 .user-tile__castle img {
@@ -213,9 +201,17 @@ img {
   margin: 0;
 }
 
+.provinces-mobile {
+  display: inline;
+}
+
 .user-tile__username {
   margin: 0;
   text-align: center;
+}
+
+.army {
+  display: block;
 }
 
 .modal-header {
@@ -289,12 +285,21 @@ img {
 
 .home-container {
   text-align: center;
-  border: solid;
-  border-color: yellow;
-  border-radius: 10px;
-  margin-top: 2px;
-  margin-bottom: 6px;
-  background-color: rgb(22,27,122);
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  margin-right: 0;
+  height: 45px;
+}
+
+.site-title {
+  margin: 0;
+  display: none;
 }
 
 #home-link {
@@ -466,7 +471,7 @@ img {
 .tasks li {
   position: relative;
   font-size: 18px;
-  padding: 5px 16px 5px 16px;
+  padding: 5px 72px 5px 16px;
   border-top: 1px solid #92A0A5;
 }
 
@@ -489,10 +494,6 @@ img {
 
 .checkbox-link:hover .box:before {
   content: "\f14a"
-}
-
-.task-name {
-  padding-right: 75px;
 }
 
 .btn-edit {
@@ -746,45 +747,7 @@ img {
   }
 }
 
-/* .tcontainer{
-  width: 100%;
-  overflow: hidden;
-  float: right;
-}
-
-.ticker-wrap {
-  width: 100%;
-  padding-left: 100%;
-}
-
-.ticker-move {
-  display: inline-block;
-  white-space: nowrap;
-  padding-right: 100%;
-  height: 100%;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-name: ticker;
-  animation-duration: 10s;
-
-}
-
-.ticker-move:hover{
-  animation-play-state: paused;
-}
-
-.ticker-item{
-  display: inline-block;
-  font-size: 20px;
-  width: 100vw;
-  color: #fff;
-} 
-
-#feed-container {
-  width: 100%;
-} */
-
-footer{
+footer {
   background-color: #0A1152;
   height: 60px;
   display: flex;
@@ -836,6 +799,46 @@ footer{
 }
 
 @media (min-width: 768px) {
+
+  .home-tile {
+    margin-right: 40px;
+  }
+
+  .home-container {
+    padding: 5px 8px;
+    border: solid yellow;
+    border-radius: 10px;
+    background-color: rgb(22,27,122);
+  }
+
+  .site-title {
+    display: block;
+  }
+
+  .site-logo {
+    margin: 0 4px 0 0;
+  }
+
+  .user-progress {
+    display: block;
+  }
+
+  .user-tile {
+    margin: 0 40px 0 0;
+  }
+
+  .user-tile__castle {
+    display: inline;
+  }
+
+  .provinces-mobile {
+    display: none;
+  }
+
+  .army {
+    display: inline-block;
+  }
+
   .user-army {
     left: 50px;
   }
@@ -875,7 +878,7 @@ footer{
 @media (max-width: 767px) {
 
   #home {
-    padding-top: 220px;
+    padding-top: 100px;
   }
 
   .login-hut {

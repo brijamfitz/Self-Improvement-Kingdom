@@ -443,7 +443,7 @@ $(document).on("click", "#close", function(){
     // ===================================================================================
     // provinces++;
     // display this number to the dom
-    $("#province-count").text(provinceTotal);
+    $(".province-count").text(provinceTotal);
     // mulitply the number of provinceTotal by 10 to get the percentage
     var percent = provinceTotal * 10;
     // increase the progress bar based on the percentage
