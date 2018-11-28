@@ -1,8 +1,9 @@
 var http = require('http'); //importing http
+var PORT = process.env.PORT || 8080;
 
 var options = {
-    host: 'https://nameless-thicket-61553.herokuapp.com',
-    port: 80,
+    host: 'nameless-thicket-61553.herokuapp.com',
+    port: PORT,
     path: '/WAKEUP_DYNO'
 };
 console.log("======WAKUP DYNO START");
