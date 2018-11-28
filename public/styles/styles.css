@@ -78,6 +78,11 @@
   border-radius: 10px;
   color: #fff;
 }
+
+.message-box h3 {
+  font-size: 22px;
+}
+
 .message-box--top {
   height: 52px;
   padding-top: 10px;
@@ -795,6 +800,10 @@ footer {
 @media (min-width: 576px) {
   #about-modal .modal-dialog {
     max-width: 75vw;
+  }
+
+  .message-box h3 {
+    font-size: 28px;
   }
 }
 
