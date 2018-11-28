@@ -5,9 +5,7 @@ $(document).ready(function(){
     }).then(function(response){
         for(var i = 0; i < 5; i++){
             var news = response[i].action;
-            var tickerItem = $("<div>");
-            tickerItem.addClass("ticker__item");
-            tickerItem.text(news);
+            var tickerItem = $('<div class="ticker__item">' + news + '</div>');
             $(".ticker").append(tickerItem);
         }
     })

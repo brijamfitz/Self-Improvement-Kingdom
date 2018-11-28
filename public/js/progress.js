@@ -82,7 +82,7 @@ $("#progress-test").on("click", function() {
   // increase province count by 1 with each encounter win
   provinces++;
   // display this number to the dom
-  $("#province-count").text(provinces);
+  $(".province-count").text(provinces);
   // mulitply the number of provinces by 10 to get the percentage
   var percent = provinces * 10;
   // increase the progress bar based on the percentage
