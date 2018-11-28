@@ -42,6 +42,7 @@
   color: white;
   width: 100%;
   padding: 5px 15px;
+  font-size: 14px;
   position: fixed;
   top: 0;
   z-index: 1;
@@ -146,30 +147,10 @@ img {
   margin: 5px;
 }
 
-#fight-flee,
-.avatar,
-.user-progress,
-#user-level,
-.army-counts {
-  text-align: center;
-  flex-grow: 0;
-}
-
 .user-progress {
-  padding-top: 18px;
-  font-size: 24px;
-}
-
-.progress-bar {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-
-.army-counts {
-  padding: 0;
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 40px;
 }
 
 .castle-container {
@@ -177,8 +158,7 @@ img {
   text-align: center;
 }
 
-.username-container {
-  font-weight: normal;
+.user-progress__provinces {
   margin: 0;
 }
 
@@ -191,15 +171,9 @@ img {
   cursor: pointer;
 }
 
-#usernav-text,
 #menu-dropdown {
   font-size: 14px;
   margin-top: 0px;
-}
-
-#usernav-text-title {
-  font-size: 14px;
-  margin-bottom: 3px;
 }
 
 .menu-btn {
@@ -212,41 +186,36 @@ img {
   color: white;
 }
 
-.usernav-text {
-  font-size: 14px;
-}
-
-.avatar {
-  padding-top: 5px;
-}
-
 .army {
-  padding: 0;
+  display: inline-block;
 }
 
-.army img {
+.progress-bar {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.user-progress-bar {
+  height: 25px;
+  margin-top: 10px;
+}
+
+.user-tile__castle {
+  display: inline-block;
+}
+
+.user-tile__castle img {
+  width: 35px;
+  height: 35px;
   margin: 0;
 }
 
-#user-level .level {
-  margin-top: 22px;
-}
-
-#profile-img {
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-}
-
-#castle-img {
-  width: 35px;
-  height: 35px;
-}
-
-#user-experience .progress {
-  border-radius: 20px;
-  height: 20px;
-  margin-top: 30px;
+.user-tile__username {
+  margin: 0;
+  text-align: center;
 }
 
 .modal-header {
@@ -456,12 +425,6 @@ img {
   margin: .5rem 0;
   position: relative;
   text-transform: capitalize;
-}
-
-.todo-card .progress {
-  height: 15px;
-  border-radius: 10px;
-  margin: 10px 0 20px;
 }
 
 .bonus {
@@ -910,9 +873,6 @@ footer{
 }
 
 @media (max-width: 767px) {
-  .army-counts {
-    margin-top: 20px;
-  }
 
   #home {
     padding-top: 220px;
@@ -944,34 +904,7 @@ footer{
     padding-right: 0px;
   }
 
-  .army-counts {
-    margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-  }
-
-  .army {
-    padding-left: 0px;
-  }
-
-  .user-progress {
-    margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  .avatar {
-    margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
   #home-body {
     display: none;
-  }
-
-  #usernav-text {
-    margin-bottom: 10px;
   }
 }
