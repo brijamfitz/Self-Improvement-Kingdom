@@ -32,7 +32,7 @@ function updateData(array){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log('Before job instantiation');
 //cron time control, currently rigged for 11:59PM(23:59) every day
-const job = new CronJob("59 23 * * *", function() {
+const job = new CronJob("01 05 * * *", function() {
 	db.User.findAll().then(function(user) {
 		console.log("Finding users")
 		// user will be an array of all user instances
