@@ -1,6 +1,6 @@
 # Self-Improvement Kingdom
 
-Experience here: [Self-Improvement Kingdom](https://glacial-wave-11290.herokuapp.com/)
+Experience here: [Self-Improvement Kingdom](https://nameless-thicket-61553.herokuapp.com/)
 
 ![image](public/images/readme-screenshot.png)
 
