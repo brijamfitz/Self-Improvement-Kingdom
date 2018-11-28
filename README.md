@@ -1,8 +1,9 @@
 # Self-Improvement Kingdom
 
-Experience here: [Self-Improvement Kingdom](https://glacial-wave-11290.herokuapp.com/)
+Experience here: [Self-Improvement Kingdom](https://nameless-thicket-61553.herokuapp.com/)
 
-![image](public/images/readme-screenshot.png)
+<img src="public/images/readme-screenshot-1.png" style="width:250px">
+<img src="public/images/readme-screenshot-2.png" style="width:250px">
 
 ## Welcome to Self-Improvement Kingdom!
 
