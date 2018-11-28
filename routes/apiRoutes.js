@@ -196,7 +196,7 @@ module.exports = function (app, Op) {
 
   // get friend data
   app.get("/api/friends", function (req, res) {
-    db.sequelize.query("SELECT Users.id, username, title, status FROM Users JOIN Friends ON ? = Friends.requestee AND username = Friends.requester AND status = 'pending' OR ? = Friends.requester AND username = Friends.requestee AND status = 'accepted' OR ? = Friends.requestee AND username = Friends.requester AND status = 'accepted'", { replacements: [req.session.username, req.session.username, req.session.username] })
+    db.sequelize.query("SELECT * FROM Users JOIN Friends ON username = requester OR username = requestee WHERE username = requester AND ? = requestee AND status = 'pending' OR '?' = requester AND username = requestee AND status = 'accepted';", { replacements: [req.session.username, req.session.username, req.session.username] })
       .spread((results, metaData) => {
         res.send(results)
       })
@@ -236,7 +236,7 @@ module.exports = function (app, Op) {
 
   // get feed data
   app.get("/api/activity", function (req, res) {
-    db.sequelize.query("SELECT * FROM Activities JOIN Friends ON actor = requester OR actor = requestee WHERE ? = requester AND  status='accepted' AND requestee = actor OR actor = requester AND status='accepted' and ? =requestee ORDER BY createdAt DESC LIMIT 5", {replacements: [req.session.username, req.session.username]}).then(function (result, metadata) {
+    db.sequelize.query("SELECT * FROM Activities JOIN Friends ON actor = requester OR actor = requestee WHERE ? = requester AND  status='accepted' AND requestee = actor OR actor = requester AND status='accepted' and ? =requestee ORDER BY Activities.createdAt DESC LIMIT 5", {replacements: [req.session.username, req.session.username]}).then(function (result, metadata) {
       res.json(result[0]);
     })
   })
