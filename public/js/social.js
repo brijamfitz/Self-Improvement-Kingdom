@@ -3,7 +3,6 @@ $(document).ready(function () {
         method:"DELETE",
         url: "/api/friends"
     }).then(function (res){
-        console.log("should be deleted");
     })
 
     function getFriends() {
@@ -11,9 +10,7 @@ $(document).ready(function () {
             method: "GET",
             url: "/api/friends"
         }).then(function (res) {
-            console.log(res)
             for (var i = 0; i < res.length; i++) {
-                console.log(res[i].status)
                 switch (res[i].status) {
                     case "accepted":
                         showFriend(res[i]);
@@ -39,7 +36,6 @@ $(document).ready(function () {
             url: "/api/friends",
             data: { username: username }
         }).then(function (res) {
-            console.log("received rseponse");
         })
         location.reload()
     });
@@ -68,7 +64,6 @@ $(document).ready(function () {
 
     function socialPut(status, username) {
         var status = status;
-        console.log(status)
         $.ajax({
             method: "PUT",
             url: "/api/friends",
@@ -91,14 +86,12 @@ $(document).ready(function () {
                     url: "/api/activity",
                     data: response
                 }).then(function () {
-                    console.log("successful response");
                 })
             })
         });
     }
 
     function showFriend(res) {
-        console.log(res)
         var friend = $("<div>");
         friend.attr("data", res.id);
         friend.addClass("friend mb-2");
