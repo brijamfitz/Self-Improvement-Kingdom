@@ -3,7 +3,7 @@ $(document).ready(function () {
         method:"DELETE",
         url: "/api/friends"
     }).then(function (res){
-        console.log("should be deleted");
+        console.log("");
     })
 
     function getFriends() {

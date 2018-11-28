@@ -236,7 +236,7 @@ module.exports = function (app, Op) {
 
   // get feed data
   app.get("/api/activity", function (req, res) {
-    db.sequelize.query("Select * FROM Activities JOIN Friends ON ? = Friends.requester AND  Friends.status='accepted' AND Friends.requestee = Activities.actor OR Activities.actor = Friends.requester AND Friends.status='accepted' and ? = Friends.requestee OR ? = Friends.requester AND Friends.status = 'accepted' AND category <> 'battle'", {replacements: [req.session.username, req.session.username, req.session.username]}).then(function (result, metadata) {
+    db.sequelize.query("SELECT * FROM Activities JOIN Friends ON actor = requester OR actor = requestee WHERE ? = requester AND  status='accepted' AND requestee = actor OR actor = requester AND status='accepted' and ? =requestee ORDER BY createdAt DESC LIMIT 5", {replacements: [req.session.username, req.session.username]}).then(function (result, metadata) {
       res.json(result[0]);
     })
   })
