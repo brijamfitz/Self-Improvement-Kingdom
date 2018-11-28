@@ -5,35 +5,12 @@ module.exports = function (allTasks, req) {
     req.session.provinceCount = req.user.provinceCount;
     req.session.encounterCompleted = req.user.encounterCompleted;
 
-    var personalTasks = [];
-    var wellnessTasks = [];
-    var learningTasks = [];
-    var creativityTasks = [];
-    var exerciseTasks = [];
-    var choresTasks = [];
-    for (var i = 0; i < allTasks.length; i++) {
-        var task = allTasks[i];
-        switch (task.category) {
-            case 'personal':
-                personalTasks.push(task);
-                break;
-            case 'wellness':
-                wellnessTasks.push(task);
-                break;
-            case 'learning':
-                learningTasks.push(task);
-                break;
-            case 'creativity':
-                creativityTasks.push(task);
-                break;
-            case 'exercise':
-                exerciseTasks.push(task);
-                break;
-            case 'chores':
-                choresTasks.push(task);
-                break;
-        }
-    };
+    const personalTasks = allTasks.filter(task => task.category === "personal");
+    const wellnessTasks = allTasks.filter(task => task.category === "wellness");
+    const learningTasks = allTasks.filter(task => task.category === "learning");
+    const creativityTasks = allTasks.filter(task => task.category === "creativity");
+    const exerciseTasks = allTasks.filter(task => task.category === "exercise");
+    const choresTasks = allTasks.filter(task => task.category === "chores");
 
     return {
         personalTasks: personalTasks,
