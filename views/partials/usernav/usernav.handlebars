@@ -1,74 +1,100 @@
-<div class="jumbotron-fluid" id="navbar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2" id="home-body">
-                <a href="/user" id="home-link"><div class="home-container">
-                    <img src="/images/castle-home.png" id="castle-home" />
-                    <p id="usernav-text-title">Self-Improvement Kingdom</p>
-                </div></a>
+<div id="navbar">
+    <div class="home-tile">
+        <a href="/user" id="home-link">
+            <div class="home-container">
+                <img src="/images/castle-home.png" class="site-logo" />
+                <p class="site-title">Self-Improvement<br>Kingdom</p>
             </div>
-            <div class="col-md-2" id="avatar">
-                <h5 class="card-title">
-                    <p id="castle-container">
-                        <span>
-                            <img src="{{data.castle}}" id="castle-img" />
-                        </span>
-                    </p>
-                    <p id="username-container">
-                        <span id="usernav-text">{{data.username}}</span> &ndash;
-                        <span id="title" class="usernav-text">{{data.title}}</span>
-                    </p>
-                </h5>
-            </div>
-            <div class="col-md-4" id="user-progress">
-                <h5 class="card-title" id="usernav-text">Provinces:
-                    <span id="province-count" class="usernav-text">{{data.provinceCount}}</span>
-                </h5>
-                <div class="progress" id="progress-usernav">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            <div class="col-md-2" id="army-counts">
-                {{!--
-                <h5 class="card-title" id="usernav-text">Army</h5> --}}
-                <div id="army">
-                    <img src="./images/archer.png" id="encounter-img-archer" alt="archer-pixel">
-                    <span id="x">&times;</span>
-                    <span id="user-archer-count" class="usernav-text">{{data.archerCount}}</span>
-                    <span id="nbsp"></span>
-                    <img src="./images/knight.png" id="encounter-img-knight" alt="knight-pixel">
-                    <span id="x">&times;</span>
-                    <span id="user-knight-count" class="usernav-text">{{data.knightCount}}</span>
-                    <span id="nbsp"></span>
-                    <img src="./images/mage.png" id="encounter-img-mage" alt="mage-pixel">
-                    <span id="x">&times;</span>
-                    <span id="user-mage-count" class="usernav-text">{{data.mageCount}}</span>
-                </div>
-            </div>
-            <div class="col-md-2" id="menu-dropdown">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            Menu
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="#">About</a>
-                            <a class="dropdown-item" id="add-friend" data-toggle="modal" data-target="#add-friend-modal">Allies</a>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    </div>
+        </a>
+    </div>
+    <div class="user-progress">
+        <p class="user-progress__provinces">Provinces:&nbsp;<span class="province-count">{{data.provinceCount}}</span></p>
+        <div class="progress user-progress-bar">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+    <div class="user-tile">
+        <p class="user-tile__username">
+            <span>{{data.username}}</span> &ndash;
+            <span id="title">{{data.title}}</span>
+        </p>
+        <div class="user-tile__castle">
+            <img src="{{data.castle}}" />
+            <p class="provinces-mobile">Provinces:&nbsp;<span class="province-count">{{data.provinceCount}}</span></p>
+        </div>
+        <div class="army">
+            <img src="./images/archer.png" id="encounter-img-archer" alt="archer pixel art"> &times;
+            <span >{{data.archerCount}}</span>
+            <img src="./images/knight.png" id="encounter-img-knight" alt="knight pixel art"> &times;
+            <span>{{data.knightCount}}</span>
+            <img src="./images/mage.png" id="encounter-img-mage" alt="mage pixel art"> &times;
+            <span>{{data.mageCount}}</span>
+        </div>
+    </div>
+    <div id="menu-dropdown">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#about-modal">About</a>
+                    <a class="dropdown-item" id="add-friend" data-toggle="modal" data-target="#add-friend-modal">Allies</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="add-friend-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal__title" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h5 class="modal-title" id="exampleModalLabel">Allies</h5>
+                <h3 class="modal-title" id="about-modal__title">About Self-Improvement Kingdom</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to the Self-Improvement Kingdom! Your goal in this game is to grow your Kingdom through conquest! Not only will your conquer provinces, but your tasks and goals as well.</p>
+                <p>You start with one province and an army of 3 Knights, 2 Archers, and 1 Mage. You will see one enemy encounter every day, but you have until midnight to bolster your forces before facing them. Complete tasks to bolster your forces!</p>
+                <h4>Tasks</h4>
+                <p>Tasks are divided into several different categories:</p>
+                <ul>
+                    <li>Personal and Wellness tasks provide an extra archer</li>
+                    <li>Exercise and Chore tasks provide an extra knight</li>
+                    <li>Learning and Creativity tasks provide an extra mage</li>
+                </ul>
+                <p>You set your own objectives! When creating a task, you provide the task name and your evaluation of its difficulty. The task be anything, walking your dog, running a marathon, or even learning JavaScript! The higher the difficulty of the task you set for yourself, the more troops you will receive upon completion.</p>
+                <p>Once you check off a task, you must choose what unit type you would like to add to your army (the bonus unit will be added automatically as well).</p>
+                <h4>Combat</h4>
+                <p>Click the “fight” button to engage your enemy in combat. Once clicked, the battle will run automatically and display the results as it progresses. Some units have an advantage over others, so having the proper army composition for the day is key.</p>
+                <ul>
+                    <li>Knights are strong against Archers</li>
+                    <li>Archers are strong against Mages</li>
+                    <li>Mages are strong against Knights</li>
+                </ul>
+                <p>You will either GAIN a province if you are victorious or LOSE a province if you are defeated. The player cannot fall below one province, so losses with one province will only destroy the army. If you do not participate in combat for the day, you will lose a province to the invading enemy forces.</p>
+                <h4>Conquest</h4>
+                <p>As you gain provinces, you will expand your empire. Your character will level up to the next rank for every 10 provinces you capture. Keep playing to see your castle grow and your title increase in status.</p>
+                <p>For every new rank, enemy encounters will become more challenging. In order to maintain a growing empire, you will need to increase the number of good habits you maintain on a daily basis!</p>
+                <p>Remember, not participating for the day will result in the loss of a province!</p>
+                <h4>Friends</h4>
+                <p>You don’t need to conquer the world alone! Add allies by sending a request in the Allies section of the menu and see their activities come up in the footer. </p>
+                <p>In future updates, we hope to expand upon the “friends” functionality, allowing for group encounters and more!</p>
+                <p>Good luck and have fun, conquerors!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-friend-modal" tabindex="-1" role="dialog" aria-labelledby="friend-modal__title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="friend-modal__title">Allies</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,7 +105,9 @@
 
                 <form class="request-alliance">
                     <div class="form-group">
-                        <label for="username"><strong>Propose an alliance?</strong></label>
+                        <label for="username">
+                            <strong>Propose an alliance?</strong>
+                        </label>
                         <input type="text" placeholder="Ally's username" class="form-control" id="fri-username">
                     </div>
                     <button type="submit" class="btn btn-success d-block mx-auto" id="fri-submit">Dispatch Request</button>

@@ -1,33 +1,30 @@
 $(document).ready(function () {
     $.ajax({
-        method:"DELETE",
+        method: "DELETE",
         url: "/api/friends"
-    }).then(function (res){
-        console.log("should be deleted");
+    }).then(function (res) {
+        console.log("");
     })
 
-    function getFriends() {
-        $.ajax({
-            method: "GET",
-            url: "/api/friends"
-        }).then(function (res) {
-            console.log(res)
-            for (var i = 0; i < res.length; i++) {
-                console.log(res[i].status)
-                switch (res[i].status) {
-                    case "accepted":
-                        showFriend(res[i]);
-                        break;
-                    case "pending":
-                        pendingFriend(res[i]);
-                        break;
-                }
-            };
-            
-        })
-    };
+    $.ajax({
+        method: "GET",
+        url: "/api/friends"
+    }).then(function (res) {
+        console.log(res);
+        for (var i = 0; i < res.length; i++) {
+            switch (res[i].status) {
+                case "accepted":
+                    showFriend(res[i]);
+                    break;
+                case "pending":
+                    pendingFriend(res[i]);
+                    break;
+            }
+        };
 
-    getFriends();
+    });
+
+
 
 
 
@@ -39,7 +36,6 @@ $(document).ready(function () {
             url: "/api/friends",
             data: { username: username }
         }).then(function (res) {
-            console.log("received rseponse");
         })
         location.reload()
     });
@@ -68,7 +64,6 @@ $(document).ready(function () {
 
     function socialPut(status, username) {
         var status = status;
-        console.log(status)
         $.ajax({
             method: "PUT",
             url: "/api/friends",
@@ -91,14 +86,12 @@ $(document).ready(function () {
                     url: "/api/activity",
                     data: response
                 }).then(function () {
-                    console.log("successful response");
                 })
             })
         });
     }
 
     function showFriend(res) {
-        console.log(res)
         var friend = $("<div>");
         friend.attr("data", res.id);
         friend.addClass("friend mb-2");

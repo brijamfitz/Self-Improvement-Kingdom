@@ -4,7 +4,7 @@ nameArray = [];
 var encounterGen = {
     //takes in initial values, takes total player army size and total player provinces to calculate
     encounterInit: function(armyTotal, provinceTotal){
-        if (armyTotal > 6){
+        if (armyTotal < 6){
             armyTotal = 6
         }
         //determines the max and min size of the base army(10% above or 20% below)
@@ -80,14 +80,11 @@ var encounterGen = {
         encounterName: "test"
     },
     exportFunction: function(){
-        console.log(encounterGen.exportObject);
         $.ajax({
             method: "POST",
             url: "/api/encounter",
             data: encounterGen.exportObject
         }).then(function(result){
-            console.log("here?")
-            console.log(result);
             return encounterGen.exportObject;
             
         })
@@ -118,8 +115,6 @@ $(document).ready(function(){
         var playerArchers = result.archerCount;
         var provinceTotal = result.provinceCount;
         var armyTotal = playerKnights + playerMages + playerArchers;
-        console.log(armyTotal);
-        console.log(provinceTotal);
         //check to see if an encounter was completed today
         if ((result.encounterCompleted === false)&&(armyTotal > 1)){
             //check to see if encounter was generated
@@ -146,7 +141,6 @@ $(document).ready(function(){
                         url: "/api/user/encounterUpdate",
                         data: encounterUpdate
                     }).then(function(result){
-                        console.log(result);
                     })
                 });
             // if encounter already generated, take existing values and display on page
