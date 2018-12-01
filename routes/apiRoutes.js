@@ -196,7 +196,7 @@ module.exports = function (app, Op) {
 
   // get friend data
   app.get("/api/friends", function (req, res) {
-    db.sequelize.query("SELECT username, status, Users.id, title FROM Users JOIN Friends ON username = requester OR username = requestee WHERE ? = requester AND username = requestee AND status = 'pending' OR username = requester AND ? = requestee AND status = 'accepted'", { replacements: [req.session.username, req.session.username] })
+    db.sequelize.query("SELECT username, status, Users.id, title FROM Users JOIN Friends ON username = requester OR username = requestee WHERE ? = requester AND username = requestee AND status = 'pending' OR username = requester AND ? = requestee AND status = 'accepted' OR ? = requestee AND username = requester AND status = 'accepted'", { replacements: [req.session.username, req.session.username, req.session.username] })
       .spread((results, metaData) => {
         console.log(metaData);
         res.send(results)
